@@ -53,7 +53,7 @@ public class Student {
      * Set the student's ID.
      * @param theID
      */
-    public void setID(String theID) {
+    public void setId(String theID) {
     	mStdID = theID;
     }
     /**
@@ -106,7 +106,7 @@ public class Student {
      * Get the student's ID.
      * @return the student's ID
      */
-    public String getID() {
+    public String getId() {
     	return mStdID;
     }
     /**
