@@ -13,6 +13,7 @@ public class EmploymentData {
     private String mPosition;
     private String mPosDescription;
     private String mSkillUsed;
+    private int mSalary;
     private Calendar mStartDate;
     private Calendar mEndDate;
     private boolean mIsIntern;
@@ -28,11 +29,12 @@ public class EmploymentData {
      * @param theEnd date
      */
     public EmploymentData(String theCompany, String thePosition, String theDescr, 
-    		String theSkill, boolean theIntern, Calendar theStart, Calendar theEnd) {
+    		String theSkill, int theSalary, boolean theIntern, Calendar theStart, Calendar theEnd) {
     	mCompany = theCompany;
     	mPosition = thePosition;
     	mPosDescription = theDescr;
     	mSkillUsed = theSkill;
+    	mSalary = theSalary;
     	mIsIntern = theIntern;
     	mStartDate = theStart;
     	mEndDate = theEnd;
@@ -83,6 +85,13 @@ public class EmploymentData {
     	mSkillUsed = theSkill;
     }
     /**
+     * Set salary.
+     * @param theSalary
+     */
+    public void setSalary(int theSalary) {
+    	mSalary = theSalary;
+    }
+    /**
      * Set true if is intern, false otherwise.
      * @param theIsIntern
      */
@@ -116,6 +125,13 @@ public class EmploymentData {
      */
     public String getSkill() {
     	return mSkillUsed;
+    }
+    /**
+     * Get the salary.
+     * @return the salary
+     */
+    public int getSalary() {
+    	return mSalary;
     }
     /**
      * Check if the employment is an internship.

@@ -1,5 +1,6 @@
 package data;
 
+import student.EmploymentData;
 import student.Student;
 
 import java.sql.Connection;
@@ -102,9 +103,132 @@ public class StudentDB {
 				filterList.add(std);
 			}
 		}
-		//TODO search by gpa?
 		for (Student std : mStudentList) {
 			if (std.getEmail().toLowerCase().contains(theSearch)) {
+				filterList.add(std);
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same major as the search keyword.
+	 * @param theSearch
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsMajor(String theSearch) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		if (mStudentList == null) {
+			getStudents();
+		}
+		for(Student std: mStudentList) {
+			if(std.getDegree().toLowerCase().contains(theSearch)) {
+				filterList.add(std);
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same degree as the search keyword.
+	 * @param theSearch
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsDegree(String theSearch) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		if (mStudentList == null) {
+			getStudents();
+		}
+		for (Student std : mStudentList) {
+			if (std.getMajor().toLowerCase().contains(theSearch)) {
+				filterList.add(std);
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same job as the search keyword.
+	 * @param theSearch
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsJob(String theSearch) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		if (mStudentList == null) {
+			getStudents();
+		}
+		
+		for (Student std : mStudentList) {
+			for(EmploymentData ed : std.getJobList()) {
+				if(ed.getCompany().toLowerCase().contains(theSearch)) {
+					filterList.add(std);
+				}
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same intern as the search keyword.
+	 * @param theSearch
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsIntern(String theSearch) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		if (mStudentList == null) {
+			getStudents();
+		}
+		
+		for (Student std : mStudentList) {
+			for(EmploymentData ed : std.getInternList()) {
+				if(ed.getCompany().toLowerCase().contains(theSearch)) {
+					filterList.add(std);
+				}
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same salary as the search keyword.
+	 * @param theMinSalary
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsSalary(int theMinSalary, int theMaxSalary) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		int temp;
+		if(theMinSalary>theMaxSalary) {
+			temp = theMaxSalary;
+			theMaxSalary = theMinSalary;
+			theMinSalary = temp;
+		}
+		if (mStudentList == null) {
+			getStudents();
+		}
+		
+		for (Student std : mStudentList) {
+			for(EmploymentData ed : std.getJobList()) {
+				if((ed.getSalary()>=theMinSalary) && (ed.getSalary()<= theMaxSalary)) {
+					filterList.add(std);
+				}
+			}
+		}
+		return filterList;
+	}
+	/**
+	 * Returns all students that contain the same GPA as the search keyword.
+	 * @param theSearch
+	 * @return list of student that match
+	 * @throws SQLException
+	 */
+	public List<Student> getStudentsGpa(double theSearch) throws SQLException {
+		List<Student> filterList = new ArrayList<Student>();
+		if (mStudentList == null) {
+			getStudents();
+		}
+		
+		for (Student std : mStudentList) {
+			if(std.getGPA() == theSearch) {
 				filterList.add(std);
 			}
 		}
