@@ -190,26 +190,40 @@ public class StudentDB {
 	}
 	/**
 	 * Returns all students that contain the same salary as the search keyword.
+	 * If theMinSalary = 0, search student with salary more than theMaxSalary
+	 * If theMaxSalary = 0, search student with salary less than theMinSalary
 	 * @param theMinSalary
+	 * @param theMaxSalary
 	 * @return list of student that match
 	 * @throws SQLException
 	 */
 	public List<Student> getStudentsSalary(int theMinSalary, int theMaxSalary) throws SQLException {
 		List<Student> filterList = new ArrayList<Student>();
-		int temp;
-		if(theMinSalary>theMaxSalary) {
-			temp = theMaxSalary;
-			theMaxSalary = theMinSalary;
-			theMinSalary = temp;
-		}
 		if (mStudentList == null) {
 			getStudents();
 		}
-		
-		for (Student std : mStudentList) {
-			for(EmploymentData ed : std.getJobList()) {
-				if((ed.getSalary()>=theMinSalary) && (ed.getSalary()<= theMaxSalary)) {
-					filterList.add(std);
+		if(theMinSalary == 0) {
+			for (Student std : mStudentList) {
+				for(EmploymentData ed : std.getJobList()) {
+					if(ed.getSalary()>= theMaxSalary) {
+						filterList.add(std);
+					}
+				}
+			}
+		} else if (theMaxSalary == 0) {
+			for (Student std : mStudentList) {
+				for(EmploymentData ed : std.getJobList()) {
+					if(ed.getSalary()<= theMinSalary) {
+						filterList.add(std);
+					}
+				}
+			}
+		} else {
+			for (Student std : mStudentList) {
+				for(EmploymentData ed : std.getJobList()) {
+					if((ed.getSalary()>=theMinSalary) && (ed.getSalary()<= theMaxSalary)) {
+						filterList.add(std);
+					}
 				}
 			}
 		}

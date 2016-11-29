@@ -52,6 +52,8 @@ private static StudentDB mStudentDB;
 	
 	/**
 	 * Return a list of students with the matching salary. 
+	 * If theMinSalary = 0, search student with salary more than theMaxSalary
+	 * If theMaxSalary = 0, search student with salary less than theMinSalary
 	 * @param theMinSalary
 	 * @param theMaxSalary
 	 * @return a list of students with matching salary
