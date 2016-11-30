@@ -33,6 +33,9 @@ public class Student {
      */
     public Student(String theName, String theID, String theMajor, String theTerm, String theDegree,
     		String theYear, double theGPA, String theEmail) {
+    	if (theName.length() < 3 || theID.length() < 3 || theGPA < 0 || theEmail.length() < 3) {
+    		throw new IllegalArgumentException("Invalid input");
+    	}
     	mStdName = theName;
     	mStdID = theID;
     	mStdMajor = theMajor;
@@ -53,7 +56,7 @@ public class Student {
      * Set the student's ID.
      * @param theID
      */
-    public void setId(String theID) {
+    public void setID(String theID) {
     	mStdID = theID;
     }
     /**
@@ -106,7 +109,7 @@ public class Student {
      * Get the student's ID.
      * @return the student's ID
      */
-    public String getId() {
+    public String getID() {
     	return mStdID;
     }
     /**

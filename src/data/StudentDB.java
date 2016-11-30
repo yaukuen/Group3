@@ -79,7 +79,7 @@ public class StudentDB {
 			}
 		}
 		for (Student std : mStudentList) {
-			if (std.getId().toLowerCase().contains(theSearch)) {
+			if (std.getID().toLowerCase().contains(theSearch)) {
 				filterList.add(std);
 			}
 		}
@@ -292,7 +292,7 @@ public class StudentDB {
 	 * @return Returns "Added Student Successfully" or "Error adding student: " with the sql exception.
 	 */
 	public String addStudent(Student theStudent) {
-		String sql = "insert into Client(`name`,`sid`,`major`,`gradTerm`,"
+		String sql = "insert into Student(`name`,`sid`,`major`,`gradTerm`,"
 				+ "`degree`,`year`,`gpa`, `email`) values "
 				+ "(?, ?, ?, ?, ?, ?, ?, ?); ";
 
@@ -308,7 +308,7 @@ public class StudentDB {
 		try {
 			preparedStatement = mConnection.prepareStatement(sql);
 			preparedStatement.setString(1, theStudent.getName());
-			preparedStatement.setString(2, theStudent.getId());
+			preparedStatement.setString(2, theStudent.getID());
 			preparedStatement.setString(3, theStudent.getMajor());
 			preparedStatement.setString(4, theStudent.getTerm());
 			preparedStatement.setString(5, theStudent.getDegree());

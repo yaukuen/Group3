@@ -13,10 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import data.LoginDB;
+import data.EmployeeDB;
 
 /**
- * The GUI for Main
+ * This class creates a GUI for the login process 
+ * and goes to the HomeGUI after the user has logged in.
  * @author Loc Bui
  *
  */
@@ -28,10 +29,17 @@ public class MainGUI implements ActionListener{
 	private JLabel myLabel, myLabelP;
 	private JButton myLoginBtn, myStudentLoginBtn;
 	
+	/**
+	 * The main method for running the GUI
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		new MainGUI();
 	}
 	
+	/**
+	 * This constructor calls the method to create the login GUI.
+	 */
 	public MainGUI() {
 		myFrame = new JFrame("Log in");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +54,9 @@ public class MainGUI implements ActionListener{
 		myFrame.setResizable(false);
 	}
 	
+	/**
+	 * This method creates the login panel with buttons.
+	 */
 	public void createLogin() {
 		myLoginPnl = new JPanel(new GridLayout(3,2));
 		myLabel = new JLabel("Enter Username:");
@@ -79,6 +90,9 @@ public class MainGUI implements ActionListener{
 		myFrame.add(myStudentLoginBtn, BorderLayout.SOUTH);
 	}
 
+	/**
+	 * This method makes the buttons work. 
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == myStudentLoginBtn) {
@@ -88,13 +102,13 @@ public class MainGUI implements ActionListener{
 		}
 		
 		if (e.getSource() == myLoginBtn) {
-			LoginDB login = new LoginDB();
+			EmployeeDB employee = new EmployeeDB();
 			String user = myUserName.getText();
 			String pass = myPassword.getText();
 			try {
-				login.login(user, pass);
-			} catch (SQLException e1) {
-				e1.printStackTrace();
+				employee.login(user, pass);
+			} catch (SQLException err) {
+				err.printStackTrace();
 			}
 			myFrame.dispose();
 		}
