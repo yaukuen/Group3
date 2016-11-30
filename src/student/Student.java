@@ -78,9 +78,9 @@ public class Student {
      * @param theEmployment
      */
     public void addEmployment(EmploymentData theEmployment) {
-    	if(theEmployment.getInternship()) {
+    	if(theEmployment.getType() == "Internship") {
     		mInternList.add(theEmployment);
-    	}else if(!theEmployment.getInternship()) {
+    	}else if(theEmployment.getType() == "Job") {
     		mJobList.add(theEmployment);
     	}
     }

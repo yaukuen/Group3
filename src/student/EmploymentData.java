@@ -1,7 +1,5 @@
 package student;
 
-import java.util.Calendar;
-
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
  * skill used, start date, end date, and if it is an intern or a job.
@@ -9,14 +7,15 @@ import java.util.Calendar;
  *
  */
 public class EmploymentData {
+	private String mSID;
     private String mCompany;
     private String mPosition;
     private String mPosDescription;
     private String mSkillUsed;
     private int mSalary;
-    private Calendar mStartDate;
-    private Calendar mEndDate;
-    private boolean mIsIntern;
+    private String mStartDate;
+    private String mEndDate;
+    private String mType;
     
     /**
      * Constructor for the EmploymentData.
@@ -28,14 +27,15 @@ public class EmploymentData {
      * @param theStart date
      * @param theEnd date
      */
-    public EmploymentData(String theCompany, String thePosition, String theDescr, 
-    		String theSkill, int theSalary, boolean theIntern, Calendar theStart, Calendar theEnd) {
+    public EmploymentData(String theSID, String theCompany, String thePosition, String theDescr, 
+    		String theSkill, int theSalary, String theType, String theStart, String theEnd) {
+    	mSID = theSID;
     	mCompany = theCompany;
     	mPosition = thePosition;
     	mPosDescription = theDescr;
     	mSkillUsed = theSkill;
     	mSalary = theSalary;
-    	mIsIntern = theIntern;
+    	mType = theType;
     	mStartDate = theStart;
     	mEndDate = theEnd;
     	
@@ -49,12 +49,12 @@ public class EmploymentData {
      * @param theIntern
      */
     public EmploymentData(String theCompany, String thePosition, String theDescr, 
-    		String theSkill, boolean theIntern) {
+    		String theSkill, String theType) {
     	mCompany = theCompany;
     	mPosition = thePosition;
     	mPosDescription = theDescr;
     	mSkillUsed = theSkill;
-    	mIsIntern = theIntern;
+    	mType = theType;
     }
     /**
      * Set company name.
@@ -95,8 +95,16 @@ public class EmploymentData {
      * Set true if is intern, false otherwise.
      * @param theIsIntern
      */
-    public void setInternship(boolean theIsIntern) {
-    	mIsIntern = theIsIntern;
+    public void setType(String theType) {
+    	mType = theType;
+    }
+    
+    /**
+     * Get SID
+     * @return the SID
+     */
+    public String getSID() {
+    	return mSID;
     }
     /**
      * Get company name.
@@ -137,21 +145,21 @@ public class EmploymentData {
      * Check if the employment is an internship.
      * @return true if intern, false otherwise
      */
-    public boolean getInternship() {
-    	return mIsIntern;
+    public String getType() {
+    	return mType;
     }
     /**
      * Get the employment start date.
      * @return the starting date
      */
-    public Calendar getStartDate() {
+    public String getStartDate() {
     	return mStartDate;
     }
     /**
      * Get the employment end date.
      * @return the end date
      */
-    public Calendar getEndDate() {
+    public String getEndDate() {
     	return mEndDate;
     }
     
