@@ -16,7 +16,7 @@ import student.EmploymentData;
  *
  */
 public class EmploymentDB {
-	private Connection mConnection;
+	private static Connection mConnection;
     private List<EmploymentData> mEmploymentList;
     
     /**
@@ -192,12 +192,12 @@ public class EmploymentDB {
 	/**
 	 * Adds a new employment to the Employment table. 
 	 * @param theEmployment 
-	 * @return Returns "Added Employment Successfully" or "Error adding employment: " with the sql exception.
+	 * @return Returns true or false
 	 */
-	public String addEmployment(EmploymentData theEmployment) {
+	public static boolean addEmployment(EmploymentData theEmployment) {
 		String sql = "insert into Employment(`sid`,`company`,`position`,`description`,"
 				+ "`skillUsed`,`startDay`,`endDay`, `type`, `salary`) values "
-				+ "(?, ?, ?, ?, ?, ?, ?, ?); ";
+				+ "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
 		if (mConnection == null) {
 			try {
@@ -222,9 +222,9 @@ public class EmploymentDB {
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return "Error adding employment: " + e.getMessage();
+			return false;
 		}
-		return "Added Employment Successfully";
+		return true;
 	}
 
 	/**

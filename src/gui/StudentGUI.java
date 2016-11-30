@@ -133,7 +133,6 @@ public class StudentGUI extends JPanel implements ActionListener,
 			panel.setLayout(new GridLayout(1, 0));
 			txfLabel[i] = new JLabel(labelNames[i]);
 			txfField[i] = new JTextField(25);
-//			txfField[i].setPreferredSize(new Dimension(100, 100));
 			panel.add(txfLabel[i]);
 			panel.add(txfField[i]);
 			myPnlAdd.add(panel);
@@ -177,8 +176,6 @@ public class StudentGUI extends JPanel implements ActionListener,
         comboPanel4.add(new JLabel("Graduation Year: "));
         comboPanel4.add(myYearComboBox);
         myPnlAdd.add(comboPanel4);
-		
-//		myPnlAdd.add(comboPanel);
 		
 		JPanel panel = new JPanel();
 		myAddBtn = new JButton("Add");

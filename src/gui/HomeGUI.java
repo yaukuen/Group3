@@ -33,8 +33,10 @@ public class HomeGUI {
 	private void createComponents()
 	{
 		myTabbedPane = new JTabbedPane();
-		JComponent addPanel = makeTextPanel("Add or Update Student's Data");
-		myTabbedPane.addTab("Add or Update Student's Data", addPanel);
+		JComponent addDataPanel = makeTextPanel("Add or Update Student's Data");
+		myTabbedPane.addTab("Add or Update Student's Data", addDataPanel);
+		JComponent addEmploymentPanel = makeTextPanel("Add or Update Student's Employment Information");
+		myTabbedPane.addTab("Add or Update Student's Employment Information", addEmploymentPanel);
 		JComponent genePanel = makeTextPanel("Generates Outputs");
 		myTabbedPane.addTab("Generates Outputs", genePanel);
 		JComponent requestPanel = makeTextPanel("Request to Edit Student's Data");
@@ -59,6 +61,8 @@ public class HomeGUI {
 			panel.add(new RequestMakingGUI());
 		} else if (type.equalsIgnoreCase("View Students' Request")) {
 			panel.add(new ViewRequestGUI());
+		} else if (type.equalsIgnoreCase("Add or Update Student's Employment Information")) {
+			panel.add(new StudentEmploymentGUI());
 		}
 		return panel;
 	}

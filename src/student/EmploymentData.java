@@ -1,5 +1,7 @@
 package student;
 
+import java.util.Calendar;
+
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
  * skill used, start date, end date, and if it is an intern or a job.
@@ -15,7 +17,7 @@ public class EmploymentData {
     private int mSalary;
     private String mStartDate;
     private String mEndDate;
-    private String mType;
+    private String type;
     
     /**
      * Constructor for the EmploymentData.
@@ -35,7 +37,7 @@ public class EmploymentData {
     	mPosDescription = theDescr;
     	mSkillUsed = theSkill;
     	mSalary = theSalary;
-    	mType = theType;
+    	type = theType;
     	mStartDate = theStart;
     	mEndDate = theEnd;
     	
@@ -54,7 +56,7 @@ public class EmploymentData {
     	mPosition = thePosition;
     	mPosDescription = theDescr;
     	mSkillUsed = theSkill;
-    	mType = theType;
+    	type = theType;
     }
     /**
      * Set company name.
@@ -96,7 +98,7 @@ public class EmploymentData {
      * @param theIsIntern
      */
     public void setType(String theType) {
-    	mType = theType;
+    	type = theType;
     }
     
     /**
@@ -146,7 +148,7 @@ public class EmploymentData {
      * @return true if intern, false otherwise
      */
     public String getType() {
-    	return mType;
+    	return type;
     }
     /**
      * Get the employment start date.
