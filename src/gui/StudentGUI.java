@@ -133,42 +133,52 @@ public class StudentGUI extends JPanel implements ActionListener,
 			panel.setLayout(new GridLayout(1, 0));
 			txfLabel[i] = new JLabel(labelNames[i]);
 			txfField[i] = new JTextField(25);
-			txfField[i].setPreferredSize(new Dimension(100, 100));
+//			txfField[i].setPreferredSize(new Dimension(100, 100));
 			panel.add(txfLabel[i]);
 			panel.add(txfField[i]);
 			myPnlAdd.add(panel);
 		}
 		
-		JPanel comboPanel = new JPanel();
-		comboPanel.setLayout(new GridLayout(4, 4));
+		JPanel comboPanel1 = new JPanel();
+		comboPanel1.setLayout(new GridLayout(1, 0));
 		
 		String[] majors = {"CSS", "CES", "IT"};
 		myMajorComboBox = new JComboBox<String>(majors);
 		myMajorComboBox.setSelectedIndex(0);
-		comboPanel.add(new JLabel("Choose Major: "));
-		comboPanel.add(myMajorComboBox);
-		
+		comboPanel1.add(new JLabel("Choose Major: "));
+		comboPanel1.add(myMajorComboBox);
+        myPnlAdd.add(comboPanel1);
+
+        JPanel comboPanel2 = new JPanel();
+        comboPanel2.setLayout(new GridLayout(1, 0));
 		String[] degrees = {"Bachelor of Science", "Bachelor of Arts", "Master of Science"};
 		myDegreeComboBox = new JComboBox<String>(degrees);
 		myDegreeComboBox.setSelectedIndex(0);
-		comboPanel.add(new JLabel("Choose Degree: "));
-		comboPanel.add(myDegreeComboBox);
-		
+        comboPanel2.add(new JLabel("Choose Degree: "));
+        comboPanel2.add(myDegreeComboBox);
+        myPnlAdd.add(comboPanel2);
+
+        JPanel comboPanel3 = new JPanel();
+        comboPanel3.setLayout(new GridLayout(1, 0));
 		String[] terms = {"Spring", "Summer", "Fall", "Winter"};
 		myTermComboBox = new JComboBox<String>(terms);
 		myTermComboBox.setSelectedIndex(0);
-		comboPanel.add(new JLabel("Graduation Term: "));
-		comboPanel.add(myTermComboBox);
+        comboPanel3.add(new JLabel("Graduation Term: "));
+        comboPanel3.add(myTermComboBox);
+        myPnlAdd.add(comboPanel3);
 
+        JPanel comboPanel4 = new JPanel();
+        comboPanel4.setLayout(new GridLayout(1, 0));
 		String[] years = {"2001", "2002", "2003", "2004", "2005",
 				"2006", "2007", "2008", "2009", "2010", "2011", "2012", 
 				"2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"};
 		myYearComboBox = new JComboBox<String>(years);
 		myYearComboBox.setSelectedIndex(0);
-		comboPanel.add(new JLabel("Graduation Year: "));
-		comboPanel.add(myYearComboBox);
+        comboPanel4.add(new JLabel("Graduation Year: "));
+        comboPanel4.add(myYearComboBox);
+        myPnlAdd.add(comboPanel4);
 		
-		myPnlAdd.add(comboPanel);
+//		myPnlAdd.add(comboPanel);
 		
 		JPanel panel = new JPanel();
 		myAddBtn = new JButton("Add");
