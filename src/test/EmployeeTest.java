@@ -33,7 +33,7 @@ public class EmployeeTest {
 	 * Test the constructor.
 	 * @throws Exception
 	 */
-	@Test(expected = NullPointerException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testConstructor() {
 		new Employee(null, null);
 		new Employee("John", null);

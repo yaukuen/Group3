@@ -34,6 +34,9 @@ public class Employee {
      * @param thePassword A String containing the employee's password.
      */
     public Employee(final String theUserName, final String thePassword) {
+    	if(theUserName == null || thePassword == null) {
+    		throw new IllegalArgumentException("Invalid Input");
+    	}
         this.myUserName = theUserName;
         this.myPassword = thePassword;
     }
