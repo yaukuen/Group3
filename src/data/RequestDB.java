@@ -40,7 +40,7 @@ public class RequestDB {
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 int id = rs.getInt("requestId");
-                String studentId = rs.getString("studentId");
+                String studentId = rs.getString("sid");
                 String studentName = rs.getString("name");
                 String content = rs.getString("content");
                 Request requestTemp = new Request(studentId, studentName, content);
@@ -90,12 +90,10 @@ public class RequestDB {
 
     /**
      * Remove a row after finished editing student's information.
-     * @param theRequest contains information of the request.
+     * @param requestID the requestId to be deleted
      * @return "Removed Request Successfully" or "Error removing request: " with the sql exception.
      */
-    public String removeRequest(final Request theRequest) {
-        // Delete From Request Where requestId = ?;
-        String requestId = theRequest.getMyRequestId();
+    public String removeRequest(final String requestId) {
         String sql = "delete from Request where requestId = ? ;";
         PreparedStatement preparedStatement;
         try {

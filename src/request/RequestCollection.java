@@ -51,14 +51,14 @@ public class RequestCollection {
 
     /**
      * A request user want to remove.
-     * @param theRequest request contains request id.
+     * @param theRequestId request contains request id.
      * @return true if succeeded, false otherwise.
      */
-    public static boolean removeRequest(final Request theRequest) {
+    public static boolean removeRequest(final String theRequestId) {
         if (myRequestDB == null) {
             myRequestDB = new RequestDB();
         }
-        String message = myRequestDB.removeRequest(theRequest);
+        String message = myRequestDB.removeRequest(theRequestId);
         if (message.startsWith("Error removing request:")) {
             return false;
         }

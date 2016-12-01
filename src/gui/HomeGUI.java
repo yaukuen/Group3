@@ -12,7 +12,7 @@ import javax.swing.JTabbedPane;
  *
  */
 public class HomeGUI {
-	private JFrame myFrame;
+	private static JFrame myFrame;
 	private JTabbedPane myTabbedPane;
 	
 	/**
@@ -43,6 +43,8 @@ public class HomeGUI {
 		myTabbedPane.addTab("Request to Edit Student's Data", requestPanel);
 		JComponent requestViewPanel = makeTextPanel("View Students' Request");
 		myTabbedPane.addTab("View Student Request", requestViewPanel);
+		JComponent logOutPanel = makeTextPanel("Log Out");
+		myTabbedPane.addTab("Log out", logOutPanel);
 		myFrame.add(myTabbedPane);
 	}
 	
@@ -63,6 +65,8 @@ public class HomeGUI {
 			panel.add(new ViewRequestGUI());
 		} else if (type.equalsIgnoreCase("Add or Update Student's Employment Information")) {
 			panel.add(new StudentEmploymentGUI());
+		} else if (type.equalsIgnoreCase("Log Out")) {
+			panel.add(new LogoutGUI());
 		}
 		return panel;
 	}
@@ -71,10 +75,11 @@ public class HomeGUI {
 	 * This method restricts the permission for user as a student.
 	 */
 	public void studentPermission() {
-		myTabbedPane.setSelectedIndex(2);
+		myTabbedPane.setSelectedIndex(3);
 		myTabbedPane.setEnabledAt(0, false);
 		myTabbedPane.setEnabledAt(1, false);
-		myTabbedPane.setEnabledAt(3, false);
+		myTabbedPane.setEnabledAt(2, false);
+		myTabbedPane.setEnabledAt(4, false);
 	}
 	
 	/**
@@ -82,16 +87,22 @@ public class HomeGUI {
 	 */
 	public void advisorPermission() {
 		myTabbedPane.setSelectedIndex(0);
-		myTabbedPane.setEnabledAt(1, false);
 		myTabbedPane.setEnabledAt(2, false);
+		myTabbedPane.setEnabledAt(3, false);
 	}
 	
 	/**
 	 * This method restricts the permission for user as a faculty.
 	 */
 	public void facultyPermission() {
-		myTabbedPane.setSelectedIndex(1);
+		myTabbedPane.setSelectedIndex(2);
 		myTabbedPane.setEnabledAt(0, false);
-		myTabbedPane.setEnabledAt(2, false);
+		myTabbedPane.setEnabledAt(1, false);
+		myTabbedPane.setEnabledAt(3, false);
+		myTabbedPane.setEnabledAt(4, false);
+	}
+	
+	public static void close() {
+		myFrame.dispose();
 	}
 }

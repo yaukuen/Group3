@@ -31,15 +31,15 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 	
 	private JButton myBtnList, myBtnAdd, myAddBtn;
 	private JPanel myPnlButtons, myPnlAdd, myPnlContent;
-	private JLabel[] txfLabel = new JLabel[6];
-	private JTextField[] txfField = new JTextField[6];
+	private JLabel[] txfLabel = new JLabel[5];
+	private JTextField[] txfField = new JTextField[5];
 	private Object[][] mData;
 	private JTable table;
 	private JScrollPane scrollPane;
 	private String[] mItemColumnNames = {"name", "company", "position",
 			"description", "skillUsed", "salary", "startDay", "endDay", "type" };
 
-	private JComboBox<String> myStudentComboBox;;
+	private JComboBox<String> myStudentComboBox, myTypeComboBox;
 	private String[] myStudentArrays;
 	private JComboBox<String> myMonthStartComboBox, myMonthEndComboBox;
 	private JComboBox<String> myYearStartComboBox, myYearEndComboBox;
@@ -96,7 +96,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myPnlAdd.add(comboPanel1);
 		
 		String labelNames[] = { "Company:", "Position: ", "Description: ", "Skill Used: ", 
-				"Salary: ", "Type(Job or Internship): "};
+				"Salary: "};
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -107,11 +107,23 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 			myPnlAdd.add(panel);
 		}
 		
+		JPanel comboPanel4 = new JPanel();
+		comboPanel4.setLayout(new GridLayout(1,2));
+		String[] types = {"Job", "Internship"};
+		myTypeComboBox = new JComboBox<String>(types);
+		myTypeComboBox.setSelectedIndex(0);
+        comboPanel4.add(new JLabel("Type (Job or Intership): "));
+        comboPanel4.add(myTypeComboBox);
+        myPnlAdd.add(comboPanel4);
+        
 		JPanel comboPanel2 = new JPanel();
         comboPanel2.setLayout(new GridLayout(1, 2));
         
-		String[] months = {"January", "February", "March", "April", "May", "June", 
-				"July", "August", "September", "October", "November", "December"};
+//		String[] months = {"January", "February", "March", "April", "May", "June", 
+//				"July", "August", "September", "October", "November", "December"};
+		
+		String[] months = {"01", "02", "03", "04", "05", "06", 
+				"07", "08", "09", "10", "11", "12"};
 		myMonthStartComboBox = new JComboBox<String>(months);
 		myMonthStartComboBox.setSelectedIndex(0);
 		
@@ -121,7 +133,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		
 		myYearStartComboBox = new JComboBox<String>(years);
 		myYearStartComboBox.setSelectedIndex(0);
-        comboPanel2.add(new JLabel("Start Day: "));
+        comboPanel2.add(new JLabel("Start Day (Month - Year): "));
         comboPanel2.add(myMonthStartComboBox);
         comboPanel2.add(myYearStartComboBox);
         myPnlAdd.add(comboPanel2);
@@ -132,7 +144,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myMonthEndComboBox.setSelectedIndex(0);
 		myYearEndComboBox = new JComboBox<String>(years);
 		myYearEndComboBox.setSelectedIndex(0);
-        comboPanel3.add(new JLabel("End Day: "));
+        comboPanel3.add(new JLabel("End Day (Month - Year): "));
         comboPanel3.add(myMonthEndComboBox);
         comboPanel3.add(myYearEndComboBox);
         myPnlAdd.add(comboPanel3);
@@ -206,15 +218,10 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 			}
 		}
 		
-		String type = txfField[5].getText();
-		if (type.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Enter Type:");
-			txfField[5].setFocusable(true);
-			return;
-		}
+		String type = (String) myTypeComboBox.getSelectedItem();
 		
-		String startDay = (String) myMonthStartComboBox.getSelectedItem() + myYearStartComboBox.getSelectedItem();
-		String endDay = (String) myMonthEndComboBox.getSelectedItem() + myYearEndComboBox.getSelectedItem();
+		String startDay = (String) myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
+		String endDay = (String) myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
 		
 		String name = (String) myStudentComboBox.getSelectedItem();
 		int index = name.indexOf(":");
