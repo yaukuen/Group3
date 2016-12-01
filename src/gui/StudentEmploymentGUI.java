@@ -1,15 +1,15 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 import data.EmploymentDB;
 import student.EmploymentData;
@@ -20,40 +20,98 @@ import student.StudentCollection;
 /**
  * This class creates the GUI for Adding and Editing Student's Data
  * @author Loc Bui
- *
+ * @author Yau Tsang
  */
 public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		TableModelListener {
-	
-	private static final int TABLE_WIDTH = 1100;
-	private static final int TABLE_HEIGHT = 550;
-	private static final long serialVersionUID = -7520370128176444786L;
-	
-	private JButton myBtnList, myBtnAdd, myAddBtn;
-	private JPanel myPnlButtons, myPnlAdd, myPnlContent;
-	private JLabel[] txfLabel = new JLabel[5];
-	private JTextField[] txfField = new JTextField[5];
-	private Object[][] mData;
-	private JTable table;
-	private JScrollPane scrollPane;
-	private String[] mItemColumnNames = {"name", "company", "position",
-			"description", "skillUsed", "salary", "startDay", "endDay", "type" };
 
-	private JComboBox<String> myStudentComboBox, myTypeComboBox;
-	private String[] myStudentArrays;
-	private JComboBox<String> myMonthStartComboBox, myMonthEndComboBox;
+    private static final int TABLE_WIDTH = 1100;
+    private static final int TABLE_HEIGHT = 550;
+	private static final long serialVersionUID = -7520370128176444786L;
+    private static EmploymentDB myEmploymentDB;
+
+    private JButton myBtnList, myBtnAdd, myAddBtn;
+    private JPanel myPnlButtons, myPnlAdd, myPnlContent;
+    private JLabel[] txfLabel = new JLabel[5];
+    private JTextField[] txfField = new JTextField[5];
+    /**
+     * List of the Employments.
+     */
+	private List<EmploymentData> myList;
+    /**
+     * Put myList into a 2d Array,
+     * and it will use in the myTable for displaying
+     * the list of the Employments.
+     */
+	private Object[][] myData;
+    private JTable myTable;
+    private JScrollPane scrollPane;
+
+    /**
+     * Columns name of the Employment Table.
+     */
+	private String[] myEmploymentColumnNames = {"name", "sid", "company", "position",
+			"description", "skillUsed", "salary", "startDay", "endDay", "type",};
+    private JComboBox<String> myStudentComboBox, myTypeComboBox;
+    private String[] myStudentArrays;
+    private JComboBox<String> myMonthStartComboBox, myMonthEndComboBox;
+
 	private JComboBox<String> myYearStartComboBox, myYearEndComboBox;
 
-	/**
-	 * This constructor calls the method to create all of the components
-	 */
+    /**
+     * This constructor calls the method to create all of the components
+     * @throws SQLException if it cause an error from the query calling SQL.
+     */
 	public StudentEmploymentGUI() {
 		setLayout(new BorderLayout());
+		if (myEmploymentDB == null) {
+		    myEmploymentDB = new EmploymentDB();
+        }
+		myList = getData(null);
 		createComponents();
 		setVisible(true);
 	}
 
-	/**
+    /**
+     * Returns the data 2d to use in the list as well as the search panels.
+     * @param theSearchKey the searching keyword.
+     * @return a list of employment data.
+     * @throws SQLException if it cause an error from the query calling SQL.
+     */
+    private List<EmploymentData> getData(final String theSearchKey) {
+	    if (theSearchKey != null) {
+            try {
+                myList = myEmploymentDB.searchEmployments(theSearchKey);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                myList = myEmploymentDB.getEmployments();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if (myList != null) {
+	        myData = new Object[myList.size()][myEmploymentColumnNames.length];
+	        for (int i = 0; i < myList.size(); i++) {
+	            myData[i][0] = myList.get(i).getmStudentName();
+                myData[i][1] = myList.get(i).getSID();
+                myData[i][2] = myList.get(i).getCompany();
+                myData[i][3] = myList.get(i).getPosition();
+                myData[i][4] = myList.get(i).getDescription();
+                myData[i][5] = myList.get(i).getSkill();
+                myData[i][6] = myList.get(i).getSalary();
+                myData[i][7] = myList.get(i).getStartDate();
+                myData[i][8] = myList.get(i).getEndDate();
+                myData[i][9] = myList.get(i).getType();
+            }
+        }
+        return myList;
+    }
+
+
+    /**
 	 * Create the three panels to add to this GUI. One for list, one for search,
 	 * one for add.
 	 */
@@ -72,6 +130,14 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myPnlButtons.add(myBtnAdd);
 		
 		add(myPnlButtons, BorderLayout.NORTH);
+
+		// instant focus on the employment data list
+		myTable = new JTable(myData, myEmploymentColumnNames);
+		scrollPane = new JScrollPane(myTable);
+        scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+		myPnlContent.add(scrollPane);
+		// Adding listener for updating or modifying the myTable.
+		myTable.getModel().addTableModelListener(this);
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
@@ -170,7 +236,17 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 			this.repaint();
 		} else if (e.getSource() == myAddBtn) {
 			performAddStudent();
-		}
+		} else if (e.getSource() == myBtnList) {
+		    myList = getData(null);
+            myPnlContent.removeAll();
+            myTable = new JTable(myData, myEmploymentColumnNames);
+            myTable.getModel().addTableModelListener(this);
+            scrollPane = new JScrollPane(myTable);
+            scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+            myPnlContent.add(scrollPane);
+            myPnlContent.revalidate();
+            this.repaint();
+        }
 	}
 
 	/**
@@ -245,10 +321,31 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 	}
 
 	/**
-	 * Listen to the cell changes on the table. 
+	 * Listen to the cell changes on the myTable.
 	 */
 	@Override
 	public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
+        TableModel model = (TableModel) e.getSource();
+        String columnName = model.getColumnName(column);
+        Object data = model.getValueAt(row, column);
+        if (columnName.matches("name") ||
+                columnName.matches("sid") ||
+                columnName.matches("startDay") ||
+                columnName.matches("endDay") ||
+                columnName.matches("type")) {
+
+            JOptionPane.showMessageDialog(null,
+                    "Update failed, "+ columnName +" CANNOT BE EDITED!!!");
+        } else if (data != null && ((String) data).length() != 0) {
+            EmploymentData employment = myList.get(row);
+            System.out.print(employment.getmEmploymentId());
+            if (!myEmploymentDB.updateEmployment(employment, columnName, data)) {
+                JOptionPane.showMessageDialog(null,
+                        "Update failed, Please check your input!");
+            }
+        }
 	}
 
 }
