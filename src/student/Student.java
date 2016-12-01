@@ -33,7 +33,8 @@ public class Student {
      */
     public Student(String theName, String theID, String theMajor, String theTerm, String theDegree,
     		String theYear, double theGPA, String theEmail) {
-    	if (theName.length() < 3 || theID.length() < 3 || theGPA < 0 || theEmail.length() < 3) {
+    	if (theName.length() < 3 || theID.length() < 3 || theGPA < 0 || theEmail.length() < 3 || theName == null
+    			|| theID == null || theMajor == null || theTerm == null || theDegree == null || theGPA > 4) {
     		throw new IllegalArgumentException("Invalid input");
     	}
     	mStdName = theName;
