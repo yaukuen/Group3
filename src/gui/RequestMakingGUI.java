@@ -51,6 +51,9 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Create the add panel for making a request.
+	 */
 	public void addPanel() {
 		// Add Panel
 		myInfoPnl = new JPanel();
@@ -84,6 +87,7 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 				+ "to add your student information such as: name, sid, major... to "
 				+ "the system so you can make a request to update your employment information. Thank you.";
 		
+		//this is for wrapping the text in the JLabel
 		String html1 = "<html><body style='width: ";
 		String html2 = "px'>";
 
@@ -121,6 +125,9 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Perform adding the request to the database.
+	 */
 	public void performAddRequest() {
 		String name = myTxfField[0].getText();
 		if (name.length() == 0) {

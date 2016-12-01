@@ -102,6 +102,17 @@ public class HomeGUI {
 		myTabbedPane.setEnabledAt(4, false);
 	}
 	
+	/**
+	 * This method restricts the permission for user as an administrative staff.
+	 */
+	public void adminPermission() {
+		myTabbedPane.setSelectedIndex(0);
+		myTabbedPane.setEnabledAt(3, false);
+	}
+	
+	/**
+	 * This method is used for closing the GUI.
+	 */
 	public static void close() {
 		myFrame.dispose();
 	}

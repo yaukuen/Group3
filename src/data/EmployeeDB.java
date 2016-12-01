@@ -91,6 +91,7 @@ public class EmployeeDB {
 	            				"Login success" , JOptionPane.INFORMATION_MESSAGE);
 	            		return "Sucess";
 	            	} else if (role == 2) {
+	            		home.adminPermission();
 	            		JOptionPane.showMessageDialog(null, "You are logged in as an Administrative Staff", 
 	            				"Login success" , JOptionPane.INFORMATION_MESSAGE);
 	            		return "Sucess";
@@ -116,34 +117,4 @@ public class EmployeeDB {
 	    }
 	    return null;
 	}
-	
-// Just change it
-//  public String login(Employee theEmployee) throws SQLException {
-//  List<Employee> employeeList = new ArrayList<>();
-//String userName = theEmployee.getMyUserName();
-//String password = theEmployee.getMyPassword();
-//Statement stmt = null;
-//String query = "select * " + "from Employee where userName = " +
-//        userName + " and password = " + password + " ;";
-//try {
-//    stmt = myConnection.createStatement();
-//    ResultSet rs = stmt.executeQuery(query);
-//    if (rs.next()) {
-//        String userNameTemp = rs.getString("userName");
-//        String passwordTemp = rs.getString("password");
-//        if (userNameTemp != null && passwordTemp != null) {
-//            return "success";
-//        } else {
-//            return null;
-//        }
-//    }
-//} catch (SQLException e) {
-//    System.out.println(e);
-//} finally {
-//    if (stmt != null) {
-//        stmt.close();
-//    }
-//}
-//return null;
-//}
 }

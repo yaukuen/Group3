@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.TableModel;
 
 import student.Student;
 import student.StudentCollection;
@@ -29,51 +30,56 @@ public class StudentGUI extends JPanel implements ActionListener,
 	
 	private JButton myBtnList, myBtnSearch, myBtnAdd, myAddBtn, mySearchBtn;
 	private JPanel myPnlButtons, myPnlAdd, myPnlContent;
-	private JLabel[] txfLabel = new JLabel[4];
-	private JTextField[] txfField = new JTextField[4];
-	private Object[][] mData;
-	private JTable table;
-	private JScrollPane scrollPane;
-	private String[] mItemColumnNames = { "name", "sid", "major",
+	private JLabel[] myTxfLabel = new JLabel[4];
+	private JTextField[] myTxfField = new JTextField[4];
+	private Object[][] myData;
+	private JTable myTable;
+	private JScrollPane myScrollPane;
+	private String[] myItemColumnNames = { "name", "sid", "major",
 			"graduationterm", "degree", "year", "gpa", "email" };
-	private List<Student> mList;
-	private JPanel pnlSearch;
+	private List<Student> myList;
+	private JPanel myPnlSearch;
 	private JComboBox<String> myTermComboBox, myYearComboBox, myMajorComboBox, myDegreeComboBox;
 	private JTextField myTxfTitle;
-	private JLabel lblTitle;;
+	private JLabel mylblTitle;;
 
 	/**
 	 * This constructor calls the method to create all of the components
 	 */
 	public StudentGUI() {
 		setLayout(new BorderLayout());
-		mList = getData(null);
+		myList = getData(null);
 		createComponents();
 		setVisible(true);
 	}
 	
+	/**
+	 * Retrieve the list of student to display
+	 * @param searchKey the key to search for a student.
+	 * @return list of student
+	 */
 	private List<Student> getData(String searchKey) {
 		if (searchKey != null) {
-			mList = StudentCollection.search(searchKey);
+			myList = StudentCollection.search(searchKey);
 		} else {
-			mList = StudentCollection.showAll();
+			myList = StudentCollection.showAll();
 		}
 
-		if (mList != null) {
-			mData = new Object[mList.size()][mItemColumnNames.length];
-			for (int i = 0; i < mList.size(); i++) {
-				mData[i][0] = mList.get(i).getName();
-				mData[i][1] = mList.get(i).getID();
-				mData[i][2] = mList.get(i).getMajor();
-				mData[i][3] = mList.get(i).getTerm();
-				mData[i][4] = mList.get(i).getDegree();
-				mData[i][5] = mList.get(i).getYear();
-				mData[i][6] = mList.get(i).getGPA();
-				mData[i][7] = mList.get(i).getEmail();
+		if (myList != null) {
+			myData = new Object[myList.size()][myItemColumnNames.length];
+			for (int i = 0; i < myList.size(); i++) {
+				myData[i][0] = myList.get(i).getName();
+				myData[i][1] = myList.get(i).getID();
+				myData[i][2] = myList.get(i).getMajor();
+				myData[i][3] = myList.get(i).getTerm();
+				myData[i][4] = myList.get(i).getDegree();
+				myData[i][5] = myList.get(i).getYear();
+				myData[i][6] = myList.get(i).getGPA();
+				myData[i][7] = myList.get(i).getEmail();
 			}
 		}
 
-		return mList;
+		return myList;
 	}
 
 	/**
@@ -100,29 +106,35 @@ public class StudentGUI extends JPanel implements ActionListener,
 		
 		addListPanel();
 		
-		pnlSearch = new JPanel();
-		lblTitle = new JLabel("Enter Name: ");
+		myPnlSearch = new JPanel();
+		mylblTitle = new JLabel("Enter Name: ");
 		myTxfTitle = new JTextField(25);
 		mySearchBtn = new JButton("Search");
 		mySearchBtn.addActionListener(this);
-		pnlSearch.add(lblTitle);
-		pnlSearch.add(myTxfTitle);
-		pnlSearch.add(mySearchBtn);
+		myPnlSearch.add(mylblTitle);
+		myPnlSearch.add(myTxfTitle);
+		myPnlSearch.add(mySearchBtn);
 		
 		add(myPnlButtons, BorderLayout.NORTH);
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Create the list panel for displaying the list of student information.
+	 */
 	public void addListPanel() {
 		// List Panel
 		myPnlContent = new JPanel();
-		table = new JTable(mData, mItemColumnNames);
-		scrollPane = new JScrollPane(table);
-		scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
-		myPnlContent.add(scrollPane);
-		table.getModel().addTableModelListener(this);
+		myTable = new JTable(myData, myItemColumnNames);
+		myScrollPane = new JScrollPane(myTable);
+		myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+		myPnlContent.add(myScrollPane);
+		myTable.getModel().addTableModelListener(this);
 	}
 	
+	/**
+	 * Create the add panel for adding a student information.
+	 */
 	public void addPanel() {
 		// Add Panel
 		myPnlAdd = new JPanel();
@@ -131,10 +143,10 @@ public class StudentGUI extends JPanel implements ActionListener,
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
-			txfLabel[i] = new JLabel(labelNames[i]);
-			txfField[i] = new JTextField(25);
-			panel.add(txfLabel[i]);
-			panel.add(txfField[i]);
+			myTxfLabel[i] = new JLabel(labelNames[i]);
+			myTxfField[i] = new JTextField(25);
+			panel.add(myTxfLabel[i]);
+			panel.add(myTxfField[i]);
 			myPnlAdd.add(panel);
 		}
 		
@@ -199,31 +211,31 @@ public class StudentGUI extends JPanel implements ActionListener,
 		} else if (e.getSource() == myAddBtn) {
 			performAddStudent();
 		} else if (e.getSource() == myBtnList) {
-			mList = getData(null);
+			myList = getData(null);
 			myPnlContent.removeAll();
-			table = new JTable(mData, mItemColumnNames);
-			table.getModel().addTableModelListener(this);
-			scrollPane = new JScrollPane(table);
-			scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
-			myPnlContent.add(scrollPane);
+			myTable = new JTable(myData, myItemColumnNames);
+			myTable.getModel().addTableModelListener(this);
+			myScrollPane = new JScrollPane(myTable);
+			myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+			myPnlContent.add(myScrollPane);
 			myPnlContent.revalidate();
 			myPnlContent.setVisible(true);
 			this.repaint();
 		} else if (e.getSource() == myBtnSearch) {
 			myPnlContent.removeAll();
-			myPnlContent.add(pnlSearch);
+			myPnlContent.add(myPnlSearch);
 			myPnlContent.revalidate();
 			this.repaint();
 		} else if (e.getSource() == mySearchBtn) {
 			String title = myTxfTitle.getText();
 			if (title.length() > 0) {
-				mList = getData(title);
+				myList = getData(title);
 				myPnlContent.removeAll();
-				table = new JTable(mData, mItemColumnNames);
-				table.getModel().addTableModelListener(this);
-				scrollPane = new JScrollPane(table);
-				scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
-				myPnlContent.add(scrollPane);
+				myTable = new JTable(myData, myItemColumnNames);
+				myTable.getModel().addTableModelListener(this);
+				myScrollPane = new JScrollPane(myTable);
+				myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+				myPnlContent.add(myScrollPane);
 				myPnlContent.revalidate();
 				this.repaint();
 				myTxfTitle.setText("");
@@ -235,23 +247,23 @@ public class StudentGUI extends JPanel implements ActionListener,
 	 * Perform adding a student's data.
 	 */
 	private void performAddStudent() {
-		String name = txfField[0].getText();
+		String name = myTxfField[0].getText();
 		if (name.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Enter Student Name (First Last)");
-			txfField[0].setFocusable(true);
+			myTxfField[0].setFocusable(true);
 			return;
 		}
-		String sid = txfField[1].getText();
+		String sid = myTxfField[1].getText();
 		if (sid.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Enter SID");
-			txfField[1].setFocusable(true);
+			myTxfField[1].setFocusable(true);
 			return;
 		}
 		String major = (String) myMajorComboBox.getSelectedItem();
 		
 		String degree = (String) myDegreeComboBox.getSelectedItem();
 		
-		String gpaStr = txfField[2].getText();
+		String gpaStr = myTxfField[2].getText();
 		double gpa = 0.0;
 		
 		if (gpaStr.length() != 0) {
@@ -259,15 +271,15 @@ public class StudentGUI extends JPanel implements ActionListener,
 				gpa = Double.parseDouble(gpaStr);
 			} catch (NumberFormatException e) {
 				JOptionPane.showMessageDialog(null, "Enter GPA as decimal");
-				txfField[2].setFocusable(true);
+				myTxfField[2].setFocusable(true);
 				return;
 			}
 		}
 		
-		String email = txfField[3].getText();
+		String email = myTxfField[3].getText();
 		if (email.length() == 0) {
 			JOptionPane.showMessageDialog(null, "Enter email");
-			txfField[3].setFocusable(true);
+			myTxfField[3].setFocusable(true);
 			return;
 		}
 
@@ -278,23 +290,39 @@ public class StudentGUI extends JPanel implements ActionListener,
 
 		String message = "Student add failed";
 		if (StudentCollection.addStudent(student)) {
-			message = "Student added successfully";
+			message = "Student added successfully!\nNow you can add the employment information"
+				+ " for this student in the \nAdd or Update Student's Employment Information tab.";
 		}
 		JOptionPane.showMessageDialog(null, message);
 
 		// Clear all text fields.
-		for (int i = 0; i < txfField.length; i++) {
-			if (txfField[i].getText().length() != 0) {
-				txfField[i].setText("");
+		for (int i = 0; i < myTxfField.length; i++) {
+			if (myTxfField[i].getText().length() != 0) {
+				myTxfField[i].setText("");
 			}
 		}
 	}
 
 	/**
-	 * Listen to the cell changes on the table. 
+	 * Listen to the cell changes on the myTable.
 	 */
 	@Override
 	public void tableChanged(TableModelEvent e) {
+        int row = e.getFirstRow();
+        int column = e.getColumn();
+        TableModel model = (TableModel) e.getSource();
+        String columnName = model.getColumnName(column);
+        Object data = model.getValueAt(row, column);
+        if (!columnName.matches("email")) {
+            JOptionPane.showMessageDialog(null,
+                    "Update failed, "+ columnName +" CANNOT BE EDITED!!!");
+        } else if (data != null && ((String) data).length() != 0) {
+            Student student = myList.get(row);
+            if (!StudentCollection.updateStudent(student, columnName, data)) {
+                JOptionPane.showMessageDialog(null,
+                        "Update failed, Please check your input!");
+            }
+        }
 	}
 
 }

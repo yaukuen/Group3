@@ -23,7 +23,7 @@ import data.EmployeeDB;
  */
 public class MainGUI implements ActionListener{
 	private JFrame myFrame;
-	private JPanel myLoginPnl;
+	private JPanel myLoginPnl, myLoginBtnPnl;
 	private JTextField myUserName;
 	private JTextField myPassword;
 	private JLabel myLabel, myLabelP;
@@ -58,7 +58,7 @@ public class MainGUI implements ActionListener{
 	 * This method creates the login panel with buttons.
 	 */
 	public void createLogin() {
-		myLoginPnl = new JPanel(new GridLayout(3,2));
+		myLoginPnl = new JPanel(new GridLayout(2,2));
 		myLabel = new JLabel("Enter Username:");
 		myLabel.setSize(myLabel.getPreferredSize());
 		myLoginPnl.add(myLabel);
@@ -79,15 +79,16 @@ public class MainGUI implements ActionListener{
 		myPassword.setVisible(true);
 		myLoginPnl.add(myPassword);
 		
+		myLoginBtnPnl = new JPanel();
 		myLoginBtn = new JButton("Log in");
-		myLoginBtn.setPreferredSize(new Dimension(100,20));
 		myLoginBtn.addActionListener(this);
-		myLoginPnl.add(myLoginBtn);
+		myLoginBtnPnl.add(myLoginBtn);
 		myFrame.add(myLoginPnl, BorderLayout.NORTH);
 		
 		myStudentLoginBtn = new JButton("Log in as a student");
 		myStudentLoginBtn.addActionListener(this);
-		myFrame.add(myStudentLoginBtn, BorderLayout.SOUTH);
+		myLoginBtnPnl.add(myStudentLoginBtn);
+		myFrame.add(myLoginBtnPnl, BorderLayout.SOUTH);
 	}
 
 	/**

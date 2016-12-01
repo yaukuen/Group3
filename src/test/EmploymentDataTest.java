@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import student.EmploymentData;
-import student.Student;
 /**
  * Test class for the EmploymentData.
  * @author Nico Tandyo

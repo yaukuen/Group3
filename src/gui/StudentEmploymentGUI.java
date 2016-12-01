@@ -162,7 +162,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myPnlAdd.add(comboPanel1);
 		
 		String labelNames[] = { "Company:", "Position: ", "Description: ", "Skill Used: ", 
-				"Salary: "};
+				"Salary per year: "};
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -184,9 +184,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         
 		JPanel comboPanel2 = new JPanel();
         comboPanel2.setLayout(new GridLayout(1, 2));
-        
-//		String[] months = {"January", "February", "March", "April", "May", "June", 
-//				"July", "August", "September", "October", "November", "December"};
 		
 		String[] months = {"01", "02", "03", "04", "05", "06", 
 				"07", "08", "09", "10", "11", "12"};
@@ -340,12 +337,10 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
                     "Update failed, "+ columnName +" CANNOT BE EDITED!!!");
         } else if (data != null && ((String) data).length() != 0) {
             EmploymentData employment = myList.get(row);
-            System.out.print(employment.getmEmploymentId());
             if (!myEmploymentDB.updateEmployment(employment, columnName, data)) {
                 JOptionPane.showMessageDialog(null,
                         "Update failed, Please check your input!");
             }
         }
 	}
-
 }

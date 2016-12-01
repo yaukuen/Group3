@@ -236,7 +236,6 @@ public class EmploymentDB {
                 String sd = rs.getString("startDay");
                 String ed = rs.getString("endDay");
                 String type = rs.getString("type");
-                String eid = rs.getString("employmentid");
                 int salary = rs.getInt("salary");
                 return new EmploymentData(sid, company, pos, desc, skill, salary, type, sd, ed);
             }
