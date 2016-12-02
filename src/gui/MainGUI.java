@@ -22,6 +22,7 @@ import data.EmployeeDB;
  *
  */
 public class MainGUI implements ActionListener{
+	//All the fields I use.
 	private JFrame myFrame;
 	private JPanel myLoginPnl, myLoginBtnPnl;
 	private JTextField myUserName;
