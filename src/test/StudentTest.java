@@ -32,36 +32,6 @@ public class StudentTest {
 		mStudent = new Student(mName, mID, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
 	}
 	/**
-	 * Test constructor with invalid name.
-	 */
-	@Test(expected = NullPointerException.class)
-	public void testConstructorWithInvalidName() {
-		new Student(null, "123456", "Computer Science", 
-				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
-		new Student("B", "123456", "Computer Science", 
-				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
-	}
-	/**
-	 * Test constructor with invalid major.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithInvalidID() {
-		new Student("Bisa", "12", "CSS", 
-				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
-		new Student("John", "-1", "CSS", 
-				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
-	}
-	/**
-	 * Test constructor with invalid GPA.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithInvalidGPA() {
-		new Student("John", "123456", "Computer Science", 
-				"Summer", "Bachelor of Science", "2016", -1, "anon@yahoo.com");
-		new Student("John", "123456", "Computer Science", 
-				"Summer", "Bachelor of Science", "2016", 9, "anon@yahoo.com");
-	}
-	/**
 	 * Test setName and getName.
 	 */
 	@Test
