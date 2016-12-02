@@ -1,6 +1,5 @@
 package student;
 
-
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
  * skill used, start date, end date, and if it is an intern or a job.
@@ -54,21 +53,26 @@ public class EmploymentData {
     }
 
     /**
-     * Constructor for the EmploymentData.
+     * Constructor for the EmploymentData without the position description
+     * because it's optional.
      *
      * @param theCompany
      * @param thePosition
-     * @param theDescr
      * @param theSkill
-     * @param theType
+     * @param theSalary
+     * @param theStart    date
+     * @param theEnd      date
      */
-    public EmploymentData(String theCompany, String thePosition, String theDescr,
-                          String theSkill, String theType) {
+    public EmploymentData(String theSID, String theCompany, String thePosition,
+                          String theSkill, int theSalary, String theType, String theStart, String theEnd) {
+        mSID = theSID;
         mCompany = theCompany;
         mPosition = thePosition;
-        mPosDescription = theDescr;
         mSkillUsed = theSkill;
+        mSalary = theSalary;
         type = theType;
+        mStartDate = theStart;
+        mEndDate = theEnd;
     }
 
     /**

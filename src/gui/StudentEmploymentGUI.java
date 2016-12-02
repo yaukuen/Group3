@@ -162,8 +162,8 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		comboPanel1.add(myStudentComboBox);
 		myPnlAdd.add(comboPanel1);
 		
-		String labelNames[] = { "Company:", "Position: ", "Description: ", "Skill Used: ", 
-				"Salary per year: "};
+		String labelNames[] = { "Company: *", "Position: * ", "Description: ", "Skill Used: * ", 
+				"Salary per year: * "};
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -179,7 +179,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		String[] types = {"Job", "Internship"};
 		myTypeComboBox = new JComboBox<String>(types);
 		myTypeComboBox.setSelectedIndex(0);
-        comboPanel4.add(new JLabel("Type (Job or Intership): "));
+        comboPanel4.add(new JLabel("Type (Job or Intership): * "));
         comboPanel4.add(myTypeComboBox);
         myPnlAdd.add(comboPanel4);
         
@@ -197,7 +197,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		
 		myYearStartComboBox = new JComboBox<String>(years);
 		myYearStartComboBox.setSelectedIndex(0);
-        comboPanel2.add(new JLabel("Start Day (Month - Year): "));
+        comboPanel2.add(new JLabel("Start Day (Month - Year): * "));
         comboPanel2.add(myMonthStartComboBox);
         comboPanel2.add(myYearStartComboBox);
         myPnlAdd.add(comboPanel2);
@@ -208,7 +208,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myMonthEndComboBox.setSelectedIndex(0);
 		myYearEndComboBox = new JComboBox<String>(years);
 		myYearEndComboBox.setSelectedIndex(0);
-        comboPanel3.add(new JLabel("End Day (Month - Year): "));
+        comboPanel3.add(new JLabel("End Day (Month - Year): * "));
         comboPanel3.add(myMonthEndComboBox);
         comboPanel3.add(myYearEndComboBox);
         myPnlAdd.add(comboPanel3);
@@ -216,7 +216,9 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		JPanel panel = new JPanel();
 		myAddBtn = new JButton("Add");
 		myAddBtn.addActionListener(this);
+		JLabel label = new JLabel("(*) = Required Fields");
 		panel.add(myAddBtn);
+		panel.add(label);
 		myPnlAdd.add(panel);
 		myPnlContent.add(myPnlAdd);
 	}
@@ -267,9 +269,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		
 		String posDescription = txfField[2].getText();
 		if (posDescription.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Enter Position Description");
-			txfField[2].setFocusable(true);
-			return;
+			posDescription = "NOT PROVIDED";
 		}
 		
 		String skillUsed = txfField[3].getText();
@@ -310,12 +310,21 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         int endMonth = Integer.parseInt(endDay.substring(0, index1));
         if (start > end) {
         	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
-				"Add failed" , JOptionPane.INFORMATION_MESSAGE);
+				"Add failed" , JOptionPane.WARNING_MESSAGE);
         } else if (start == end && startMonth > endMonth) {
         	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
-    				"Add failed" , JOptionPane.INFORMATION_MESSAGE);
+    				"Add failed" , JOptionPane.WARNING_MESSAGE);
         } else {
-    		EmploymentData empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
+        	EmploymentData empData;
+//        	if (posDescription == "NOT PROVIDED") {
+//        		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
+//        				salary, type, startDay, endDay);
+//        	} else {
+//        		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
+//        				salary, type, startDay, endDay);
+//        	}
+        	
+    		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
     				salary, type, startDay, endDay);
     		
     		String message = "Student add failed";
