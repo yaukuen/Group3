@@ -101,7 +101,6 @@ public class MainGUI implements ActionListener{
 			try {
 				home = new HomeGUI();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			home.studentPermission();

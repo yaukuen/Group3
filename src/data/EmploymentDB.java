@@ -2,7 +2,6 @@ package data;
 
 import student.EmploymentData;
 import student.OutPut;
-import student.Student;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -298,7 +297,7 @@ public class EmploymentDB {
         try {
             stmt = mConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
+            while (rs.next()) {
                 String name = rs.getString("name");
                 String sid = rs.getString("sid");
                 double gpa = rs.getDouble("gpa");
@@ -335,7 +334,7 @@ public class EmploymentDB {
         try {
             stmt = mConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
+            while (rs.next()) {
                 String name = rs.getString("name");
                 String sid = rs.getString("sid");
                 double gpa = rs.getDouble("gpa");

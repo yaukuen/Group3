@@ -37,6 +37,8 @@ public class OutputGUI extends JPanel implements ActionListener {
 	private JScrollPane myScrollPane;
 	public static final int GPA = 1;
 	public static final int SALARY = 2;
+	public static final int INTERNSHIP = 3;
+	public static final int JOB = 4;
 
 	/**
 	 * The constructor to call the method to create all of the components
@@ -48,14 +50,20 @@ public class OutputGUI extends JPanel implements ActionListener {
 		setVisible(true);
 	}
 	
-    private List<OutPut> getData(int number) {
+    private List<OutPut> getData(int number) throws SQLException {
         if (number == 1) {
         	myList = StudentCollection.searchByGPA();
             myData = new Object[myList.size()][myColumnNames.length];
         } else if (number == 2) {
         	myList = StudentCollection.searchBySalary();
             myData = new Object[myList.size()][myColumnNames.length];
-        }
+        } else if (number == 3) {
+			myList = EmploymentDB.getInternship();
+			myData = new Object[myList.size()][myColumnNames.length];
+		} else if (number == 4) {
+			myList = EmploymentDB.getJob();
+			myData = new Object[myList.size()][myColumnNames.length];
+		}
 	    if (myList != null) {
 	        for (int i = 0; i < myList.size(); i++) {
 	            myData[i][0] = myList.get(i).getMyStdName();
@@ -71,48 +79,6 @@ public class OutputGUI extends JPanel implements ActionListener {
         }
         return myList;
     }
-	
-	public List<OutPut> getInternshipData() throws SQLException {
-		myList = EmploymentDB.getInternship();
-
-		if (myList != null) {
-			myData = new Object[myList.size()][myColumnNames.length];
-			for (int i = 0; i < myList.size(); i++) {
-				myData[i][0] = myList.get(i).getMyStdName();
-				myData[i][1] = myList.get(i).getMyStdID();
-				myData[i][2] = myList.get(i).getMyGPA();
-				myData[i][3] = myList.get(i).getMyStdMajor();
-				myData[i][4] = myList.get(i).getMyDegree();
-				myData[i][5] = myList.get(i).getMySalary();
-				myData[i][6] = myList.get(i).getMyCompany();
-				myData[i][7] = myList.get(i).getMyPosition();
-				myData[i][8] = myList.get(i).getMyType();
-			}
-		}
-
-		return myList;
-	}
-	
-	public List<OutPut> getJobData() throws SQLException {
-		myList = EmploymentDB.getJob();
-
-		if (myList != null) {
-			myData = new Object[myList.size()][myColumnNames.length];
-			for (int i = 0; i < myList.size(); i++) {
-				myData[i][0] = myList.get(i).getMyStdName();
-				myData[i][1] = myList.get(i).getMyStdID();
-				myData[i][2] = myList.get(i).getMyGPA();
-				myData[i][3] = myList.get(i).getMyStdMajor();
-				myData[i][4] = myList.get(i).getMyDegree();
-				myData[i][5] = myList.get(i).getMySalary();
-				myData[i][6] = myList.get(i).getMyCompany();
-				myData[i][7] = myList.get(i).getMyPosition();
-				myData[i][8] = myList.get(i).getMyType();
-			}
-		}
-
-		return myList;
-	}
 	
 	public List<OutPut> getMajor(String theSearch) throws SQLException {
 		myList = EmploymentDB.getMajor(theSearch);
@@ -194,21 +160,29 @@ public class OutputGUI extends JPanel implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == myBtnSearch) {
             if (myComboBox.getSelectedItem().equals("GPA")) {
-                myList = getData(GPA);
+                try {
+					myList = getData(GPA);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Salary")) {
-                myList = getData(SALARY);
+                try {
+					myList = getData(SALARY);
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Internship")) {
 				try {
-					myList = getInternshipData();
+					myList = getData(INTERNSHIP);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 				changeTable();
 			} else if (myComboBox.getSelectedItem().equals("Job")) {
 				try {
-					myList = getJobData();
+					myList = getData(JOB);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
