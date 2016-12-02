@@ -31,11 +31,6 @@ public class EmploymentDataTest {
 		mEmp = new EmploymentData(mSID, mCompany, mPosition, mPosDescription, 
 				mSkillUsed, mSalary, mType, mStartDate, mEndDate);
 	}
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorIllegalArgument() {
-		new EmploymentData(mSID, mCompany, mPosition, mPosDescription, mSkillUsed, 
-				mSalary, mType, "02-2015", "01-2013");
-	}
 	/**
 	 * Test set and get company methods.
 	 */
