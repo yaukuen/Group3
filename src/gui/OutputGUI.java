@@ -49,7 +49,12 @@ public class OutputGUI extends JPanel implements ActionListener {
 		createComponents();
 		setVisible(true);
 	}
-	
+	/**
+	 * Get the output data.
+	 * @param number is the selection
+	 * @return a list of output
+	 * @throws SQLException
+	 */
     private List<OutPut> getData(int number) throws SQLException {
         if (number == 1) {
         	myList = StudentCollection.searchByGPA();
@@ -79,7 +84,12 @@ public class OutputGUI extends JPanel implements ActionListener {
         }
         return myList;
     }
-	
+	/**
+	 * Get a list of output with desired major.
+	 * @param theSearch
+	 * @return a list of Output with desired major
+	 * @throws SQLException
+	 */
 	public List<OutPut> getMajor(String theSearch) throws SQLException {
 		myList = EmploymentDB.getMajor(theSearch);
 
@@ -99,7 +109,12 @@ public class OutputGUI extends JPanel implements ActionListener {
 		}
 		return myList;
 	}
-	
+	/**
+	 * Get a list of Output with desired degree. 
+	 * @param theSearch
+	 * @return the desired list of output.
+	 * @throws SQLException
+	 */
 	public List<OutPut> getDegree(String theSearch) throws SQLException {
 		myList = EmploymentDB.getMajor(theSearch);
 
@@ -154,7 +169,8 @@ public class OutputGUI extends JPanel implements ActionListener {
 	}
 
 	/**
-	 * Make the buttons work!
+	 * Perform an action based on the event.
+	 * @param e is the event
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
