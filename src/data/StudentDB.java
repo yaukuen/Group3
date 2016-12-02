@@ -21,8 +21,6 @@ import java.util.List;
 public class StudentDB {
 	private Connection mConnection;
     private List<Student> mStudentList;
-    private List<OutPut> myGPAList;
-    private List<OutPut> mySalaryList;
     private List<OutPut> myOutPutList;
 
     /**

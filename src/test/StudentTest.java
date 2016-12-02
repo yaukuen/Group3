@@ -45,10 +45,10 @@ public class StudentTest {
 	 * Test constructor with invalid major.
 	 */
 	@Test(expected = IllegalArgumentException.class)
-	public void testConstructorWithInvalidMajor() {
-		new Student("John", "123456", "2", 
+	public void testConstructorWithInvalidID() {
+		new Student("Bisa", "12", "CSS", 
 				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
-		new Student("John", "123456", "A", 
+		new Student("John", "-1", "CSS", 
 				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
 	}
 	/**
