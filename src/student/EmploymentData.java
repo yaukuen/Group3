@@ -1,5 +1,7 @@
 package student;
 
+import javax.swing.JOptionPane;
+
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
  * skill used, start date, end date, and if it is an intern or a job.
@@ -41,20 +43,6 @@ public class EmploymentData {
      */
     public EmploymentData(String theSID, String theCompany, String thePosition, String theDescr,
                           String theSkill, int theSalary, String theType, String theStart, String theEnd) {
-
-        //check for invalid start day and end day.
-        int index = theStart.indexOf("-");
-        int index1 = theEnd.indexOf("-");
-        int start = Integer.parseInt(theStart.substring(index + 1));
-        int end = Integer.parseInt(theEnd.substring(index1 + 1));
-        int startMonth = Integer.parseInt(theStart.substring(0, index));
-        int endMonth = Integer.parseInt(theEnd.substring(0, index1));
-        if (start > end) {
-            throw new IllegalArgumentException("Invalid start day and end day");
-        } else if (start == end && startMonth > endMonth) {
-            throw new IllegalArgumentException("Invalid start day and end day");
-        }
-
         mSID = theSID;
         mCompany = theCompany;
         mPosition = thePosition;
@@ -64,7 +52,6 @@ public class EmploymentData {
         type = theType;
         mStartDate = theStart;
         mEndDate = theEnd;
-
     }
 
     /**
