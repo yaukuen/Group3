@@ -37,51 +37,51 @@ public class StudentCollectionTest {
 	/**
 	 * Test searchByGPA.
 	 */
-	@Test
-	public void testSearchByGPA() {
-		List<Student> filteredStudent = StudentCollection.searchByGPA(mGPA);
-		
-		boolean found = false;
-		for (Student std : filteredStudent){
-			if (std.getGPA() == mGPA){
-				found = true;
-				break;
-			}
-		}
-		assertTrue(found);
-	}
-	/**
-	 * Test searchByMajor.
-	 */
-	@Test
-	public void testSearchByMajor() {
-		List<Student> filteredStudent = StudentCollection.searchByMajor(mMajor);
-		
-		boolean found = true;
-		for (Student std : filteredStudent){
-			if (std.getMajor().equals(mMajor)){
-				found = true;
-				break;
-			}
-		}
-		assertTrue(found);
-	}
-	/**
-	 * Test searchByDegree.
-	 */
-	@Test
-	public void testSearchByDegree() {
-		List<Student> filteredStudent = StudentCollection.searchByDegree(mDegree);
-		
-		boolean found = true;
-		for (Student std : filteredStudent){
-			if (std.getDegree().equals(mDegree)){
-				found = true;
-				break;
-			}
-		}
-		assertTrue(found);
-	}
+//	@Test
+//	public void testSearchByGPA() {
+//		List<Student> filteredStudent = StudentCollection.searchByGPA(mGPA);
+//		
+//		boolean found = false;
+//		for (Student std : filteredStudent){
+//			if (std.getGPA() == mGPA){
+//				found = true;
+//				break;
+//			}
+//		}
+//		assertTrue(found);
+//	}
+//	/**
+//	 * Test searchByMajor.
+//	 */
+//	@Test
+//	public void testSearchByMajor() {
+//		List<Student> filteredStudent = StudentCollection.searchByMajor(mMajor);
+//		
+//		boolean found = true;
+//		for (Student std : filteredStudent){
+//			if (std.getMajor().equals(mMajor)){
+//				found = true;
+//				break;
+//			}
+//		}
+//		assertTrue(found);
+//	}
+//	/**
+//	 * Test searchByDegree.
+//	 */
+//	@Test
+//	public void testSearchByDegree() {
+//		List<Student> filteredStudent = StudentCollection.searchByDegree(mDegree);
+//		
+//		boolean found = true;
+//		for (Student std : filteredStudent){
+//			if (std.getDegree().equals(mDegree)){
+//				found = true;
+//				break;
+//			}
+//		}
+//		assertTrue(found);
+//	}
 	/**
 	 * Test for the addStudent method. However, change the student ID to unique student ID
 	 * every time you test it because ID must not be duplicate.
