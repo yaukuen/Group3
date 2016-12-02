@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import gui.OutputGUI;
 import student.Student;
 import data.StudentDB;
 
@@ -33,17 +34,16 @@ private static StudentDB mStudentDB;
 		return list;
 	}
 	/**
-	 * Return a list of students with the matching GPA. 
-	 * @param theGpa
+	 * Return a list of students with the matching GPA.
 	 * @return a list of students with matching GPA
 	 */
-	public static List<Student> searchByGPA(double theGpa) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchByGPA() {
+		List<OutPut> list = new ArrayList<>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsGpa(theGpa);
+				return mStudentDB.getOutput(OutputGUI.GPA);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -54,17 +54,15 @@ private static StudentDB mStudentDB;
 	 * Return a list of students with the matching salary. 
 	 * If theMinSalary = 0, search student with salary more than theMaxSalary
 	 * If theMaxSalary = 0, search student with salary less than theMinSalary
-	 * @param theMinSalary
-	 * @param theMaxSalary
 	 * @return a list of students with matching salary
 	 */
-	public static List<Student> searchBySalary(int theMinSalary, int theMaxSalary) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchBySalary() {
+		List<OutPut> list = new ArrayList<>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsSalary(theMinSalary, theMaxSalary);
+				return mStudentDB.getOutput(OutputGUI.SALARY);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

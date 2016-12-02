@@ -1,6 +1,7 @@
 package data;
 
 import student.EmploymentData;
+import student.OutPut;
 import student.Student;
 
 import java.sql.Connection;
@@ -20,7 +21,10 @@ import java.util.List;
 public class StudentDB {
 	private Connection mConnection;
     private List<Student> mStudentList;
-    
+    private List<OutPut> myGPAList;
+    private List<OutPut> mySalaryList;
+    private List<OutPut> myOutPutList;
+
     /**
 	 * Retrieves all students from the Student table.
 	 * 
@@ -61,6 +65,7 @@ public class StudentDB {
 		}
 		return mStudentList;
 	}
+
 	/**
 	 * Returns all students that contain the search keyword in the name or description. 
 	 * @param theSearch search name
@@ -110,6 +115,65 @@ public class StudentDB {
 		}
 		return filterList;
 	}
+
+    public List<OutPut> getOutputs(int number) throws SQLException {
+        if (mConnection == null) {
+            mConnection = DataConnection.getConnection();
+        }
+        String query = null;
+        Statement stmt = null;
+        if (number == 1) {
+            query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,\n" +
+                    "Employment.salary, Employment.company, Employment.position, Employment.type\n" +
+                    "from Student Join Employment\n" +
+                    "on Student.sid = Employment.sid\n" +
+                    "order by Student.gpa desc;";
+        } else if (number == 2) {
+            query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,\n" +
+                    "Employment.salary, Employment.company, Employment.position, Employment.type\n" +
+                    "from Student Join Employment\n" +
+                    "on Student.sid = Employment.sid\n" +
+                    "order by Employment.salary desc;";
+        }
+        myOutPutList = new ArrayList<OutPut>();
+        try {
+            stmt = mConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String sid = rs.getString("sid");
+                double gpa = rs.getDouble("gpa");
+                String major = rs.getString("major");
+                String deg = rs.getString("degree");
+                int salary = rs.getInt("salary");
+                String company = rs.getString("company");
+                String pos = rs.getString("position");
+                String type = rs.getString("type");
+                OutPut output = null;
+                output = new OutPut(name, sid, gpa, major, deg, salary, company, pos, type);
+                myOutPutList.add(output);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return myOutPutList;
+    }
+
+    /**
+     * Returns all students that contain the same GPA as the search keyword.
+     * @return list of student that match
+     * @throws SQLException
+     */
+    public List<OutPut> getOutput(int number) throws SQLException {
+    	getOutputs(number);
+        return myOutPutList;
+    }
+
 	/**
 	 * Returns all students that contain the same major as the search keyword.
 	 * @param theSearch
@@ -184,66 +248,6 @@ public class StudentDB {
 				if(ed.getCompany().toLowerCase().contains(theSearch)) {
 					filterList.add(std);
 				}
-			}
-		}
-		return filterList;
-	}
-	/**
-	 * Returns all students that contain the same salary as the search keyword.
-	 * If theMinSalary = 0, search student with salary more than theMaxSalary
-	 * If theMaxSalary = 0, search student with salary less than theMinSalary
-	 * @param theMinSalary
-	 * @param theMaxSalary
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsSalary(int theMinSalary, int theMaxSalary) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		if(theMinSalary == 0) {
-			for (Student std : mStudentList) {
-				for(EmploymentData ed : std.getJobList()) {
-					if(ed.getSalary()>= theMaxSalary) {
-						filterList.add(std);
-					}
-				}
-			}
-		} else if (theMaxSalary == 0) {
-			for (Student std : mStudentList) {
-				for(EmploymentData ed : std.getJobList()) {
-					if(ed.getSalary()<= theMinSalary) {
-						filterList.add(std);
-					}
-				}
-			}
-		} else {
-			for (Student std : mStudentList) {
-				for(EmploymentData ed : std.getJobList()) {
-					if((ed.getSalary()>=theMinSalary) && (ed.getSalary()<= theMaxSalary)) {
-						filterList.add(std);
-					}
-				}
-			}
-		}
-		return filterList;
-	}
-	/**
-	 * Returns all students that contain the same GPA as the search keyword.
-	 * @param theSearch
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsGpa(double theSearch) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		
-		for (Student std : mStudentList) {
-			if(std.getGPA() == theSearch) {
-				filterList.add(std);
 			}
 		}
 		return filterList;
@@ -325,7 +329,7 @@ public class StudentDB {
 
 	/**
 	 * Modifies the data on a Student - only email can be changed
-	 * @param row
+	 * @param theStudent
 	 * @param theCol
 	 * @param theData
 	 * @return Returns a message with success or failure.
