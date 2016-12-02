@@ -92,7 +92,7 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 		int commentColumnWidth = 872;
 		myTable.getColumnModel().getColumn(2).setPreferredWidth(commentColumnWidth);
 		myScrollPane = new JScrollPane(myTable);
-		myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+		myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
 		myPnlContent.add(myScrollPane);
 	}
 

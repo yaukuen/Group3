@@ -160,7 +160,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 		myPnlContent.removeAll();
 		myTable = new JTable(myData, myColumnNames);
 		myScrollPane = new JScrollPane(myTable);
-		myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+		myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
 		myPnlContent.add(myScrollPane);
 		myPnlContent.revalidate();
 		myPnlContent.setVisible(true);

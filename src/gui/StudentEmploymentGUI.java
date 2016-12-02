@@ -132,7 +132,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		// instant focus on the employment data list
 		myTable = new JTable(myData, myEmploymentColumnNames);
 		scrollPane = new JScrollPane(myTable);
-        scrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+        scrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
 		myPnlContent.add(scrollPane);
 		// Adding listener for updating or modifying the myTable.
 		myTable.getModel().addTableModelListener(this);
@@ -240,7 +240,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
             myTable = new JTable(myData, myEmploymentColumnNames);
             myTable.getModel().addTableModelListener(this);
             scrollPane = new JScrollPane(myTable);
-            scrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+            scrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
             myPnlContent.add(scrollPane);
             myPnlContent.revalidate();
             this.repaint();
@@ -301,21 +301,36 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		int index = name.indexOf(":");
 		String sid = name.substring(index+2);
 		
-		EmploymentData empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
-				salary, type, startDay, endDay);
-		
-		String message = "Student add failed";
-		if (EmploymentDB.addEmployment(empData)) {
-			message = "Student added successfully";
-		}
-		JOptionPane.showMessageDialog(null, message);
-		
-		// Clear all text fields.
-		for (int i = 0; i < txfField.length; i++) {
-			if (txfField[i].getText().length() != 0) {
-				txfField[i].setText("");
-			}
-		}
+        //check for invalid start day and end day.
+        int index2 = startDay.indexOf("-");
+        int index1 = endDay.indexOf("-");
+        int start = Integer.parseInt(startDay.substring(index2 + 1));
+        int end = Integer.parseInt(endDay.substring(index1 + 1));
+        int startMonth = Integer.parseInt(startDay.substring(0, index2));
+        int endMonth = Integer.parseInt(endDay.substring(0, index1));
+        if (start > end) {
+        	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+				"Add failed" , JOptionPane.INFORMATION_MESSAGE);
+        } else if (start == end && startMonth > endMonth) {
+        	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+    				"Add failed" , JOptionPane.INFORMATION_MESSAGE);
+        } else {
+    		EmploymentData empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
+    				salary, type, startDay, endDay);
+    		
+    		String message = "Student add failed";
+    		if (EmploymentDB.addEmployment(empData)) {
+    			message = "Student added successfully";
+    		}
+    		JOptionPane.showMessageDialog(null, message);
+    		
+    		// Clear all text fields.
+    		for (int i = 0; i < txfField.length; i++) {
+    			if (txfField[i].getText().length() != 0) {
+    				txfField[i].setText("");
+    			}
+    		}
+        }
 	}
 
 	/**

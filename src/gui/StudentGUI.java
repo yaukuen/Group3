@@ -23,6 +23,8 @@ import student.StudentCollection;
  */
 public class StudentGUI extends JPanel implements ActionListener,
 		TableModelListener {
+	public static final int WIDTH = 1100;
+	public static final int HEIGHT = 550;
 	private static final long serialVersionUID = -7520370128176444786L;
 	
 	private JButton myBtnList, myBtnSearch, myBtnAdd, myAddBtn, mySearchBtn;
@@ -124,7 +126,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		myPnlContent = new JPanel();
 		myTable = new JTable(myData, myColumnNames);
 		myScrollPane = new JScrollPane(myTable);
-		myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+		myScrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		myPnlContent.add(myScrollPane);
 		myTable.getModel().addTableModelListener(this);
 	}
@@ -213,7 +215,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 			myTable = new JTable(myData, myColumnNames);
 			myTable.getModel().addTableModelListener(this);
 			myScrollPane = new JScrollPane(myTable);
-			myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+			myScrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 			myPnlContent.add(myScrollPane);
 			myPnlContent.revalidate();
 			myPnlContent.setVisible(true);
@@ -231,7 +233,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 				myTable = new JTable(myData, myColumnNames);
 				myTable.getModel().addTableModelListener(this);
 				myScrollPane = new JScrollPane(myTable);
-				myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
+				myScrollPane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 				myPnlContent.add(myScrollPane);
 				myPnlContent.revalidate();
 				this.repaint();
