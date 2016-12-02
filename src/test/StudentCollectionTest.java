@@ -35,7 +35,6 @@ public class StudentCollectionTest {
 		int sid = rd.nextInt(999999);
 		String sidStr = Integer.toString(sid);
 		mInitialStudent = new Student(mName, sidStr, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
-		StudentCollection.addStudent(mInitialStudent);
 	}
 	/**
 	 * Test searchByMajor.
@@ -74,13 +73,7 @@ public class StudentCollectionTest {
 	 */
 	@Test
 	public void testAddSuccess() {
-		Random rd = new Random();
-		int sid = rd.nextInt(999999);
-		String sidStr = Integer.toString(sid);
-		Student addedStudent = new Student("NameTest", sidStr, "Computer Science", "Autumn", "Bachelor of Science"
-				, "2018", 3.9, "name@uw.edu");
-				
-		boolean successfullAdd = StudentCollection.addStudent(addedStudent);
+		boolean successfullAdd = StudentCollection.addStudent(mInitialStudent);
 		assertTrue(successfullAdd);
 	}
 }
