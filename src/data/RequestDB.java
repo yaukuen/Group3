@@ -43,7 +43,13 @@ public class RequestDB {
                 String studentId = rs.getString("sid");
                 String studentName = rs.getString("name");
                 String content = rs.getString("content");
-                Request requestTemp = new Request(studentId, studentName, content);
+                String company = rs.getString("company");
+                String position = rs.getString("position");
+                int salary = rs.getInt("salary");
+                String start = rs.getString("startDay");
+                String end = rs.getString("endDay");
+                String type = rs.getString("type");
+                Request requestTemp = new Request(studentId, studentName, company, position, start, end, salary, type, content);
                 requestTemp.setMyRequestId(new Integer(id).toString());
                 myRequestList.add(requestTemp);
             }
@@ -64,8 +70,8 @@ public class RequestDB {
      * @return "Added Request Successfully" or "Error adding request: " with the sql exception.
      */
     public String addRequest(final Request theRequest) {
-        String sql = "insert into Request(sid, `name`, content) values "
-                + "(?, ?, ?); ";
+        String sql = "insert into Request(sid, `name`, company, position, salary, startDay, endDay, type,  content) values "
+                + "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
         if (myConnection == null) {
             try {
@@ -79,7 +85,13 @@ public class RequestDB {
             preparedStatement = myConnection.prepareStatement(sql);
             preparedStatement.setString(1, theRequest.getMySid());
             preparedStatement.setString(2, theRequest.getMyName());
-            preparedStatement.setString(3, theRequest.getMyContent());
+            preparedStatement.setString(3, theRequest.getMyCompany());
+            preparedStatement.setString(4, theRequest.getMyPosition());
+            preparedStatement.setInt(5, theRequest.getMySalary());
+            preparedStatement.setString(6, theRequest.getMyStartDay());
+            preparedStatement.setString(7, theRequest.getMyEndDay());
+            preparedStatement.setString(8, theRequest.getMyType());
+            preparedStatement.setString(9, theRequest.getMyContent());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

@@ -21,11 +21,14 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 1779520078061383929L;
 	private JButton myBtnInstruction, myAddBtn;
 	private JPanel myInfoPnl, myPnlContent, myInfoPanel;
-	private JLabel[] myTxfLabel = new JLabel[2];
-	private JTextField[] myTxfField = new JTextField[2];
+	private JLabel[] myTxfLabel = new JLabel[5];
+	private JTextField[] myTxfField = new JTextField[5];
 	private JLabel myCommentLabel = new JLabel();
 	private JLabel myInfoLabel;
 	private JTextArea myTxfArea = new JTextArea();
+    private JComboBox<String> myMonthStartComboBox, myMonthEndComboBox, myTypeComboBox;
+
+	private JComboBox<String> myYearStartComboBox, myYearEndComboBox;
 
 	/**
 	 * This constructor calls the method to create all of the components.
@@ -57,8 +60,8 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 	public void addPanel() {
 		// Add Panel
 		myInfoPnl = new JPanel();
-		myInfoPnl.setLayout(new GridLayout(3, 0));
-		String labelNames[] = { "Name (First Last):", "SID: "};
+		myInfoPnl.setLayout(new GridLayout(9, 0));
+		String labelNames[] = { "Name (First Last): *", "SID: *", "Company: *", "Position: *", "Salary: *"};
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -70,11 +73,11 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		}
 
 		
-		JPanel myCommentPnl = new JPanel(new GridLayout(2, 0));
+		JPanel myCommentPnl = new JPanel(new GridLayout(3, 0));
 		JPanel commentPanel = new JPanel();
 		commentPanel.setLayout(new GridLayout(1,0));
-		myCommentLabel = new JLabel("Comment: ");
-		int rows = 10, columns = 10;
+		myCommentLabel = new JLabel("Comment(Optional):");
+		int rows = 9, columns = 10;
 		myTxfArea = new JTextArea(rows, columns);
 		myTxfArea.setLineWrap(true);
 		myTxfArea.setWrapStyleWord(true);
@@ -92,7 +95,7 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		String html1 = "<html><body style='width: ";
 		String html2 = "px'>";
 
-		int width = 500, height = 200, size = 17;
+		int width = 500, height = 175, size = 17;
 		myInfoLabel = new JLabel(html1 + "400" + html2 + s);
 		myInfoLabel.setFont(new Font("DialogInput", Font.BOLD, size));
 		myInfoPanel.add(myInfoLabel);
@@ -106,6 +109,45 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		panel.add(myAddBtn);
 		panel.add(myBtnInstruction);
 		myCommentPnl.add(panel);
+		
+		JPanel comboPanel4 = new JPanel();
+		comboPanel4.setLayout(new GridLayout(1,2));
+		String[] types = {"Job", "Internship"};
+		myTypeComboBox = new JComboBox<String>(types);
+		myTypeComboBox.setSelectedIndex(0);
+        comboPanel4.add(new JLabel("Type (Job or Intership): * "));
+        comboPanel4.add(myTypeComboBox);
+        myInfoPnl.add(comboPanel4);
+        
+		JPanel comboPanel2 = new JPanel();
+        comboPanel2.setLayout(new GridLayout(1, 2));
+		
+		String[] months = {"01", "02", "03", "04", "05", "06", 
+				"07", "08", "09", "10", "11", "12"};
+		myMonthStartComboBox = new JComboBox<String>(months);
+		myMonthStartComboBox.setSelectedIndex(0);
+		
+		String[] years = {"2001", "2002", "2003", "2004", "2005",
+				"2006", "2007", "2008", "2009", "2010", "2011", "2012", 
+				"2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"};
+		
+		myYearStartComboBox = new JComboBox<String>(years);
+		myYearStartComboBox.setSelectedIndex(0);
+        comboPanel2.add(new JLabel("Start Day (Month - Year): * "));
+        comboPanel2.add(myMonthStartComboBox);
+        comboPanel2.add(myYearStartComboBox);
+        myInfoPnl.add(comboPanel2);
+
+        JPanel comboPanel3 = new JPanel();
+        comboPanel3.setLayout(new GridLayout(1, 2));
+		myMonthEndComboBox = new JComboBox<String>(months);
+		myMonthEndComboBox.setSelectedIndex(0);
+		myYearEndComboBox = new JComboBox<String>(years);
+		myYearEndComboBox.setSelectedIndex(0);
+        comboPanel3.add(new JLabel("End Day (Month - Year): * "));
+        comboPanel3.add(myMonthEndComboBox);
+        comboPanel3.add(myYearEndComboBox);
+        myInfoPnl.add(comboPanel3);
 
 		myPnlContent.add(myInfoPanel, BorderLayout.NORTH);
 		myPnlContent.add(myInfoPnl, BorderLayout.CENTER);
@@ -143,14 +185,59 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 			myTxfField[1].setFocusable(true);
 			return;
 		}
-		String content = myTxfArea.getText();
-		if (content.length() == 0) {
-			JOptionPane.showMessageDialog(null, "Enter the information you want to update");
-			myTxfArea.setFocusable(true);
+		String company = myTxfField[2].getText();
+		if (company.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Enter Company");
+			myTxfField[2].setFocusable(true);
 			return;
 		}
 		
-		Request request = new Request(sid, name, content);
+		String position = myTxfField[3].getText();
+		if (position.length() == 0) {
+			JOptionPane.showMessageDialog(null, "Enter Position");
+			myTxfField[3].setFocusable(true);
+			return;
+		}
+		
+		String salaryStr = myTxfField[4].getText();
+		int salary = 0;
+		
+		if (salaryStr.length() != 0) {
+			try {
+				salary = Integer.parseInt(salaryStr);
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Enter salary an integer");
+				myTxfField[4].setFocusable(true);
+				return;
+			}
+		}
+		
+		String content = myTxfArea.getText();
+		if (content.length() == 0) {
+			content = "NOT PROVIDED";
+		}
+		
+		String type = (String) myTypeComboBox.getSelectedItem();
+		
+		String startDay = (String) myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
+		String endDay = (String) myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
+		
+        //check for invalid start day and end day.
+        int index2 = startDay.indexOf("-");
+        int index1 = endDay.indexOf("-");
+        int start = Integer.parseInt(startDay.substring(index2 + 1));
+        int end = Integer.parseInt(endDay.substring(index1 + 1));
+        int startMonth = Integer.parseInt(startDay.substring(0, index2));
+        int endMonth = Integer.parseInt(endDay.substring(0, index1));
+        if (start > end) {
+        	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+				"Add failed" , JOptionPane.WARNING_MESSAGE);
+        } else if (start == end && startMonth > endMonth) {
+        	JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+    				"Add failed" , JOptionPane.WARNING_MESSAGE);
+        }
+		
+		Request request = new Request(sid, name, company, position, startDay, endDay, salary, type, content);
 		
 		String message = "Request add failed";
 		if (RequestCollection.addRequest(request)) {
