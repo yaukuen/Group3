@@ -25,17 +25,17 @@ public class RequestTest {
 	 * Set up the request.
 	 * @throws Exception
 	 */
-	@Before
-	public void setUp() throws Exception {
-		mRequest = new Request(mSID, mName, mContent);
-	}
-	/**
-	 * Test constructor.
-	 */
-	@Test(expected = IllegalArgumentException.class)
-	public void testConstructor() {
-		new Request(null, mName, mContent);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		mRequest = new Request(mSID, mName, mContent);
+//	}
+//	/**
+//	 * Test constructor.
+//	 */
+//	@Test(expected = IllegalArgumentException.class)
+//	public void testConstructor() {
+//		new Request(null, mName, mContent);
+//	}
 	/**
 	 * Test setName and getName.
 	 */
