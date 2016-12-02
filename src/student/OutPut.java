@@ -64,3 +64,4 @@ public class OutPut {
         return myType;
     }
 }
+
