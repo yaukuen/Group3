@@ -35,7 +35,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 	private Object[][] myData;
 	private JTable myTable;
 	private JScrollPane myScrollPane;
-	private String[] myItemColumnNames = { "name", "sid", "major",
+	private String[] myColumnNames = { "name", "sid", "major",
 			"graduationterm", "degree", "year", "gpa", "email" };
 	private List<Student> myList;
 	private JPanel myPnlSearch;
@@ -66,7 +66,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		}
 
 		if (myList != null) {
-			myData = new Object[myList.size()][myItemColumnNames.length];
+			myData = new Object[myList.size()][myColumnNames.length];
 			for (int i = 0; i < myList.size(); i++) {
 				myData[i][0] = myList.get(i).getName();
 				myData[i][1] = myList.get(i).getID();
@@ -125,7 +125,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 	public void addListPanel() {
 		// List Panel
 		myPnlContent = new JPanel();
-		myTable = new JTable(myData, myItemColumnNames);
+		myTable = new JTable(myData, myColumnNames);
 		myScrollPane = new JScrollPane(myTable);
 		myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
 		myPnlContent.add(myScrollPane);
@@ -213,7 +213,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		} else if (e.getSource() == myBtnList) {
 			myList = getData(null);
 			myPnlContent.removeAll();
-			myTable = new JTable(myData, myItemColumnNames);
+			myTable = new JTable(myData, myColumnNames);
 			myTable.getModel().addTableModelListener(this);
 			myScrollPane = new JScrollPane(myTable);
 			myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
@@ -231,7 +231,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 			if (title.length() > 0) {
 				myList = getData(title);
 				myPnlContent.removeAll();
-				myTable = new JTable(myData, myItemColumnNames);
+				myTable = new JTable(myData, myColumnNames);
 				myTable.getModel().addTableModelListener(this);
 				myScrollPane = new JScrollPane(myTable);
 				myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));

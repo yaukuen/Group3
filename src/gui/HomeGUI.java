@@ -1,5 +1,7 @@
 package gui;
 
+import java.sql.SQLException;
+
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,8 +19,9 @@ public class HomeGUI {
 	
 	/**
 	 * This constructors calls the method to create the GUI.
+	 * @throws SQLException 
 	 */
-	public HomeGUI() {
+	public HomeGUI() throws SQLException {
 		myFrame = new JFrame("Home");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createComponents();
@@ -29,8 +32,9 @@ public class HomeGUI {
 	
 	/**
 	 * This method creates several tabs for different features for user to use.
+	 * @throws SQLException 
 	 */
-	private void createComponents()
+	private void createComponents() throws SQLException
 	{
 		myTabbedPane = new JTabbedPane();
 		JComponent addDataPanel = makeTextPanel("Add or Update Student's Data");
@@ -52,8 +56,9 @@ public class HomeGUI {
 	 * Create the the particular part to add to the tab based on the type.
 	 * @param type the tab's type.
 	 * @return the panel.
+	 * @throws SQLException 
 	 */
-	private JComponent makeTextPanel(String type) {
+	private JComponent makeTextPanel(String type) throws SQLException {
 		JPanel panel = new JPanel();
 		if (type.equalsIgnoreCase("Add or Update Student's Data")) {
 			panel.add(new StudentGUI());
