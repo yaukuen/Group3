@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 
 /**
  * This class contains methods to access the student tables data.
@@ -319,7 +321,9 @@ public class StudentDB {
 			preparedStatement.setString(8, theStudent.getEmail());
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+//			e.printStackTrace(); //for debugging
+        	JOptionPane.showMessageDialog(null, "Student ID already exists!",
+    				"Add failed" , JOptionPane.WARNING_MESSAGE);
 			return "Error adding student: " + e.getMessage();
 		}
 		return "Added Student Successfully";
@@ -348,8 +352,7 @@ public class StudentDB {
 			preparedStatement.setString(2, email);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println(e);
-			e.printStackTrace();
+//			e.printStackTrace(); //for debugging
 			return "Error updating student: " + e.getMessage();
 		}
 		return "Updated Student Successfully";

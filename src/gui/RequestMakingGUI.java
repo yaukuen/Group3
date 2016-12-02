@@ -152,9 +152,9 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		
 		Request request = new Request(sid, name, content);
 		
-		String message = "Student add failed";
+		String message = "Request add failed";
 		if (RequestCollection.addRequest(request)) {
-			message = "Student added successfully";
+			message = "Request added successfully";
 		}
 		JOptionPane.showMessageDialog(null, message);
 

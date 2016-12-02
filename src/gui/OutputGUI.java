@@ -26,7 +26,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 	private static final int INTERNSHIP = 3;
 	private static final int JOB = 4;
 	
-	private JButton myBtnSearch;
+	private JButton myBtnView;
 	private JComboBox<String> myComboBox;
 	private JPanel myComboBoxPnl, myPnlContent;
 	private List<OutPut> myList;
@@ -142,16 +142,16 @@ public class OutputGUI extends JPanel implements ActionListener {
 	private void createComponents() {
 		myPnlContent = new JPanel();
 		myComboBoxPnl = new JPanel();
-		JLabel label = new JLabel("Choose a criterion to view by: ");
+		JLabel label = new JLabel("Select a criterion to view by: ");
 		myComboBoxPnl.add(label);
 		myComboBox = new JComboBox<String>();
 		for (int i = 0; i < myComboBoxValues.length; i++) {
 			myComboBox.addItem(myComboBoxValues[i]);
 		}
 		myComboBoxPnl.add(myComboBox);
-		myBtnSearch = new JButton("Search");
-		myBtnSearch.addActionListener(this);
-		myComboBoxPnl.add(myBtnSearch);
+		myBtnView = new JButton("View");
+		myBtnView.addActionListener(this);
+		myComboBoxPnl.add(myBtnView);
 		add(myComboBoxPnl, BorderLayout.NORTH);
 		add(myPnlContent, BorderLayout.CENTER);
 	}
@@ -173,7 +173,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource() == myBtnSearch) {
+		if (e.getSource() == myBtnView) {
             if (myComboBox.getSelectedItem().equals("GPA")) {
                 try {
 					myList = getData(GPA);

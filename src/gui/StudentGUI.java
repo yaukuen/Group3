@@ -23,8 +23,8 @@ import student.StudentCollection;
  */
 public class StudentGUI extends JPanel implements ActionListener,
 		TableModelListener {
-	public static final int WIDTH = 1100;
-	public static final int HEIGHT = 550;
+	protected static final int WIDTH = 1100;
+	protected static final int HEIGHT = 550;
 	private static final long serialVersionUID = -7520370128176444786L;
 	
 	private JButton myBtnList, myBtnSearch, myBtnAdd, myAddBtn, mySearchBtn;
@@ -138,7 +138,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		// Add Panel
 		myPnlAdd = new JPanel();
 		myPnlAdd.setLayout(new GridLayout(9, 0));
-		String labelNames[] = { "Name (First Last):", "SID: ", "GPA: ", "Email: "};
+		String labelNames[] = { "Name (First Last): * ", "SID: * ", "GPA: * ", "Email: * "};
 		for (int i = 0; i < labelNames.length; i++) {
 			JPanel panel = new JPanel();
 			panel.setLayout(new GridLayout(1, 0));
@@ -155,7 +155,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		String[] majors = {"CSS", "CES", "IT"};
 		myMajorComboBox = new JComboBox<String>(majors);
 		myMajorComboBox.setSelectedIndex(0);
-		comboPanel1.add(new JLabel("Choose Major: "));
+		comboPanel1.add(new JLabel("Choose Major: * "));
 		comboPanel1.add(myMajorComboBox);
         myPnlAdd.add(comboPanel1);
 
@@ -164,7 +164,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		String[] degrees = {"Bachelor of Science", "Bachelor of Arts", "Master of Science"};
 		myDegreeComboBox = new JComboBox<String>(degrees);
 		myDegreeComboBox.setSelectedIndex(0);
-        comboPanel2.add(new JLabel("Choose Degree: "));
+        comboPanel2.add(new JLabel("Choose Degree: * "));
         comboPanel2.add(myDegreeComboBox);
         myPnlAdd.add(comboPanel2);
 
@@ -173,7 +173,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		String[] terms = {"Spring", "Summer", "Fall", "Winter"};
 		myTermComboBox = new JComboBox<String>(terms);
 		myTermComboBox.setSelectedIndex(0);
-        comboPanel3.add(new JLabel("Graduation Term: "));
+        comboPanel3.add(new JLabel("Graduation Term: * "));
         comboPanel3.add(myTermComboBox);
         myPnlAdd.add(comboPanel3);
 
@@ -184,14 +184,16 @@ public class StudentGUI extends JPanel implements ActionListener,
 				"2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"};
 		myYearComboBox = new JComboBox<String>(years);
 		myYearComboBox.setSelectedIndex(0);
-        comboPanel4.add(new JLabel("Graduation Year: "));
+        comboPanel4.add(new JLabel("Graduation Year: * "));
         comboPanel4.add(myYearComboBox);
         myPnlAdd.add(comboPanel4);
 		
 		JPanel panel = new JPanel();
 		myAddBtn = new JButton("Add");
 		myAddBtn.addActionListener(this);
+		JLabel label = new JLabel("(*) = Required Fields");
 		panel.add(myAddBtn);
+		panel.add(label);
 		myPnlAdd.add(panel);
 		myPnlContent.add(myPnlAdd);
 	}
@@ -285,21 +287,27 @@ public class StudentGUI extends JPanel implements ActionListener,
 		String gradTerm = (String) myTermComboBox.getSelectedItem();
 		String year = (String) myYearComboBox.getSelectedItem();
 		
-		Student student = new Student(name, sid, major, gradTerm, degree, year, gpa, email);
+    	if (name.length() < 3 || sid.length() < 3 || gpa < 0.0 || gpa > 4.0 || email.length() < 3) {
+        	JOptionPane.showMessageDialog(null, "Invalid input! Please check again",
+    				"Add failed" , JOptionPane.WARNING_MESSAGE);
+    	} else {
+    		Student student = new Student(name, sid, major, gradTerm, degree, year, gpa, email);
 
-		String message = "Student add failed";
-		if (StudentCollection.addStudent(student)) {
-			message = "Student added successfully!\nNow you can add the employment information"
-				+ " for this student in the \nAdd or Update Student's Employment Information tab.";
-		}
-		JOptionPane.showMessageDialog(null, message);
-
-		// Clear all text fields.
-		for (int i = 0; i < myTxfField.length; i++) {
-			if (myTxfField[i].getText().length() != 0) {
-				myTxfField[i].setText("");
-			}
-		}
+//    		String message = "Student add failed";
+    		String message = null;
+    		if (StudentCollection.addStudent(student)) {
+    			message = "Student added successfully!\nNow you can add the employment information"
+    				+ " for this student in the \nAdd or Update Student's Employment Information tab.";
+        		JOptionPane.showMessageDialog(null, message);
+        		
+        		// Clear all text fields.
+        		for (int i = 0; i < myTxfField.length; i++) {
+        			if (myTxfField[i].getText().length() != 0) {
+        				myTxfField[i].setText("");
+        			}
+        		}
+    		}
+    	}
 	}
 
 	/**

@@ -33,9 +33,6 @@ public class Student {
      */
     public Student(String theName, String theID, String theMajor, String theTerm, String theDegree,
     		String theYear, double theGPA, String theEmail) {
-    	if (theName.length() < 3 || theID.length() < 3 || theGPA < 0.0 || theGPA > 4.0 || theEmail.length() < 3) {
-    		throw new IllegalArgumentException("Invalid input");
-    	}
     	mStdName = theName;
     	mStdID = theID;
     	mStdMajor = theMajor;
