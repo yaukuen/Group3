@@ -1,6 +1,5 @@
 package student;
 
-import javax.swing.JOptionPane;
 
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
