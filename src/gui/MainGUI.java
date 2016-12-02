@@ -97,7 +97,13 @@ public class MainGUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == myStudentLoginBtn) {
-			HomeGUI home = new HomeGUI();
+			HomeGUI home = null;
+			try {
+				home = new HomeGUI();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			home.studentPermission();
 			myFrame.dispose();
 		}

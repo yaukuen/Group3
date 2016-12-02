@@ -37,19 +37,19 @@ public class StudentCollectionTest {
 	/**
 	 * Test searchByGPA.
 	 */
-	@Test
-	public void testSearchByGPA() {
-		List<Student> filteredStudent = StudentCollection.searchByGPA(mGPA);
-		
-		boolean found = false;
-		for (Student std : filteredStudent){
-			if (std.getGPA() == mGPA){
-				found = true;
-				break;
-			}
-		}
-		assertTrue(found);
-	}
+//	@Test
+//	public void testSearchByGPA() {
+//		List<Student> filteredStudent = StudentCollection.searchByGPA(mGPA);
+//		
+//		boolean found = false;
+//		for (Student std : filteredStudent){
+//			if (std.getGPA() == mGPA){
+//				found = true;
+//				break;
+//			}
+//		}
+//		assertTrue(found);
+//	}
 //	/**
 //	 * Test searchByMajor.
 //	 */
