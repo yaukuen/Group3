@@ -1,6 +1,5 @@
 package data;
 
-import employee.Employee;
 import gui.HomeGUI;
 import gui.MainGUI;
 
@@ -8,8 +7,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -24,46 +21,6 @@ public class EmployeeDB {
      */
     private Connection myConnection;
 
-    /**
-     * It's a list holding all employee.
-     */
-    private List<Employee> myEmployeeList;
-
-    /**
-     * Get all employees from the Employee table.
-     *
-     * @return A list of employee.
-     * @throws SQLException if query not input correctly.
-     */
-    public List<Employee> getEmployee() throws SQLException {
-        if (myConnection == null) {
-            myConnection = DataConnection.getConnection();
-        }
-        Statement stmt = null;
-        String query = "SELECT * " + "FROM Employee ";
-
-        myEmployeeList = new ArrayList<>();
-        try {
-            stmt = myConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                int id = rs.getInt("employeeId");
-                String userName = rs.getString("userName");
-                String password = rs.getString("password");
-                Employee employee = new Employee(userName, password);
-                employee.setMyId(new Integer(id).toString());
-                myEmployeeList.add(employee);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        return myEmployeeList;
-    }
 
     /**
      * It login to the system by given Employee information.

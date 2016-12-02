@@ -22,8 +22,6 @@ import request.RequestCollection;
  */
 public class ViewRequestGUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = -8173105788916568140L;
-	private static final int TABLE_WIDTH = 1100;
-	private static final int TABLE_HEIGHT = 550;
 	
 	private JButton myBtnView, myBtnDelete;
 	private JPanel myBtnPanel;
@@ -94,7 +92,7 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 		int commentColumnWidth = 872;
 		myTable.getColumnModel().getColumn(2).setPreferredWidth(commentColumnWidth);
 		myScrollPane = new JScrollPane(myTable);
-		myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+		myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
 		myPnlContent.add(myScrollPane);
 	}
 
@@ -125,10 +123,11 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 				myBtnDelete.setEnabled(true);
 				int viewIndex = myTable.getSelectedRow();
 				if (viewIndex != -1) {
+					int changableColumn = 3;
 					int modelIndex = myTable.convertRowIndexToModel(viewIndex);
 			        DefaultTableModel model = (DefaultTableModel)myTable.getModel();
 			        model.removeRow(modelIndex);
-			        String id = (String) myData[viewIndex][3];
+			        String id = (String) myData[viewIndex][changableColumn];
 			        RequestCollection.removeRequest(id);
 				}
 			}

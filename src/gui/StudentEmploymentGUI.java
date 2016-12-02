@@ -25,8 +25,6 @@ import student.StudentCollection;
 public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		TableModelListener {
 
-    private static final int TABLE_WIDTH = 1100;
-    private static final int TABLE_HEIGHT = 550;
 	private static final long serialVersionUID = -7520370128176444786L;
     private static EmploymentDB myEmploymentDB;
 
@@ -134,13 +132,16 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		// instant focus on the employment data list
 		myTable = new JTable(myData, myEmploymentColumnNames);
 		scrollPane = new JScrollPane(myTable);
-        scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+        scrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
 		myPnlContent.add(scrollPane);
 		// Adding listener for updating or modifying the myTable.
 		myTable.getModel().addTableModelListener(this);
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Create the add student employment information panel.
+	 */
 	public void addPanel() {
 		// Add Panel
 		myPnlAdd = new JPanel();
@@ -239,7 +240,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
             myTable = new JTable(myData, myEmploymentColumnNames);
             myTable.getModel().addTableModelListener(this);
             scrollPane = new JScrollPane(myTable);
-            scrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+            scrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
             myPnlContent.add(scrollPane);
             myPnlContent.revalidate();
             this.repaint();
