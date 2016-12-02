@@ -106,7 +106,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 		addListPanel();
 		
 		myPnlSearch = new JPanel();
-		mylblTitle = new JLabel("Enter Name: ");
+		mylblTitle = new JLabel("Enter Search Key: ");
 		myTxfTitle = new JTextField(25);
 		mySearchBtn = new JButton("Search");
 		mySearchBtn.addActionListener(this);

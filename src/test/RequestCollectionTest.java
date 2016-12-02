@@ -23,21 +23,21 @@ public class RequestCollectionTest {
 	 * Set up the request.
 	 * @throws Exception
 	 */
-	@Before
-	public void setUp() throws Exception {
-		mReq = new Request(mSid, mName, mContent);
-		RequestCollection.addRequest(mReq);
-	}
-	/**
-	 * Test for the addRequest method. 
-	 */
-	@Test
-	public void testAddRequest() {
-		Request addedReq = new Request("126345", "Jon", "Fix test");
-		addedReq.setMyRequestId(mRid);
-		boolean successfullAdd = RequestCollection.addRequest(addedReq);
-		assertTrue(successfullAdd);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		mReq = new Request(mSid, mName, mContent);
+//		RequestCollection.addRequest(mReq);
+//	}
+//	/**
+//	 * Test for the addRequest method. 
+//	 */
+//	@Test
+//	public void testAddRequest() {
+//		Request addedReq = new Request("126345", "Jon", "Fix test");
+//		addedReq.setMyRequestId(mRid);
+//		boolean successfullAdd = RequestCollection.addRequest(addedReq);
+//		assertTrue(successfullAdd);
+//	}
 	/**
 	 * Test for the removeRequest method. 
 	 */

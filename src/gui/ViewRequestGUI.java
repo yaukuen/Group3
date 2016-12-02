@@ -27,7 +27,8 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 	private JPanel myBtnPanel;
 	private List<Request> myList;
 	private Object[][] myData;
-	private Object[] mItemColumnNames = {"SID: ", "Name", "Comment", "RequestID"};
+	private Object[] mItemColumnNames = {"SID: ", "Name", "Company", "Position", "Salary",
+			"StartDay", "EndDay", "Type" ,"Comment", "RequestID"};
 	private Container myPnlContent;
 	private TableModel myTableModel;
 	private JTable myTable;
@@ -51,8 +52,14 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 			for (int i = 0; i < myList.size(); i++) {
 				myData[i][0] = myList.get(i).getMySid();
 				myData[i][1] = myList.get(i).getMyName();
-				myData[i][2] = myList.get(i).getMyContent();
-				myData[i][3] = myList.get(i).getMyRequestId();
+				myData[i][2] = myList.get(i).getMyCompany();
+				myData[i][3] = myList.get(i).getMyPosition();
+				myData[i][4] = myList.get(i).getMySalary();
+				myData[i][5] = myList.get(i).getMyStartDay();
+				myData[i][6] = myList.get(i).getMyEndDay();
+				myData[i][7] = myList.get(i).getMyType();
+				myData[i][8] = myList.get(i).getMyContent();
+				myData[i][9] = myList.get(i).getMyRequestId();
 			}
 		}
 		return myList;
@@ -89,8 +96,11 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 		myTableModel = new DefaultTableModel(myData, mItemColumnNames);
 		myTable = new JTable(myTableModel);
 		myTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		int commentColumnWidth = 872;
-		myTable.getColumnModel().getColumn(2).setPreferredWidth(commentColumnWidth);
+		int commentColumnWidth = 372;
+		int columnWidth = 100;
+		myTable.getColumnModel().getColumn(8).setPreferredWidth(commentColumnWidth);
+		myTable.getColumnModel().getColumn(2).setPreferredWidth(columnWidth);
+		myTable.getColumnModel().getColumn(3).setPreferredWidth(columnWidth);
 		myScrollPane = new JScrollPane(myTable);
 		myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
 		myPnlContent.add(myScrollPane);
@@ -123,7 +133,7 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 				myBtnDelete.setEnabled(true);
 				int viewIndex = myTable.getSelectedRow();
 				if (viewIndex != -1) {
-					int changableColumn = 3;
+					int changableColumn = 9;
 					int modelIndex = myTable.convertRowIndexToModel(viewIndex);
 			        DefaultTableModel model = (DefaultTableModel)myTable.getModel();
 			        model.removeRow(modelIndex);

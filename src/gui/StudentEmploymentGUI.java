@@ -316,13 +316,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
     				"Add failed" , JOptionPane.WARNING_MESSAGE);
         } else {
         	EmploymentData empData;
-//        	if (posDescription == "NOT PROVIDED") {
-//        		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
-//        				salary, type, startDay, endDay);
-//        	} else {
-//        		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
-//        				salary, type, startDay, endDay);
-//        	}
         	
     		empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
     				salary, type, startDay, endDay);

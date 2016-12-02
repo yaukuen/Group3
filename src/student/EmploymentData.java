@@ -52,28 +52,6 @@ public class EmploymentData {
         mEndDate = theEnd;
     }
 
-    /**
-     * Constructor for the EmploymentData without the position description
-     * because it's optional.
-     *
-     * @param theCompany
-     * @param thePosition
-     * @param theSkill
-     * @param theSalary
-     * @param theStart    date
-     * @param theEnd      date
-     */
-    public EmploymentData(String theSID, String theCompany, String thePosition,
-                          String theSkill, int theSalary, String theType, String theStart, String theEnd) {
-        mSID = theSID;
-        mCompany = theCompany;
-        mPosition = thePosition;
-        mSkillUsed = theSkill;
-        mSalary = theSalary;
-        type = theType;
-        mStartDate = theStart;
-        mEndDate = theEnd;
-    }
 
     /**
      * Gets SID
