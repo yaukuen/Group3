@@ -21,8 +21,6 @@ import student.StudentCollection;
  */
 public class OutputGUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 7655286335054538989L;
-	private static final int TABLE_WIDTH = 1100;
-	private static final int TABLE_HEIGHT = 550;
 	public static final int GPA = 1;
 	public static final int SALARY = 2;
 	private static final int INTERNSHIP = 3;
@@ -162,7 +160,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 		myPnlContent.removeAll();
 		myTable = new JTable(myData, myColumnNames);
 		myScrollPane = new JScrollPane(myTable);
-		myScrollPane.setPreferredSize(new Dimension(TABLE_WIDTH, TABLE_HEIGHT));
+		myScrollPane.setPreferredSize(new Dimension(HomeGUI.WIDTH, HomeGUI.HEIGHT));
 		myPnlContent.add(myScrollPane);
 		myPnlContent.revalidate();
 		myPnlContent.setVisible(true);

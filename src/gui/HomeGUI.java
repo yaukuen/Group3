@@ -14,8 +14,8 @@ import javax.swing.JTabbedPane;
  *
  */
 public class HomeGUI {
-	private static final int WIDTH = 1200;
-	private static final int HEIGHT = 700;
+	public static final int WIDTH = 1200;
+	public static final int HEIGHT = 700;
 	private static JFrame myFrame;
 	private JTabbedPane myTabbedPane;
 	
