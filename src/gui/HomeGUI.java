@@ -14,6 +14,8 @@ import javax.swing.JTabbedPane;
  *
  */
 public class HomeGUI {
+	private static final int WIDTH = 1200;
+	private static final int HEIGHT = 700;
 	private static JFrame myFrame;
 	private JTabbedPane myTabbedPane;
 	
@@ -25,7 +27,7 @@ public class HomeGUI {
 		myFrame = new JFrame("Home");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		createComponents();
-		myFrame.setSize(1200, 700);
+		myFrame.setSize(WIDTH, HEIGHT);
 		myFrame.setLocationRelativeTo(null);
 		myFrame.setVisible(true);
 	}

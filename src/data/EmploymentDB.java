@@ -292,7 +292,7 @@ public class EmploymentDB {
     	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
     			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
     			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
-    			+ " where Employment.type = 'Internship';";
+    			+ " where Employment.type = 'Internship' order by Student.name asc;";
     	myOutputList = new ArrayList<OutPut>();
         try {
             stmt = mConnection.createStatement();
@@ -329,7 +329,7 @@ public class EmploymentDB {
     	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
     			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
     			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
-    			+ " where Employment.type = 'Job';";
+    			+ " where Employment.type = 'Job' order by Student.name asc;";
     	myOutputList = new ArrayList<OutPut>();
         try {
             stmt = mConnection.createStatement();
@@ -365,7 +365,7 @@ public class EmploymentDB {
         Statement stmt = null;
         String query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,"
         		+ " Employment.salary, Employment.company, Employment.position, Employment.type "
-        		+ "from Student Join Employment on Student.sid = Employment.sid;";
+        		+ "from Student Join Employment on Student.sid = Employment.sid order by Student.name asc;";
 
         myOutputList = new ArrayList<OutPut>();
         List<OutPut> filterList = new ArrayList<OutPut>();

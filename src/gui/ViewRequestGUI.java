@@ -125,10 +125,11 @@ public class ViewRequestGUI extends JPanel implements ActionListener {
 				myBtnDelete.setEnabled(true);
 				int viewIndex = myTable.getSelectedRow();
 				if (viewIndex != -1) {
+					int changableColumn = 3;
 					int modelIndex = myTable.convertRowIndexToModel(viewIndex);
 			        DefaultTableModel model = (DefaultTableModel)myTable.getModel();
 			        model.removeRow(modelIndex);
-			        String id = (String) myData[viewIndex][3];
+			        String id = (String) myData[viewIndex][changableColumn];
 			        RequestCollection.removeRequest(id);
 				}
 			}

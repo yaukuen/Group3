@@ -141,6 +141,9 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
+	/**
+	 * Create the add student employment information panel.
+	 */
 	public void addPanel() {
 		// Add Panel
 		myPnlAdd = new JPanel();

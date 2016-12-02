@@ -74,7 +74,8 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		JPanel commentPanel = new JPanel();
 		commentPanel.setLayout(new GridLayout(1,0));
 		myCommentLabel = new JLabel("Comment: ");
-		myTxfArea = new JTextArea(10, 10);
+		int rows = 10, columns = 10;
+		myTxfArea = new JTextArea(rows, columns);
 		myTxfArea.setLineWrap(true);
 		myTxfArea.setWrapStyleWord(true);
 		JScrollPane scroll = new JScrollPane(myTxfArea);
@@ -91,10 +92,11 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		String html1 = "<html><body style='width: ";
 		String html2 = "px'>";
 
+		int width = 500, height = 200, size = 17;
 		myInfoLabel = new JLabel(html1 + "400" + html2 + s);
-		myInfoLabel.setFont(new Font("DialogInput", Font.BOLD, 17));
+		myInfoLabel.setFont(new Font("DialogInput", Font.BOLD, size));
 		myInfoPanel.add(myInfoLabel);
-		myInfoPanel.setPreferredSize(new Dimension(500, 300));
+		myInfoPanel.setPreferredSize(new Dimension(width, height));
 		myCommentPnl.add(commentPanel);
 		
 		
@@ -105,9 +107,9 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		panel.add(myBtnInstruction);
 		myCommentPnl.add(panel);
 
-		myPnlContent.add(myInfoPnl, BorderLayout.NORTH);
-		myPnlContent.add(myCommentPnl, BorderLayout.CENTER);
-		myPnlContent.add(myInfoPanel, BorderLayout.SOUTH);
+		myPnlContent.add(myInfoPanel, BorderLayout.NORTH);
+		myPnlContent.add(myInfoPnl, BorderLayout.CENTER);
+		myPnlContent.add(myCommentPnl, BorderLayout.SOUTH);
 	}
 
 	/**

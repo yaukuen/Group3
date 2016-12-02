@@ -22,6 +22,8 @@ import data.EmployeeDB;
  *
  */
 public class MainGUI implements ActionListener{
+	private static final int WIDTH = 300;
+	private static final int HEIGHT = 125;
 	private JFrame myFrame;
 	private JPanel myLoginPnl, myLoginBtnPnl;
 	private JTextField myUserName;
@@ -44,7 +46,7 @@ public class MainGUI implements ActionListener{
 		myFrame = new JFrame("Log in");
 		myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		myFrame.setLayout(new BorderLayout());
-		myFrame.setPreferredSize(new Dimension(300, 125));
+		myFrame.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		
 		createLogin();
 

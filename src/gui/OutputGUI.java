@@ -17,12 +17,17 @@ import student.StudentCollection;
  * This class creates the GUI for generating outputs 
  * based on the criterion that the user has chosen to view by.
  * @author Loc Bui
- *
+ * @author Yau
  */
 public class OutputGUI extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 7655286335054538989L;
 	private static final int TABLE_WIDTH = 1100;
 	private static final int TABLE_HEIGHT = 550;
+	public static final int GPA = 1;
+	public static final int SALARY = 2;
+	private static final int INTERNSHIP = 3;
+	private static final int JOB = 4;
+	
 	private JButton myBtnSearch;
 	private JComboBox<String> myComboBox;
 	private JPanel myComboBoxPnl, myPnlContent;
@@ -35,10 +40,6 @@ public class OutputGUI extends JPanel implements ActionListener {
 	private Object[][] myData;
 	private JTable myTable;
 	private JScrollPane myScrollPane;
-	public static final int GPA = 1;
-	public static final int SALARY = 2;
-	public static final int INTERNSHIP = 3;
-	public static final int JOB = 4;
 
 	/**
 	 * The constructor to call the method to create all of the components
@@ -143,7 +144,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 	private void createComponents() {
 		myPnlContent = new JPanel();
 		myComboBoxPnl = new JPanel();
-		JLabel label = new JLabel("Choose a criterion to search by: ");
+		JLabel label = new JLabel("Choose a criterion to view by: ");
 		myComboBoxPnl.add(label);
 		myComboBox = new JComboBox<String>();
 		for (int i = 0; i < myComboBoxValues.length; i++) {
