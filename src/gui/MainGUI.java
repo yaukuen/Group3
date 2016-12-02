@@ -22,7 +22,7 @@ import data.EmployeeDB;
  *
  */
 public class MainGUI implements ActionListener{
-	//All the fields I use.
+	//All the fields I use. This is another change.
 	private JFrame myFrame;
 	private JPanel myLoginPnl, myLoginBtnPnl;
 	private JTextField myUserName;
