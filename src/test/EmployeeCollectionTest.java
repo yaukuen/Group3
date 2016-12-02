@@ -13,6 +13,10 @@ import employee.EmployeeCollection;
  * @author Nico Tandyo
  */
 public class EmployeeCollectionTest {
+	/**
+	 * Test the login method.
+	 * @throws SQLException
+	 */
 	@Test
 	public void testAddRequest() throws SQLException {
 		boolean adminLoginSuccess = EmployeeCollection.login("admin", "admin");
