@@ -46,7 +46,7 @@ public class StudentTest {
 	 */
 	@Test(expected = IllegalArgumentException.class)
 	public void testConstructorWithInvalidMajor() {
-		new Student("John", "123456", null, 
+		new Student("John", "123456", "2", 
 				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
 		new Student("John", "123456", "A", 
 				"Summer", "Bachelor of Science", "2016", 3.7, "anon@yahoo.com");
