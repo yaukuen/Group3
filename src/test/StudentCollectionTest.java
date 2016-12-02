@@ -2,6 +2,7 @@ package test;
 import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,6 @@ import student.StudentCollection;
 public class StudentCollectionTest {
     private Student mInitialStudent;
     private String mName = "InitTest";
-	private String mID = "123327";
 	private String mMajor = "CSS";
 	private String mTerm = "Spring";
 	private String mDegree = "Bachelor of Science";
@@ -31,7 +31,10 @@ public class StudentCollectionTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		mInitialStudent = new Student(mName, mID, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
+		Random rd = new Random();
+		int sid = rd.nextInt(999999);
+		String sidStr = Integer.toString(sid);
+		mInitialStudent = new Student(mName, sidStr, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
 		StudentCollection.addStudent(mInitialStudent);
 	}
 	/**
@@ -67,12 +70,14 @@ public class StudentCollectionTest {
 		assertTrue(found);
 	}
 	/**
-	 * Test for the addStudent method. However, change the student ID to unique student ID
-	 * every time you test it because ID must not be duplicate.
+	 * Test for the addStudent method using random student ID so there will be no duplicates.
 	 */
 	@Test
 	public void testAddSuccess() {
-		Student addedStudent = new Student("NameTest", "098097", "Computer Science", "Autumn", "Bachelor of Science"
+		Random rd = new Random();
+		int sid = rd.nextInt(999999);
+		String sidStr = Integer.toString(sid);
+		Student addedStudent = new Student("NameTest", sidStr, "Computer Science", "Autumn", "Bachelor of Science"
 				, "2018", 3.9, "name@uw.edu");
 				
 		boolean successfullAdd = StudentCollection.addStudent(addedStudent);
