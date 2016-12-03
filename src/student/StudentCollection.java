@@ -149,11 +149,8 @@ private static StudentDB mStudentDB;
 			mStudentDB = new StudentDB();
 		}
 		String message = mStudentDB.updateStudent(theStudent, theColumn, theData);
-		if (message.startsWith("Error updating student: ")) {
-			return false;
-		}
-		return true;
-	}
+        return !message.startsWith("Error updating student: ");
+    }
 	/**
 	 * Adds a new client to the data. 
 	 * @param theStudent
@@ -165,11 +162,8 @@ private static StudentDB mStudentDB;
 		}
 		
 		String message = mStudentDB.addStudent(theStudent);
-		if (message.startsWith("Error adding student:")) {
-			return false;
-		}
-		return true;
-	}
+        return !message.startsWith("Error adding student:");
+    }
 	/**
 	 * 
 	 * Return all students in the list, null otherwise. 
