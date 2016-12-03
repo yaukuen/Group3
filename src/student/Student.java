@@ -1,6 +1,5 @@
 package student;
 
-import java.util.List;
 
 /**
  * Student class represent a student with name, student id, 
@@ -17,8 +16,6 @@ public class Student {
     private String mYear;
     private double mGPA;
     private String mEmail;
-    private List<EmploymentData> mJobList;
-    private List<EmploymentData> mInternList;
     
     /**
      * Constructor for the student.
