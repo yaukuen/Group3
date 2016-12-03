@@ -68,13 +68,32 @@ public class StudentTest {
         assertEquals(mStudent.getEmail(), test);
 	}
 	/**
-	 * Test all of the getters.
+	 * Test the getGPA.
 	 */
 	@Test
-	public void testGetters() {
+	public void testGetGPA() {
 		assertEquals(mStudent.getGPA(), mGPA, 0.1);
+		
+	}
+	/**
+	 * Test the getTerm.
+	 */
+	@Test
+	public void testGetTerm() {
 		assertEquals(mStudent.getTerm(), mTerm);
+	}
+	/**
+	 * Test the getYear.
+	 */
+	@Test
+	public void testGetYear() {
 		assertEquals(mStudent.getYear(), mYear);
+	}
+	/**
+	 * Test the getDegree.
+	 */
+	@Test
+	public void testGetDegree() {
 		assertEquals(mStudent.getDegree(), mDegree);
 	}
 }
