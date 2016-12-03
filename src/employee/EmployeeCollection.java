@@ -39,10 +39,6 @@ public class EmployeeCollection {
 //        }
         
         String message = myEmployeeDB.login(username, password);
-        if (message == null) {
-        	return false;
-        }
-        
-        return true;
+        return message != null;
     }
 }

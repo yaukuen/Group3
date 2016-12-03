@@ -1,7 +1,6 @@
 package data;
 
 import student.EmploymentData;
-import student.OutPut;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import java.util.List;
 public class EmploymentDB {
     private static Connection mConnection;
     private List<EmploymentData> mEmploymentList;
-    private static List<OutPut> myOutputList;
 
     /**
      * Adds a new employment to the Employment table.
@@ -142,12 +140,6 @@ public class EmploymentDB {
                 filterList.add(emp);
             }
         }
-        // description
-        for (EmploymentData emp : mEmploymentList) {
-            if (emp.getDescription().toLowerCase().contains(theSearch)) {
-                filterList.add(emp);
-            }
-        }
         // skill
         for (EmploymentData emp : mEmploymentList) {
             if (emp.getSkill().toLowerCase().contains(theSearch)) {
@@ -176,82 +168,6 @@ public class EmploymentDB {
     }
 
     /**
-     * Returns all employments that contain the same salary as the search keyword.
-     * If theMinSalary = 0, search employment with salary more than theMaxSalary
-     * If theMaxSalary = 0, search employment with salary less than theMinSalary
-     *
-     * @param theMinSalary
-     * @param theMaxSalary
-     * @return list of employment that match
-     * @throws SQLException
-     */
-    public List<EmploymentData> getEmploymentSalary(int theMinSalary, int theMaxSalary) throws SQLException {
-        List<EmploymentData> filterList = new ArrayList<EmploymentData>();
-        if (mEmploymentList == null) {
-            getEmployments();
-        }
-        if (theMinSalary == 0) {
-            for (EmploymentData ed : mEmploymentList) {
-                if (ed.getSalary() >= theMaxSalary) {
-                    filterList.add(ed);
-                }
-            }
-        } else if (theMaxSalary == 0) {
-            for (EmploymentData ed : mEmploymentList) {
-                if (ed.getSalary() <= theMinSalary) {
-                    filterList.add(ed);
-                }
-            }
-        } else {
-            for (EmploymentData ed : mEmploymentList) {
-                if ((ed.getSalary() >= theMinSalary) && (ed.getSalary() <= theMaxSalary)) {
-                    filterList.add(ed);
-                }
-            }
-        }
-        return filterList;
-    }
-
-    /**
-     * Retrieve the employment with the given id or null if not found.
-     *
-     * @param theId the employment ID
-     * @return employment
-     * @throws SQLException
-     */
-    public EmploymentData getEmployment(String theId) throws SQLException {
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
-        }
-        Statement stmt = null;
-        String query = "select * " + "from Employment where employmentid = " + theId;
-
-        try {
-            stmt = mConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            if (rs.next()) {
-                String sid = rs.getString("sid");
-                String company = rs.getString("company");
-                String pos = rs.getString("position");
-                String desc = rs.getString("description");
-                String skill = rs.getString("skillUsed");
-                String sd = rs.getString("startDay");
-                String ed = rs.getString("endDay");
-                String type = rs.getString("type");
-                int salary = rs.getInt("salary");
-                return new EmploymentData(sid, company, pos, desc, skill, salary, type, sd, ed);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        return null;
-    }
-
-    /**
      * Modifies the data on an Employment .
      *
      * @param theEmployment EmploymentData object.
@@ -259,7 +175,7 @@ public class EmploymentDB {
      * @param theData       the change of input.
      * @return Returns a message with success or failure.
      */
-    public boolean updateEmployment(EmploymentData theEmployment, String theCol, Object theData) {
+    public static boolean updateEmployment(EmploymentData theEmployment, String theCol, Object theData) {
 
         int employmentid = Integer.parseInt(theEmployment.getmEmploymentId());
 
@@ -267,6 +183,13 @@ public class EmploymentDB {
                 + "` = ?  where employmentid = ?";
         // For debugging - System.out.println(sql);
         PreparedStatement preparedStatement = null;
+        if (mConnection == null) {
+            try {
+                mConnection = DataConnection.getConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             preparedStatement = mConnection.prepareStatement(sql);
             if (theData instanceof String)
@@ -283,128 +206,5 @@ public class EmploymentDB {
         return true;
 
     }
-    
-    public static List<OutPut> getInternship() throws SQLException {
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
-        }
-        Statement stmt = null;
-    	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
-    			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
-    			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
-    			+ " where Employment.type = 'Internship' order by Student.name asc;";
-    	myOutputList = new ArrayList<OutPut>();
-        try {
-            stmt = mConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String sid = rs.getString("sid");
-                double gpa = rs.getDouble("gpa");
-                String major = rs.getString("major");
-                String degree = rs.getString("degree");
-                String company = rs.getString("company");
-                String position = rs.getString("position");
-                String type = rs.getString("type");
-                int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
-                myOutputList.add(output);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        return myOutputList;
-    }
-    
-    public static List<OutPut> getJob() throws SQLException {
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
-        }
-        Statement stmt = null;
-    	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
-    			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
-    			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
-    			+ " where Employment.type = 'Job' order by Student.name asc;";
-    	myOutputList = new ArrayList<OutPut>();
-        try {
-            stmt = mConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String sid = rs.getString("sid");
-                double gpa = rs.getDouble("gpa");
-                String major = rs.getString("major");
-                String degree = rs.getString("degree");
-                String company = rs.getString("company");
-                String position = rs.getString("position");
-                String type = rs.getString("type");
-                int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
-                myOutputList.add(output);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        return myOutputList;
-    }
-    
-    public static List<OutPut> getMajor(String theSearch) throws SQLException {
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
-        }
-        Statement stmt = null;
-        String query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,"
-        		+ " Employment.salary, Employment.company, Employment.position, Employment.type "
-        		+ "from Student Join Employment on Student.sid = Employment.sid order by Student.name asc;";
 
-        myOutputList = new ArrayList<OutPut>();
-        List<OutPut> filterList = new ArrayList<OutPut>();
-        try {
-            stmt = mConnection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String sid = rs.getString("sid");
-                double gpa = rs.getDouble("gpa");
-                String major = rs.getString("major");
-                String degree = rs.getString("degree");
-                String company = rs.getString("company");
-                String pos = rs.getString("position");
-                String type = rs.getString("type");
-                int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, pos, type);
-                
-                myOutputList.add(output);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
-        } finally {
-            if (stmt != null) {
-                stmt.close();
-            }
-        }
-        for (OutPut out : myOutputList) {
-			if (out.getMyStdMajor().equals(theSearch)) {
-				filterList.add(out);
-			}
-		}
-        for (OutPut out : myOutputList) {
-			if (out.getMyDegree().equals(theSearch)) {
-				filterList.add(out);
-			}
-        }
-        return filterList;
-    }
 }

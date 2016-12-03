@@ -20,8 +20,8 @@ public class RequestCollectionTest {
     private String mName = "Noone";
     private String mContent = "Bibibi";
     private String mCompany = "Porsche";
-    private String mStartDay;
-    private String mEndDay;
+    private String mStartDay = "01-2001";
+    private String mEndDay = "02-2002";
     private String mType = "Internship";
     private String mPosition = "Developer";
     private String mRID;

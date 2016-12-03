@@ -1,6 +1,5 @@
 package data;
 
-import student.EmploymentData;
 import student.OutPut;
 import student.Student;
 
@@ -21,9 +20,10 @@ import javax.swing.JOptionPane;
  *
  */
 public class StudentDB {
-	private Connection mConnection;
+	private static Connection mConnection;
     private List<Student> mStudentList;
     private List<OutPut> myOutPutList;
+    private static List<OutPut> myAnotherOutputList;
 
     /**
 	 * Retrieves all students from the Student table.
@@ -174,121 +174,130 @@ public class StudentDB {
         return myOutPutList;
     }
 
-	/**
-	 * Returns all students that contain the same major as the search keyword.
-	 * @param theSearch
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsMajor(String theSearch) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		for(Student std: mStudentList) {
-			if(std.getDegree().toLowerCase().contains(theSearch)) {
-				filterList.add(std);
-			}
-		}
-		return filterList;
-	}
-	/**
-	 * Returns all students that contain the same degree as the search keyword.
-	 * @param theSearch
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsDegree(String theSearch) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		for (Student std : mStudentList) {
-			if (std.getMajor().toLowerCase().contains(theSearch)) {
-				filterList.add(std);
-			}
-		}
-		return filterList;
-	}
-	/**
-	 * Returns all students that contain the same job as the search keyword.
-	 * @param theSearch
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsJob(String theSearch) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		
-		for (Student std : mStudentList) {
-			for(EmploymentData ed : std.getJobList()) {
-				if(ed.getCompany().toLowerCase().contains(theSearch)) {
-					filterList.add(std);
-				}
-			}
-		}
-		return filterList;
-	}
-	/**
-	 * Returns all students that contain the same intern as the search keyword.
-	 * @param theSearch
-	 * @return list of student that match
-	 * @throws SQLException
-	 */
-	public List<Student> getStudentsIntern(String theSearch) throws SQLException {
-		List<Student> filterList = new ArrayList<Student>();
-		if (mStudentList == null) {
-			getStudents();
-		}
-		
-		for (Student std : mStudentList) {
-			for(EmploymentData ed : std.getInternList()) {
-				if(ed.getCompany().toLowerCase().contains(theSearch)) {
-					filterList.add(std);
-				}
-			}
-		}
-		return filterList;
-	}
+    
+    public static List<OutPut> searchByInternship() throws SQLException {
+        if (mConnection == null) {
+            mConnection = DataConnection.getConnection();
+        }
+        Statement stmt = null;
+    	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
+    			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
+    			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
+    			+ " where Employment.type = 'Internship' order by Student.name asc;";
+    	myAnotherOutputList = new ArrayList<OutPut>();
+        try {
+            stmt = mConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String sid = rs.getString("sid");
+                double gpa = rs.getDouble("gpa");
+                String major = rs.getString("major");
+                String degree = rs.getString("degree");
+                String company = rs.getString("company");
+                String position = rs.getString("position");
+                String type = rs.getString("type");
+                int salary = rs.getInt("salary");
+                OutPut output = null;
+                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
+                myAnotherOutputList.add(output);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return myAnotherOutputList;
+    }
+    
+    public static List<OutPut> searchByJob() throws SQLException {
+        if (mConnection == null) {
+            mConnection = DataConnection.getConnection();
+        }
+        Statement stmt = null;
+    	String query = "Select Student.name, Student.sid, Student.gpa, Student.major, "
+    			+ "Student.degree, Employment.salary, Employment.company, Employment.position,"
+    			+ " Employment.type from Student Join Employment on Student.sid = Employment.sid"
+    			+ " where Employment.type = 'Job' order by Student.name asc;";
+    	myAnotherOutputList = new ArrayList<OutPut>();
+        try {
+            stmt = mConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String sid = rs.getString("sid");
+                double gpa = rs.getDouble("gpa");
+                String major = rs.getString("major");
+                String degree = rs.getString("degree");
+                String company = rs.getString("company");
+                String position = rs.getString("position");
+                String type = rs.getString("type");
+                int salary = rs.getInt("salary");
+                OutPut output = null;
+                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
+                myAnotherOutputList.add(output);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return myAnotherOutputList;
+    }
+    
+    public static List<OutPut> searchByMajor(String theSearch) throws SQLException {
+        if (mConnection == null) {
+            mConnection = DataConnection.getConnection();
+        }
+        Statement stmt = null;
+        String query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,"
+        		+ " Employment.salary, Employment.company, Employment.position, Employment.type "
+        		+ "from Student Join Employment on Student.sid = Employment.sid order by Student.name asc;";
 
-	/**
-	 * Retrieve the student with the given id or null if not found.
-	 * @param theId id
-	 * @return student
-	 * @throws SQLException
-	 */
-	public Student getStudent(String theId) throws SQLException {
-		if (mConnection == null) {
-			mConnection = DataConnection.getConnection();
-		}
-		Statement stmt = null;
-		String query = "select * " + "from Student where sid = " + theId;
-
-		try {
-			stmt = mConnection.createStatement();
-			ResultSet rs = stmt.executeQuery(query);
-			if (rs.next()) {
-				String name = rs.getString("name");
-				String sid = rs.getString("sid");
-				String major = rs.getString("major");
-				String term = rs.getString("gradTerm");
-				String deg = rs.getString("degree");
-				String year = rs.getString("year");
-				double gpa = rs.getDouble("gpa");
-				String email = rs.getString("email");
-				return new Student(name, sid, major, term, deg, year, gpa, email);
+        myAnotherOutputList = new ArrayList<OutPut>();
+        List<OutPut> filterList = new ArrayList<OutPut>();
+        try {
+            stmt = mConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String name = rs.getString("name");
+                String sid = rs.getString("sid");
+                double gpa = rs.getDouble("gpa");
+                String major = rs.getString("major");
+                String degree = rs.getString("degree");
+                String company = rs.getString("company");
+                String pos = rs.getString("position");
+                String type = rs.getString("type");
+                int salary = rs.getInt("salary");
+                OutPut output = null;
+                output = new OutPut(name, sid, gpa, major, degree, salary, company, pos, type);
+                
+                myAnotherOutputList.add(output);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        for (OutPut out : myAnotherOutputList) {
+			if (out.getMyStdMajor().equals(theSearch)) {
+				filterList.add(out);
 			}
-		} catch (SQLException e) {
-			System.out.println(e);
-		} finally {
-			if (stmt != null) {
-				stmt.close();
-			}
 		}
-		return null;
-	}
+        for (OutPut out : myAnotherOutputList) {
+			if (out.getMyDegree().equals(theSearch)) {
+				filterList.add(out);
+			}
+        }
+        return filterList;
+    }
 
 	/**
 	 * Adds a new student to the Student table. 
@@ -338,9 +347,9 @@ public class StudentDB {
 	 */
 	public String updateStudent(Student theStudent, String theCol, Object theData) {
 		
-		String email = theStudent.getEmail();
+		String sid = theStudent.getID();
 		String sql = "update Student set `" + theCol
-				+ "` = ?  where email= ?";
+				+ "` = ?  where sid= ?";
 		// For debugging - System.out.println(sql);
 		PreparedStatement preparedStatement = null;
 		try {
@@ -349,7 +358,7 @@ public class StudentDB {
 				preparedStatement.setString(1, (String) theData); 
 			else if (theData instanceof Double)
 				preparedStatement.setDouble(1, (Double) theData);
-			preparedStatement.setString(2, email);
+			preparedStatement.setString(2, sid);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 //			e.printStackTrace(); //for debugging
