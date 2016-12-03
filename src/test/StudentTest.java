@@ -64,8 +64,8 @@ public class StudentTest {
 	@Test
 	public void testSetGetEmail() {
 		String test = "setMajor";
-		mStudent.setEmail(test);;
-		assertEquals(mStudent.getEmail(), test);
+		mStudent.setEmail(test);
+        assertEquals(mStudent.getEmail(), test);
 	}
 	/**
 	 * Test all of the getters.
