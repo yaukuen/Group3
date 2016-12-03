@@ -7,6 +7,7 @@ import java.util.Random;
 import org.junit.Before;
 import org.junit.Test;
 
+import student.OutPut;
 import student.Student;
 import student.StudentCollection;
 
@@ -16,6 +17,7 @@ import student.StudentCollection;
  *
  */
 public class StudentCollectionTest {
+
     private Student mInitialStudent;
     private String mName = "InitTest";
 	private String mMajor = "CSS";
@@ -32,9 +34,10 @@ public class StudentCollectionTest {
 	@Before
 	public void setUp() throws Exception {
 		Random rd = new Random();
-		int sid = rd.nextInt(999999);
-		String sidStr = Integer.toString(sid);
-		mInitialStudent = new Student(mName, sidStr, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
+		int number = rd.nextInt(999999);
+		String sid = "" + number;
+//		String sidStr = Integer.parseInt(sid);
+		mInitialStudent = new Student(mName, sid, mMajor, mTerm, mDegree, mYear, mGPA, mEmail);
 	}
 	/**
 	 * Test searchByMajor.
@@ -76,4 +79,47 @@ public class StudentCollectionTest {
 		boolean successfullAdd = StudentCollection.addStudent(mInitialStudent);
 		assertTrue(successfullAdd);
 	}
+
+	/**
+	 * Testing showing all student.
+	 */
+	@Test
+	public void testShowAll() {
+		List<Student> studentList = StudentCollection.showAll();
+		int result = studentList.size();
+		assertNotEquals(0, result);
+	}
+
+    /**
+     * Testing search by GPA.
+     */
+	@Test
+	public void testSearchbyGPA() {
+	    List<OutPut> gpaOutput = StudentCollection.searchByGPA();
+        int result = gpaOutput.size();
+        assertNotEquals(0, result);
+    }
+
+    /**
+     * Testing search by Salary.
+     */
+    @Test
+    public void testSearchbySalary() {
+        List<OutPut> salaryOutput = StudentCollection.searchBySalary();
+        int result = salaryOutput.size();
+        assertNotEquals(0, result);
+    }
+
+    /**
+     * Testing update a student's email.
+     */
+    @Test
+    public void testUpdateStudent() {
+        mInitialStudent.setID("123456");
+        Random rd = new Random();
+        int number = rd.nextInt(999999);
+        String email = number + "@uw.edu";
+        boolean result = StudentCollection.updateStudent(mInitialStudent, "email", email);
+        assertTrue(result);
+    }
 }

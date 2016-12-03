@@ -22,7 +22,7 @@ private static StudentDB mStudentDB;
 	 * @return a list of clients that match
 	 */
 	public static List<Student> search(String theName) {
-		List<Student> list = new ArrayList<Student>();
+		List<Student> list = new ArrayList<>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
@@ -69,74 +69,74 @@ private static StudentDB mStudentDB;
 		return list;
 	}
 	
-	/**
-	 * Return a list of students with the matching major. 
-	 * @param theMajor
-	 * @return a list of students with matching major
-	 */
-	public static List<OutPut> searchByMajor(String theMajor) {
-		List<OutPut> list = new ArrayList<OutPut>();
-		if (mStudentDB == null) {
-			mStudentDB = new StudentDB();
-		}
-		try {
-				return StudentDB.searchByMajor(theMajor);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	/**
-	 * Return a list of students with the matching degree. 
-	 * @param theDegree
-	 * @return a list of students with matching degree
-	 */
-	public static List<OutPut> searchByDegree(String theDegree) {
-		List<OutPut> list = new ArrayList<OutPut>();
-		if (mStudentDB == null) {
-			mStudentDB = new StudentDB();
-		}
-		try {
-				return StudentDB.searchByMajor(theDegree);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	/**
-	 * Return a list of students with the matching intern. 
-	 * @param theInternship name as a string
-	 * @return a list of students with matching intern
-	 */
-	public static List<OutPut> searchByInternship(String theInternship) {
-		List<OutPut> list = new ArrayList<OutPut>();
-		if (mStudentDB == null) {
-			mStudentDB = new StudentDB();
-		}
-		try {
-				return StudentDB.searchByInternship();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	/**
-	 * Return a list of students with the matching job. 
-	 * @param theJob name as a string
-	 * @return a list of students with matching intern
-	 */
-	public static List<OutPut> searchByJob(String theJob) {
-		List<OutPut> list = new ArrayList<OutPut>();
-		if (mStudentDB == null) {
-			mStudentDB = new StudentDB();
-		}
-		try {
-				return StudentDB.searchByJob();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
+//	/**
+//	 * Return a list of students with the matching major.
+//	 * @param theMajor
+//	 * @return a list of students with matching major
+//	 */
+//	public static List<OutPut> searchByMajor(String theMajor) {
+//		List<OutPut> list = new ArrayList<OutPut>();
+//		if (mStudentDB == null) {
+//			mStudentDB = new StudentDB();
+//		}
+//		try {
+//				return StudentDB.searchByMajor(theMajor);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+//	/**
+//	 * Return a list of students with the matching degree.
+//	 * @param theDegree
+//	 * @return a list of students with matching degree
+//	 */
+//	public static List<OutPut> searchByDegree(String theDegree) {
+//		List<OutPut> list = new ArrayList<OutPut>();
+//		if (mStudentDB == null) {
+//			mStudentDB = new StudentDB();
+//		}
+//		try {
+//				return StudentDB.searchByMajor(theDegree);
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+//	/**
+//	 * Return a list of students with the matching intern.
+//	 * @param theInternship name as a string
+//	 * @return a list of students with matching intern
+//	 */
+//	public static List<OutPut> searchByInternship(String theInternship) {
+//		List<OutPut> list = new ArrayList<OutPut>();
+//		if (mStudentDB == null) {
+//			mStudentDB = new StudentDB();
+//		}
+//		try {
+//				return StudentDB.searchByInternship();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
+//	/**
+//	 * Return a list of students with the matching job.
+//	 * @param theJob name as a string
+//	 * @return a list of students with matching intern
+//	 */
+//	public static List<OutPut> searchByJob(String theJob) {
+//		List<OutPut> list = new ArrayList<OutPut>();
+//		if (mStudentDB == null) {
+//			mStudentDB = new StudentDB();
+//		}
+//		try {
+//				return StudentDB.searchByJob();
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		return list;
+//	}
 	/**
 	 * Modify the particular column of the student with the given data can only modify email. 
 	 * @param theStudent student to modify

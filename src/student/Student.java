@@ -1,6 +1,5 @@
 package student;
 
-import java.util.List;
 
 /**
  * Student class represent a student with name, student id, 
@@ -17,8 +16,6 @@ public class Student {
     private String mYear;
     private double mGPA;
     private String mEmail;
-    private List<EmploymentData> mJobList;
-    private List<EmploymentData> mInternList;
     
     /**
      * Constructor for the student.
@@ -74,27 +71,27 @@ public class Student {
      * Add an employment to the list of job or intern.
      * @param theEmployment
      */
-    public void addEmployment(EmploymentData theEmployment) {
-    	if(theEmployment.getType() == "Intership") {
-    		mInternList.add(theEmployment);
-    	}else if(theEmployment.getType() == "Job") {
-    		mJobList.add(theEmployment);
-    	}
-    }
-    /**
-     * Get the list of job.
-     * @return a list of job
-     */
-    public List<EmploymentData> getJobList() {
-    	return mJobList;
-    }
-    /**
-     * Get the list of intern.
-     * @return a list of intern.
-     */
-    public List<EmploymentData> getInternList() {
-    	return mInternList;
-    }
+//    public void addEmployment(EmploymentData theEmployment) {
+//    	if(theEmployment.getType() == "Intership") {
+//    		mInternList.add(theEmployment);
+//    	}else if(theEmployment.getType() == "Job") {
+//    		mJobList.add(theEmployment);
+//    	}
+//    }
+//    /**
+//     * Get the list of job.
+//     * @return a list of job
+//     */
+//    public List<EmploymentData> getJobList() {
+//    	return mJobList;
+//    }
+//    /**
+//     * Get the list of intern.
+//     * @return a list of intern.
+//     */
+//    public List<EmploymentData> getInternList() {
+//    	return mInternList;
+//    }
     /**
      * Get the student's name.
      * @return the student's name
