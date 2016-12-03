@@ -122,17 +122,17 @@ public class Employee {
         this.myId = myId;
     }
 
-    /**
-     * It's for debugging.
-     *
-     * @return a String of all data
-     */
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "myUserName='" + myUserName + '\'' +
-                ", myPassword='" + myPassword + '\'' +
-                ", myRole=" + myRole +
-                '}';
-    }
+//    /**
+//     * It's for debugging.
+//     *
+//     * @return a String of all data
+//     */
+//    @Override
+//    public String toString() {
+//        return "Employee{" +
+//                "myUserName='" + myUserName + '\'' +
+//                ", myPassword='" + myPassword + '\'' +
+//                ", myRole=" + myRole +
+//                '}';
+//    }
 }
