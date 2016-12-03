@@ -199,8 +199,7 @@ public class EmploymentDB {
             preparedStatement.setInt(2, employmentid);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e);
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         }
         return true;

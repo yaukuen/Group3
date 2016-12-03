@@ -389,9 +389,9 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
                     "Update failed, "+ columnName +" CANNOT BE EDITED!!!");
         } else if (data != null && ((String) data).length() != 0) {
             EmploymentData employment = myList.get(row);
-            if (!myEmploymentDB.updateEmployment(employment, columnName, data)) {
+            if (!EmploymentDB.updateEmployment(employment, columnName, data)) {
                 JOptionPane.showMessageDialog(null,
-                        "Update failed, Please check your input!");
+                        "Update failed, Please check your input!!!");
             }
         }
 	}
