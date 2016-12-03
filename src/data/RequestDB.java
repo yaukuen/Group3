@@ -50,7 +50,7 @@ public class RequestDB {
                 String end = rs.getString("endDay");
                 String type = rs.getString("type");
                 Request requestTemp = new Request(studentId, studentName, company, position, start, end, salary, type, content);
-                requestTemp.setMyRequestId(new Integer(id).toString());
+                requestTemp.setMyRequestId(Integer.toString(id));
                 myRequestList.add(requestTemp);
             }
         } catch (SQLException e) {
@@ -102,7 +102,7 @@ public class RequestDB {
 
     /**
      * Remove a row after finished editing student's information.
-     * @param requestID the requestId to be deleted
+     * @param requestId the requestId to be deleted
      * @return "Removed Request Successfully" or "Error removing request: " with the sql exception.
      */
     public String removeRequest(final String requestId) {

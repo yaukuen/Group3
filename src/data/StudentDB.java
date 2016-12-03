@@ -351,6 +351,13 @@ public class StudentDB {
 		String sql = "update Student set `" + theCol
 				+ "` = ?  where sid= ?";
 		// For debugging - System.out.println(sql);
+		if (mConnection == null) {
+			try {
+				mConnection = DataConnection.getConnection();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		PreparedStatement preparedStatement = null;
 		try {
 			preparedStatement = mConnection.prepareStatement(sql);
