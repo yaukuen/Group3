@@ -41,7 +41,7 @@ public class StudentCollectionTest {
 	 */
 	@Test
 	public void testSearchByMajor() {
-		List<Student> filteredStudent = StudentCollection.searchByMajor(mMajor);
+		List<Student> filteredStudent = StudentCollection.search(mMajor);
 		
 		boolean found = true;
 		for (Student std : filteredStudent){
@@ -57,7 +57,7 @@ public class StudentCollectionTest {
 	 */
 	@Test
 	public void testSearchByDegree() {
-		List<Student> filteredStudent = StudentCollection.searchByDegree(mDegree);
+		List<Student> filteredStudent = StudentCollection.search(mDegree);
 		
 		boolean found = true;
 		for (Student std : filteredStudent){

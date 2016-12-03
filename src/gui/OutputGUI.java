@@ -9,7 +9,7 @@ import java.util.List;
 
 import javax.swing.*;
 
-import data.EmploymentDB;
+import data.StudentDB;
 import student.OutPut;
 import student.StudentCollection;
 
@@ -62,10 +62,10 @@ public class OutputGUI extends JPanel implements ActionListener {
         	myList = StudentCollection.searchBySalary();
             myData = new Object[myList.size()][myColumnNames.length];
         } else if (number == 3) {
-			myList = EmploymentDB.getInternship();
+			myList = StudentDB.searchByInternship();
 			myData = new Object[myList.size()][myColumnNames.length];
 		} else if (number == 4) {
-			myList = EmploymentDB.getJob();
+			myList = StudentDB.searchByJob();
 			myData = new Object[myList.size()][myColumnNames.length];
 		}
 	    if (myList != null) {
@@ -90,7 +90,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 	 * @throws SQLException
 	 */
 	public List<OutPut> getMajor(String theSearch) throws SQLException {
-		myList = EmploymentDB.getMajor(theSearch);
+		myList = StudentDB.searchByMajor(theSearch);
 
 		if (myList != null) {
 			myData = new Object[myList.size()][myColumnNames.length];
@@ -115,7 +115,7 @@ public class OutputGUI extends JPanel implements ActionListener {
 	 * @throws SQLException
 	 */
 	public List<OutPut> getDegree(String theSearch) throws SQLException {
-		myList = EmploymentDB.getMajor(theSearch);
+		myList = StudentDB.searchByMajor(theSearch);
 
 		if (myList != null) {
 			myData = new Object[myList.size()][myColumnNames.length];

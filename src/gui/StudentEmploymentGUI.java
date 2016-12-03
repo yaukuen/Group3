@@ -28,8 +28,8 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 	private static final long serialVersionUID = -7520370128176444786L;
     private static EmploymentDB myEmploymentDB;
 
-    private JButton myBtnList, myBtnAdd, myAddBtn;
-    private JPanel myPnlButtons, myPnlAdd, myPnlContent;
+    private JButton myBtnList, myBtnAdd, myBtnSearch, myAddBtn, mySearchBtn;
+    private JPanel myPnlButtons, myPnlAdd, myPnlContent, myPnlSearch;
     private JLabel[] txfLabel = new JLabel[5];
     private JTextField[] txfField = new JTextField[5];
     /**
@@ -43,7 +43,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
      */
 	private Object[][] myData;
     private JTable myTable;
-    private JScrollPane scrollPane;
+    private JScrollPane myScrollPane;
 
     /**
      * Columns name of the Employment Table.
@@ -55,6 +55,8 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
     private JComboBox<String> myMonthStartComboBox, myMonthEndComboBox;
 
 	private JComboBox<String> myYearStartComboBox, myYearEndComboBox;
+	private JLabel mylblTitle;
+	private JTextField myTxfTitle;
 
     /**
      * This constructor calls the method to create all of the components
@@ -120,22 +122,35 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myPnlButtons = new JPanel();
 		myBtnList = new JButton("Student Employment List");
 		myBtnList.addActionListener(this);
+		
+		myBtnSearch = new JButton("Student Search");
+		myBtnSearch.addActionListener(this);
 
 		myBtnAdd = new JButton("Add Student Employment");
 		myBtnAdd.addActionListener(this);
 		
 		myPnlButtons.add(myBtnList);
+		myPnlButtons.add(myBtnSearch);
 		myPnlButtons.add(myBtnAdd);
 		
 		add(myPnlButtons, BorderLayout.NORTH);
 
 		// instant focus on the employment data list
 		myTable = new JTable(myData, myEmploymentColumnNames);
-		scrollPane = new JScrollPane(myTable);
-        scrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
-		myPnlContent.add(scrollPane);
+		myScrollPane = new JScrollPane(myTable);
+        myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
+		myPnlContent.add(myScrollPane);
 		// Adding listener for updating or modifying the myTable.
 		myTable.getModel().addTableModelListener(this);
+		
+		myPnlSearch = new JPanel();
+		mylblTitle = new JLabel("Enter Search Key: ");
+		myTxfTitle = new JTextField(25);
+		mySearchBtn = new JButton("Search");
+		mySearchBtn.addActionListener(this);
+		myPnlSearch.add(mylblTitle);
+		myPnlSearch.add(myTxfTitle);
+		myPnlSearch.add(mySearchBtn);
 		add(myPnlContent, BorderLayout.CENTER);
 	}
 	
@@ -241,12 +256,31 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
             myPnlContent.removeAll();
             myTable = new JTable(myData, myEmploymentColumnNames);
             myTable.getModel().addTableModelListener(this);
-            scrollPane = new JScrollPane(myTable);
-            scrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
-            myPnlContent.add(scrollPane);
+            myScrollPane = new JScrollPane(myTable);
+            myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
+            myPnlContent.add(myScrollPane);
             myPnlContent.revalidate();
             this.repaint();
-        }
+        } else if (e.getSource() == myBtnSearch) {
+			myPnlContent.removeAll();
+			myPnlContent.add(myPnlSearch);
+			myPnlContent.revalidate();
+			this.repaint();
+		} else if (e.getSource() == mySearchBtn) {
+			String title = myTxfTitle.getText();
+			if (title.length() > 0) {
+				myList = getData(title);
+				myPnlContent.removeAll();
+				myTable = new JTable(myData, myEmploymentColumnNames);
+				myTable.getModel().addTableModelListener(this);
+				myScrollPane = new JScrollPane(myTable);
+				myScrollPane.setPreferredSize(new Dimension(StudentGUI.WIDTH, StudentGUI.HEIGHT));
+				myPnlContent.add(myScrollPane);
+				myPnlContent.revalidate();
+				this.repaint();
+				myTxfTitle.setText("");
+			}
+		}
 	}
 
 	/**

@@ -74,13 +74,13 @@ private static StudentDB mStudentDB;
 	 * @param theMajor
 	 * @return a list of students with matching major
 	 */
-	public static List<Student> searchByMajor(String theMajor) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchByMajor(String theMajor) {
+		List<OutPut> list = new ArrayList<OutPut>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsMajor(theMajor);
+				return StudentDB.searchByMajor(theMajor);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,13 +91,13 @@ private static StudentDB mStudentDB;
 	 * @param theDegree
 	 * @return a list of students with matching degree
 	 */
-	public static List<Student> searchByDegree(String theDegree) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchByDegree(String theDegree) {
+		List<OutPut> list = new ArrayList<OutPut>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsMajor(theDegree);
+				return StudentDB.searchByMajor(theDegree);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -108,13 +108,13 @@ private static StudentDB mStudentDB;
 	 * @param theInternship name as a string
 	 * @return a list of students with matching intern
 	 */
-	public static List<Student> searchByInternship(String theInternship) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchByInternship(String theInternship) {
+		List<OutPut> list = new ArrayList<OutPut>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsIntern(theInternship);
+				return StudentDB.searchByInternship();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -125,13 +125,13 @@ private static StudentDB mStudentDB;
 	 * @param theJob name as a string
 	 * @return a list of students with matching intern
 	 */
-	public static List<Student> searchByJob(String theJob) {
-		List<Student> list = new ArrayList<Student>();
+	public static List<OutPut> searchByJob(String theJob) {
+		List<OutPut> list = new ArrayList<OutPut>();
 		if (mStudentDB == null) {
 			mStudentDB = new StudentDB();
 		}
 		try {
-				return mStudentDB.getStudentsJob(theJob);
+				return StudentDB.searchByJob();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
