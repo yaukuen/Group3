@@ -40,9 +40,9 @@ public class StudentGUI extends JPanel implements ActionListener,
 	private JPanel myPnlSearch;
 	private JComboBox<String> myTermComboBox, myYearComboBox, myMajorComboBox, myDegreeComboBox;
 	private JTextField myTxfTitle;
-	private JLabel mylblTitle;;
+	private JLabel mylblTitle;
 
-	/**
+    /**
 	 * This constructor calls the method to create all of the components
 	 */
 	public StudentGUI() {

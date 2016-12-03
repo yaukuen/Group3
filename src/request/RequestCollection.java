@@ -43,10 +43,7 @@ public class RequestCollection {
             myRequestDB = new RequestDB();
         }
         String message = myRequestDB.addRequest(theRequest);
-        if (message.startsWith("Error adding request:")) {
-            return false;
-        }
-        return true;
+        return !message.startsWith("Error adding request:");
     }
 
     /**
@@ -59,10 +56,7 @@ public class RequestCollection {
             myRequestDB = new RequestDB();
         }
         String message = myRequestDB.removeRequest(theRequestId);
-        if (message.startsWith("Error removing request:")) {
-            return false;
-        }
-        return true;
+        return !message.startsWith("Error removing request:");
     }
 
 }

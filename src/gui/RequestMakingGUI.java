@@ -219,8 +219,8 @@ public class RequestMakingGUI extends JPanel implements ActionListener{
 		
 		String type = (String) myTypeComboBox.getSelectedItem();
 		
-		String startDay = (String) myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
-		String endDay = (String) myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
+		String startDay = myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
+		String endDay = myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
 		
         //check for invalid start day and end day.
         int index2 = startDay.indexOf("-");
