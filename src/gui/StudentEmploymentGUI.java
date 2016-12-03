@@ -391,7 +391,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
             EmploymentData employment = myList.get(row);
             if (!EmploymentDB.updateEmployment(employment, columnName, data)) {
                 JOptionPane.showMessageDialog(null,
-                        "Update failed, Please check your input!");
+                        "Update failed, Please check your input!!!");
             }
         }
 	}
