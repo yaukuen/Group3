@@ -96,12 +96,26 @@ public class EmploymentDataTest {
 		assertEquals(mEmp.getType(), test);
 	}
 	/**
-	 * Test the rest of the getters.
+	 * Test the getEndDate.
 	 */
 	@Test
-	public void testGetters() {
+	public void testGetEndDate() {
 		assertEquals(mEmp.getEndDate(), mEndDate);
+		
+	}
+	/**
+	 * Test the getStartDate.
+	 */
+	@Test
+	public void testGetStartDate() {
 		assertEquals(mEmp.getStartDate(), mStartDate);
+		
+	}
+	/**
+	 * Test the getSID.
+	 */
+	@Test
+	public void testGetSID() {
 		assertEquals(mEmp.getSID(), mSID[0]);
 	}
 
