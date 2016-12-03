@@ -21,7 +21,8 @@ public class EmployeeCollection {
     /**
      * A login to find employee is in the system or not.
      *
-     * @param theEmployee An employee information.
+     * @param username An employee's username.
+     * @param password An employee's password.
      * @return true if found, otherwise return false.
      * @throws SQLException if query is not correct.
      */
