@@ -287,9 +287,25 @@ public class StudentGUI extends JPanel implements ActionListener,
 		String gradTerm = (String) myTermComboBox.getSelectedItem();
 		String year = (String) myYearComboBox.getSelectedItem();
 		
-    	if (name.length() < 3 || sid.length() < 3 || gpa < 0.0 || gpa > 4.0 || email.length() < 3) {
-        	JOptionPane.showMessageDialog(null, "Invalid input! Please check again",
-    				"Add failed" , JOptionPane.WARNING_MESSAGE);
+    	if (name.length() < 3 || sid.length() < 3 || gpa < 0.0 || gpa > 4.0 || email.length() < 8) {
+        	if (name.length() < 3) {
+                JOptionPane.showMessageDialog(null, "Invalid input! " +
+                                "Name should be longer than 3 characters!",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else if (sid.length() < 3 ) {
+                JOptionPane.showMessageDialog(null, "Invalid input! " +
+                                "Student ID should be at least 3 digits.",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else if (gpa < 0.0 || gpa > 4.0) {
+                JOptionPane.showMessageDialog(null, "Invalid GPA input!",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else if (email.length() < 8) {
+                JOptionPane.showMessageDialog(null, "Invalid Email - TOO SHORT!",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Invalid Input!",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            }
     	} else {
     		Student student = new Student(name, sid, major, gradTerm, degree, year, gpa, email);
 
