@@ -347,9 +347,9 @@ public class StudentDB {
 	 */
 	public String updateStudent(Student theStudent, String theCol, Object theData) {
 		
-		String email = theStudent.getEmail();
+		String sid = theStudent.getID();
 		String sql = "update Student set `" + theCol
-				+ "` = ?  where email= ?";
+				+ "` = ?  where sid= ?";
 		// For debugging - System.out.println(sql);
 		PreparedStatement preparedStatement = null;
 		try {
@@ -358,7 +358,7 @@ public class StudentDB {
 				preparedStatement.setString(1, (String) theData); 
 			else if (theData instanceof Double)
 				preparedStatement.setDouble(1, (Double) theData);
-			preparedStatement.setString(2, email);
+			preparedStatement.setString(2, sid);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 //			e.printStackTrace(); //for debugging

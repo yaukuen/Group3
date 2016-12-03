@@ -175,7 +175,7 @@ public class EmploymentDB {
      * @param theData       the change of input.
      * @return Returns a message with success or failure.
      */
-    public boolean updateEmployment(EmploymentData theEmployment, String theCol, Object theData) {
+    public static boolean updateEmployment(EmploymentData theEmployment, String theCol, Object theData) {
 
         int employmentid = Integer.parseInt(theEmployment.getmEmploymentId());
 
@@ -183,6 +183,13 @@ public class EmploymentDB {
                 + "` = ?  where employmentid = ?";
         // For debugging - System.out.println(sql);
         PreparedStatement preparedStatement = null;
+        if (mConnection == null) {
+            try {
+                mConnection = DataConnection.getConnection();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         try {
             preparedStatement = mConnection.prepareStatement(sql);
             if (theData instanceof String)

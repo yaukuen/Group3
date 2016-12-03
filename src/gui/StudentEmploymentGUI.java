@@ -123,7 +123,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		myBtnList = new JButton("Student Employment List");
 		myBtnList.addActionListener(this);
 		
-		myBtnSearch = new JButton("Student Search");
+		myBtnSearch = new JButton("Student Employment Search");
 		myBtnSearch.addActionListener(this);
 
 		myBtnAdd = new JButton("Add Student Employment");
@@ -328,8 +328,8 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 		
 		String type = (String) myTypeComboBox.getSelectedItem();
 		
-		String startDay = (String) myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
-		String endDay = (String) myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
+		String startDay = myMonthStartComboBox.getSelectedItem() + "-" + myYearStartComboBox.getSelectedItem();
+		String endDay = myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
 		
 		String name = (String) myStudentComboBox.getSelectedItem();
 		int index = name.indexOf(":");
