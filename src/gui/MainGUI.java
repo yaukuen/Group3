@@ -14,6 +14,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import data.EmployeeDB;
+import data.EmploymentDB;
+import employee.EmployeeCollection;
+import student.Student;
 
 /**
  * This class creates a GUI for the login process 
@@ -22,6 +25,8 @@ import data.EmployeeDB;
  *
  */
 public class MainGUI implements ActionListener{
+	public static final int EMPLOYEE = 1;
+	public static final int STUDENT = 2;
 	private static final int WIDTH = 300;
 	private static final int HEIGHT = 125;
 	private JFrame myFrame;
@@ -98,25 +103,27 @@ public class MainGUI implements ActionListener{
 	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
+        EmployeeCollection employee = new EmployeeCollection();
 		if (e.getSource() == myStudentLoginBtn) {
-			HomeGUI home = null;
+//			HomeGUI home = null;
 			try {
-				home = new HomeGUI();
+//				home = new HomeGUI();
+                employee.login(null, null, STUDENT);
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+//				e1.printStackTrace();
 			}
-			home.studentPermission();
+//			home.studentPermission();
 			myFrame.dispose();
 		}
 		
 		if (e.getSource() == myLoginBtn) {
-			EmployeeDB employee = new EmployeeDB();
+
 			String user = myUserName.getText();
 			String pass = myPassword.getText();
 			try {
-				employee.login(user, pass);
+				employee.login(user, pass, EMPLOYEE);
 			} catch (SQLException err) {
-				err.printStackTrace();
+//				err.printStackTrace();
 			}
 			myFrame.dispose();
 		}
