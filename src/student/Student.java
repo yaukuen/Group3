@@ -2,79 +2,123 @@ package student;
 
 
 /**
- * Student class represent a student with name, student id, 
+ * Student class represent a student with name, student id,
  * major, term, degree, year, GPA, email, and a list of employment.
- * @author Nico Tandyo
  *
+ * @author Nico Tandyo
+ * @author Yau
  */
 public class Student {
-    private String mStdName;
-    private String mStdID;
-    private String mStdMajor;
-    private String mGradTerm;
-    private String mDegree;
-    private String mYear;
-    private double mGPA;
-    private String mEmail;
-    
+
+    /**
+     * Student's name.
+     */
+    private String myStdName;
+
+    /**
+     * Student ID.
+     */
+    private String myStdID;
+
+    /**
+     * Student major.
+     */
+    private String myStdMajor;
+
+    /**
+     * Term of the degree.
+     */
+    private String myGradTerm;
+
+    /**
+     * Academic Degree.
+     */
+    private String myDegree;
+
+    /**
+     * Degree year.
+     */
+    private String myYear;
+
+    /**
+     * GPA.
+     */
+    private double myGPA;
+
+    /**
+     * Student's email.
+     */
+    private String myEmail;
+
     /**
      * Constructor for the student.
-     * @param theName
-     * @param theID
-     * @param theMajor
-     * @param theTerm
-     * @param theDegree
-     * @param theYear
-     * @param theGPA
-     * @param theEmail
+     *
+     * @param theName   Student's name.
+     * @param theID     Student ID.
+     * @param theMajor  Major.
+     * @param theTerm   of degree.
+     * @param theDegree Academic degree.
+     * @param theYear   degree year.
+     * @param theGPA    GPA.
+     * @param theEmail  Student's email.
      */
-    public Student(String theName, String theID, String theMajor, String theTerm, String theDegree,
-    		String theYear, double theGPA, String theEmail) {
-    	mStdName = theName;
-    	mStdID = theID;
-    	mStdMajor = theMajor;
-    	mGradTerm = theTerm;
-    	mDegree = theDegree;
-    	mYear = theYear;
-    	mGPA = theGPA;
-    	mEmail = theEmail;
+    public Student(final String theName, final String theID, final String theMajor,
+                   final String theTerm, final String theDegree, final String theYear,
+                   final double theGPA, final String theEmail) {
+        myStdName = theName;
+        myStdID = theID;
+        myStdMajor = theMajor;
+        myGradTerm = theTerm;
+        myDegree = theDegree;
+        myYear = theYear;
+        myGPA = theGPA;
+        myEmail = theEmail;
     }
+
+    /**
+     * Get the student's name.
+     *
+     * @return the student's name
+     */
+    public String getName() {
+        return myStdName;
+    }
+
     /**
      * Set the student's name.
-     * @param theName
+     *
+     * @param theName of the student.
      */
-    public void setName(String theName) {
-    	mStdName = theName;
+    public void setName(final String theName) {
+        myStdName = theName;
     }
+
+    /**
+     * Get the student's ID.
+     *
+     * @return the student's ID
+     */
+    public String getID() {
+        return myStdID;
+    }
+
     /**
      * Set the student's ID.
-     * @param theID
+     *
+     * @param theID of the student.
      */
-    public void setID(String theID) {
-    	mStdID = theID;
+    public void setID(final String theID) {
+        myStdID = theID;
     }
-    /**
-     * Set the student's major.
-     * @param theMajor
-     */
-    public void setMajor(String theMajor) {
-    	mStdMajor = theMajor;
-    }
-    /**
-     * Set the student's email.
-     * @param theEmail
-     */
-    public void setEmail(String theEmail) {
-    	mEmail = theEmail;
-    }
-    /**
-     * Add an employment to the list of job or intern.
-     * @param theEmployment
-     */
+
+//    /**
+//     * Add an employment to the list of job or intern.
+//     * @param theEmployment
+//     */
 //    public void addEmployment(EmploymentData theEmployment) {
-//    	if(theEmployment.getType() == "Intership") {
+//    	if(theEmployment.getMyType() == "Intership") {
 //    		mInternList.add(theEmployment);
-//    	}else if(theEmployment.getType() == "Job") {
+//    	}else if(theEmployment.getMyType() == "Job") {
 //    		mJobList.add(theEmployment);
 //    	}
 //    }
@@ -92,61 +136,77 @@ public class Student {
 //    public List<EmploymentData> getInternList() {
 //    	return mInternList;
 //    }
-    /**
-     * Get the student's name.
-     * @return the student's name
-     */
-    public String getName() {
-    	return mStdName;
-    }
-    /**
-     * Get the student's ID.
-     * @return the student's ID
-     */
-    public String getID() {
-    	return mStdID;
-    }
+
     /**
      * Get the student's major.
+     *
      * @return the student's major
      */
     public String getMajor() {
-    	return mStdMajor;
+        return myStdMajor;
     }
+
+    /**
+     * Set the student's major.
+     *
+     * @param theMajor of the student.
+     */
+    public void setMajor(final String theMajor) {
+        myStdMajor = theMajor;
+    }
+
     /**
      * Get the student's graduation term.
+     *
      * @return the student's graduation term
      */
     public String getTerm() {
-    	return mGradTerm;
+        return myGradTerm;
     }
+
     /**
      * Get the student's degree.
+     *
      * @return the student's degree
      */
     public String getDegree() {
-    	return mDegree;
+        return myDegree;
     }
+
     /**
      * Get the student's year.
+     *
      * @return the student's year
      */
     public String getYear() {
-    	return mYear;
+        return myYear;
     }
+
     /**
      * Get the student's GPA.
+     *
      * @return the student's GPA
      */
     public double getGPA() {
-    	return mGPA;
+        return myGPA;
     }
+
     /**
      * Get the student's email.
+     *
      * @return the student's email
      */
     public String getEmail() {
-    	return mEmail;
+        return myEmail;
     }
-    
+
+    /**
+     * Set the student's email.
+     *
+     * @param theEmail of the student.
+     */
+    public void setEmail(final String theEmail) {
+        myEmail = theEmail;
+    }
+
 }

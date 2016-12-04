@@ -25,28 +25,54 @@ public class Request {
      * A request ID.
      */
     private String myRequestId;
+
+    /**
+     * A company's name.
+     */
     private String myCompany;
+
+    /**
+     * Starting date.
+     */
     private String myStartDay;
+
+    /**
+     * Ending date.
+     */
     private String myEndDay;
+
+    /**
+     * Data type, Job or Internship.
+     */
     private String myType;
+
+    /**
+     * Working position.
+     */
     private String myPosition;
+
+    /**
+     * Salary amount.
+     */
     private int mySalary;
 
 
     /**
      * A constructor creating a new request.
-     * @param theSid
-     * @param theName
-     * @param theCompany
-     * @param thePosition
-     * @param theStart
-     * @param theEnd
-     * @param theSalary
-     * @param theType
-     * @param theContent
+     *
+     * @param theSid      Student's ID.
+     * @param theName     Student's name.
+     * @param theCompany  Company's name.
+     * @param thePosition Job position.
+     * @param theStart    Starting date.
+     * @param theEnd      Ending date.
+     * @param theSalary   Salary amount.
+     * @param theType     Job or Internship.
+     * @param theContent  Content of comment.
      */
-    public Request(final String theSid, final String theName, final String theCompany, final String thePosition, 
-    		final String theStart, final String theEnd, final int theSalary, final String theType, final String theContent) {
+    public Request(final String theSid, final String theName, final String theCompany,
+                   final String thePosition, final String theStart, final String theEnd,
+                   final int theSalary, final String theType, final String theContent) {
         if (theSid == null) {
             throw new IllegalArgumentException("Please input your student ID number.");
         }
@@ -72,6 +98,7 @@ public class Request {
 
     /**
      * Gets the student's name.
+     *
      * @return A string of the student's name.
      */
     public String getMyName() {
@@ -99,33 +126,63 @@ public class Request {
     /**
      * Sets the request's ID.
      *
-     * @param myRequestId A string containing the request's ID.
+     * @param theRequestId A string containing the request's ID.
      */
-    public void setMyRequestId(String myRequestId) {
-        this.myRequestId = myRequestId;
+    public void setMyRequestId(final String theRequestId) {
+        this.myRequestId = theRequestId;
     }
 
-	public String getMyCompany() {
-		return myCompany;
-	}
+    /**
+     * Gets the company's name.
+     *
+     * @return name of the company.
+     */
+    public String getMyCompany() {
+        return myCompany;
+    }
 
-	public String getMyStartDay() {
-		return myStartDay;
-	}
+    /**
+     * Gets starting date.
+     *
+     * @return the starting date.
+     */
+    public String getMyStartDay() {
+        return myStartDay;
+    }
 
-	public String getMyEndDay() {
-		return myEndDay;
-	}
+    /**
+     * Gets ending date.
+     *
+     * @return the ending date.
+     */
+    public String getMyEndDay() {
+        return myEndDay;
+    }
 
-	public String getMyType() {
-		return myType;
-	}
+    /**
+     * Gets the working type.
+     *
+     * @return Job or internship for the type.
+     */
+    public String getMyType() {
+        return myType;
+    }
 
-	public String getMyPosition() {
-		return myPosition;
-	}
+    /**
+     * Gets the working position.
+     *
+     * @return the position.
+     */
+    public String getMyPosition() {
+        return myPosition;
+    }
 
-	public int getMySalary() {
-		return mySalary;
-	}
+    /**
+     * Gets the salary amount.
+     *
+     * @return the amount.
+     */
+    public int getMySalary() {
+        return mySalary;
+    }
 }

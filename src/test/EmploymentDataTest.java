@@ -1,7 +1,5 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import data.EmploymentDB;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,135 +9,195 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+import static org.junit.Assert.*;
+
 /**
  * Test class for the EmploymentData.
- * @author Nico Tandyo
  *
+ * @author Nico Tandyo
+ * @author Yau
  */
 public class EmploymentDataTest {
-	private String[] mSID = {"123456", "4123123"};
-    private String mCompany = "TESTING COMPANY";
-    private String mPosition = "TESTING POSITION";
-    private String mPosDescription = "GoodTest";
-    private String mSkillUsed = "Computer SciTest";
-    private int mSalary = 7357;
-    private String mType = "Job";
-    private String mStartDate = "01-2013";
-    private String mEndDate = "01-2014";
-    private String mEmID = "17";
-    
-    private EmploymentData mEmp;
-    private EmploymentDB mEDB = new EmploymentDB();
-    
-    /**
-	 * Set up the employment.
-	 * @throws Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
 
-		mEmp = new EmploymentData(mSID[0], mCompany, mPosition, mPosDescription,
-				mSkillUsed, mSalary, mType, mStartDate, mEndDate);
-	}
-	/**
-	 * Test set and get company methods.
-	 */
-	@Test
-	public void testSetGetCompany() {
-		String test = "microTest";
-		mEmp.setCompany(test);
-		assertEquals(mEmp.getCompany(), test);
-	}
-	/**
-	 * Test set and get description methods.
-	 */
-	@Test
-	public void testSetGetDesc() {
-		String test = "goodSet";
-		mEmp.setDescription(test);
-		assertEquals(mEmp.getDescription(), test);
-	}
-	/**
-	 * Test set and get position methods.
-	 */
-	@Test
-	public void testSetGetPos() {
-		String test = "bossSet";
-		mEmp.setPosition(test);
-		assertEquals(mEmp.getPosition(), test);
-	}
-	/**
-	 * Test set and get skill methods.
-	 */
-	@Test
-	public void testSetGetSkill() {
-		String test = "compSet";
-		mEmp.setSkill(test);
-		assertEquals(mEmp.getSkill(), test);
-	}
-	/**
-	 * Test set and get salary methods.
-	 */
-	@Test
-	public void testSetGetSalary() {
-		int test = 73571;
-		mEmp.setSalary(test);
-		assertEquals(mEmp.getSalary(), test);
-	}
-	/**
-	 * Test set and get type methods.
-	 */
-	@Test
-	public void testSetGetType() {
-		String test = "Internship";
-		mEmp.setType(test);
-		assertEquals(mEmp.getType(), test);
-	}
-	/**
-	 * Test the getEndDate.
-	 */
-	@Test
-	public void testGetEndDate() {
-		assertEquals(mEmp.getEndDate(), mEndDate);
-		
-	}
-	/**
-	 * Test the getStartDate.
-	 */
-	@Test
-	public void testGetStartDate() {
-		assertEquals(mEmp.getStartDate(), mStartDate);
-		
-	}
-	/**
-	 * Test the getSID.
-	 */
-	@Test
-	public void testGetSID() {
-		assertEquals(mEmp.getSID(), mSID[0]);
-	}
+    /**
+     * Student's ID.
+     */
+    private String[] mySID = {"123456", "4123123"};
+
+    /**
+     * Company name.
+     */
+    private String myCompany = "TESTING COMPANY";
+
+    /**
+     * Working position.
+     */
+    private String myPosition = "TESTING POSITION";
+
+    /**
+     * Position description.
+     */
+    private String myPosDescription = "GoodTest";
+
+    /**
+     * Skill used.
+     */
+    private String mySkillUsed = "Computer SciTest";
+
+    /**
+     * Salary amount.
+     */
+    private int mySalary = 7357;
+
+    /**
+     * Employment type.
+     */
+    private String myType = "Job";
+
+    /**
+     * Starting date.
+     */
+    private String myStartDate = "01-2013";
+
+    /**
+     * Ending date.
+     */
+    private String myEndDate = "01-2014";
+
+    /**
+     * Employment ID.
+     */
+    private String myEmID = "17";
+
+    /**
+     * Employment data.
+     */
+    private EmploymentData myEmp;
+
+    /**
+     * Employment database.
+     */
+    private EmploymentDB myEDB = new EmploymentDB();
+
+    /**
+     * Set up the employment.
+     *
+     * @throws Exception if error occur.
+     */
+    @Before
+    public void setUp() throws Exception {
+
+        myEmp = new EmploymentData(mySID[0], myCompany, myPosition, myPosDescription,
+                mySkillUsed, mySalary, myType, myStartDate, myEndDate);
+    }
+
+    /**
+     * Test set and get company methods.
+     */
+    @Test
+    public void testSetGetCompany() {
+        String test = "microTest";
+        myEmp.setCompany(test);
+        assertEquals(myEmp.getCompany(), test);
+    }
+
+    /**
+     * Test set and get description methods.
+     */
+    @Test
+    public void testSetGetDesc() {
+        String test = "goodSet";
+        myEmp.setDescription(test);
+        assertEquals(myEmp.getDescription(), test);
+    }
+
+    /**
+     * Test set and get position methods.
+     */
+    @Test
+    public void testSetGetPos() {
+        String test = "bossSet";
+        myEmp.setPosition(test);
+        assertEquals(myEmp.getPosition(), test);
+    }
+
+    /**
+     * Test set and get skill methods.
+     */
+    @Test
+    public void testSetGetSkill() {
+        String test = "compSet";
+        myEmp.setSkill(test);
+        assertEquals(myEmp.getSkill(), test);
+    }
+
+    /**
+     * Test set and get salary methods.
+     */
+    @Test
+    public void testSetGetSalary() {
+        int test = 73571;
+        myEmp.setSalary(test);
+        assertEquals(myEmp.getSalary(), test);
+    }
+
+    /**
+     * Test set and get type methods.
+     */
+    @Test
+    public void testSetGetType() {
+        String test = "Internship";
+        myEmp.setMyType(test);
+        assertEquals(myEmp.getMyType(), test);
+    }
+
+    /**
+     * Test the getEndDate.
+     */
+    @Test
+    public void testGetEndDate() {
+        assertEquals(myEmp.getEndDate(), myEndDate);
+
+    }
+
+    /**
+     * Test the getStartDate.
+     */
+    @Test
+    public void testGetStartDate() {
+        assertEquals(myEmp.getStartDate(), myStartDate);
+
+    }
+
+    /**
+     * Test the getSID.
+     */
+    @Test
+    public void testGetSID() {
+        assertEquals(myEmp.getSID(), mySID[0]);
+    }
 
     /**
      * Test adding an employment to the Employment table
      */
-	@Test
+    @Test
     public void testAddingEmployment() {
         Random rd = new Random();
         int type = rd.nextInt(2);
         if (type == 0) {
-            mType = "Job";
+            myType = "Job";
         } else {
-            mType = "Internship";
+            myType = "Internship";
         }
-        mSalary = rd.nextInt(500000) + 1;
+        mySalary = rd.nextInt(500000) + 1;
         int start = rd.nextInt(9) + 1;
         int end = rd.nextInt(9) + 1;
-        mStartDate = "0" + start + "-2015";
-        mEndDate = "0" + end + "-2016";
+        myStartDate = "0" + start + "-2015";
+        myEndDate = "0" + end + "-2016";
         int person = rd.nextInt(2);
-        mEmp = new EmploymentData(mSID[person], mCompany, mPosition, mPosDescription,
-                mSkillUsed, mSalary, mType, mStartDate, mEndDate);
-	    boolean result = EmploymentDB.addEmployment(mEmp);
+        myEmp = new EmploymentData(mySID[person], myCompany, myPosition, myPosDescription,
+                mySkillUsed, mySalary, myType, myStartDate, myEndDate);
+        boolean result = EmploymentDB.addEmployment(myEmp);
         assertTrue(result);
     }
 
@@ -149,9 +207,9 @@ public class EmploymentDataTest {
     @Test
     public void testUpdatingEmployment() {
         Random rd = new Random();
-        mEmp.setmEmploymentId(mEmID);
+        myEmp.setMyEmploymentId(myEmID);
         int salaryTemp = rd.nextInt(500000) + 1;
-        boolean result = EmploymentDB.updateEmployment(mEmp, "salary", salaryTemp);
+        boolean result = EmploymentDB.updateEmployment(myEmp, "salary", salaryTemp);
         assertTrue(result);
     }
 
@@ -168,8 +226,8 @@ public class EmploymentDataTest {
         } else {
             search = "Internship";
         }
-        List<EmploymentData> result = mEDB.searchEmployments(search);
+        List<EmploymentData> result = myEDB.searchEmployments(search);
         assertNotEquals(0, result.size());
     }
-	
+
 }
