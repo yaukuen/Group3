@@ -1,72 +1,78 @@
 package data;
 
 
+import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
 
-import javax.swing.JOptionPane;
-
-
 /**
  * This class has the information to connect to the cssgate server.
  * to customize for your own project.
+ *
  * @author Loc Bui
+ * @author Yau
  */
 
 
 public class DataConnection {
 
-	private static String userName = "locbui";
-	private static String password = "DuwavUg";
-	private static String serverName = "cssgate.insttech.washington.edu";
-	public static Connection sConnection;
+    /**
+     * Connection to the database.
+     */
+    private static Connection myConnection;
 
-	// Creates once instance of the connection to be reused in the different places in the
-	// system.
-	private static void createConnection() throws SQLException {
-		Properties connectionProps = new Properties();
-		connectionProps.put("user", userName);
-		connectionProps.put("password", password);
+    // Creates once instance of the connection to be reused in the different places in the
+    // system.
+    private static void createConnection() throws SQLException {
+        Properties connectionProps = new Properties();
 
+        // Login to the SQL's username.
+        String userName = "locbui";
+        // Login to the SQL's password
+        String password = "DuwavUg";
+        connectionProps.put("user", userName);
+        connectionProps.put("password", password);
+        // Server address.
+        String serverName = "cssgate.insttech.washington.edu";
+        myConnection = DriverManager
+                .getConnection("jdbc:mysql://" + serverName + "/"
+                        + userName + "?user=" + userName + "&password=" + password);
 
-		sConnection =  DriverManager
-				.getConnection("jdbc:mysql://" + serverName + "/"
-						+ userName + "?user=" + userName + "&password=" + password);
+        //For debugging - System.out.println("Connected to database");
+    }
 
-		//For debugging - System.out.println("Connected to database");
-	}
-
-	/**
-	 * Returns a connection to the database so that queries can be executed.
-	 * @return Connection to the database
-	 * @throws SQLException
-	 */
-	public static Connection getConnection() {
-		if (sConnection == null) {
-			try {
-				createConnection();
-			} catch (SQLException e) {
+    /**
+     * Returns a connection to the database so that queries can be executed.
+     *
+     * @return Connection to the database
+     */
+    public static Connection getConnection() {
+        if (myConnection == null) {
+            try {
+                createConnection();
+            } catch (SQLException e) {
 //				e.printStackTrace(); //For debugging.
-				JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
-								+ "\nPlease check your internet connection and restart the program!",
-						"Login failed" , JOptionPane.WARNING_MESSAGE);
-			}
-		}
-		return sConnection;
-	}
+                JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                                + "\nPlease check your internet connection and restart the program!",
+                        "Login failed", JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        return myConnection;
+    }
 
-	/**
-	 * Close the connection to the database when done.
-	 * @throws SQLException
-	 */
-	public static void closeConnection() throws SQLException {
-		if (sConnection != null && !sConnection.isClosed()) {
-			sConnection.close();
-		}
-	}
+    /**
+     * Close the connection to the database when done.
+     *
+     * @throws SQLException it throws exception if errors occur.
+     */
+    public static void closeConnection() throws SQLException {
+        if (myConnection != null && !myConnection.isClosed()) {
+            myConnection.close();
+        }
+    }
 
 
 }

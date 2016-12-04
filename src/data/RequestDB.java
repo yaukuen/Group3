@@ -18,13 +18,9 @@ public class RequestDB {
     private Connection myConnection;
 
     /**
-     * It's a list holding all request.
-     */
-    private List<Request> myRequestList;
-
-    /**
      * Get all requests from the Request table.
-     * @returnA list of all requests.
+     *
+     * @return A list of all requests.
      * @throws SQLException if query not input correctly.
      */
     public List<Request> getRequests() throws SQLException {
@@ -34,7 +30,8 @@ public class RequestDB {
         Statement stmt = null;
         String query = "SELECT * " + "FROM Request ;";
 
-        myRequestList = new ArrayList<>();
+        // It's a list holding all request.
+        List<Request> myRequestList = new ArrayList<>();
         try {
             if (myConnection == null) {
                 return null;
@@ -52,7 +49,8 @@ public class RequestDB {
                 String start = rs.getString("startDay");
                 String end = rs.getString("endDay");
                 String type = rs.getString("type");
-                Request requestTemp = new Request(studentId, studentName, company, position, start, end, salary, type, content);
+                Request requestTemp = new Request(studentId, studentName, company,
+                        position, start, end, salary, type, content);
                 requestTemp.setMyRequestId(Integer.toString(id));
                 myRequestList.add(requestTemp);
             }
@@ -69,11 +67,13 @@ public class RequestDB {
 
     /**
      * Adds a new request to the Request table.
+     *
      * @param theRequest contains information of the request.
      * @return "Added Request Successfully" or "Error adding request: " with the sql exception.
      */
     public String addRequest(final Request theRequest) {
-        String sql = "insert into Request(sid, `name`, company, position, salary, startDay, endDay, type,  content) values "
+        String sql = "insert into Request(sid, `name`, company," +
+                " position, salary, startDay, endDay, type,  content) values "
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
         if (myConnection == null) {
@@ -101,15 +101,16 @@ public class RequestDB {
 
     /**
      * Remove a row after finished editing student's information.
-     * @param requestId the requestId to be deleted
+     *
+     * @param theRequestId the requestId to be deleted
      * @return "Removed Request Successfully" or "Error removing request: " with the sql exception.
      */
-    public String removeRequest(final String requestId) {
+    public String removeRequest(final String theRequestId) {
         String sql = "delete from Request where requestId = ? ;";
         PreparedStatement preparedStatement;
         try {
             preparedStatement = myConnection.prepareStatement(sql);
-            preparedStatement.setString(1, requestId);
+            preparedStatement.setString(1, theRequestId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
