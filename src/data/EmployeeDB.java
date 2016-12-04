@@ -71,7 +71,6 @@ public class EmployeeDB {
 	            	return null;
 	            }
 	        } else if (theRole == 2) {
-                String sql = "Select * from Login where username = 'student' and password='student'";
                 if (myConnection == null) {
                     return null;
                 }
