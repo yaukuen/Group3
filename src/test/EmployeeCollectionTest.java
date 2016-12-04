@@ -4,6 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
 
+import gui.MainGUI;
 import org.junit.Test;
 
 import employee.EmployeeCollection;
@@ -19,11 +20,13 @@ public class EmployeeCollectionTest {
 	 */
 	@Test
 	public void testAddRequest() throws SQLException {
-		boolean adminLoginSuccess = EmployeeCollection.login("admin", "admin");
+		boolean adminLoginSuccess = EmployeeCollection.login("admin", "admin", MainGUI.EMPLOYEE);
 		assertTrue(adminLoginSuccess);
-		boolean advisorLoginSuccess = EmployeeCollection.login("advisor", "advisor");
+		boolean advisorLoginSuccess = EmployeeCollection.login("advisor", "advisor", MainGUI.EMPLOYEE);
 		assertTrue(advisorLoginSuccess);
-		boolean staffLoginSuccess = EmployeeCollection.login("faculty", "faculty");
+		boolean staffLoginSuccess = EmployeeCollection.login("faculty", "faculty", MainGUI.EMPLOYEE);
 		assertTrue(staffLoginSuccess);
+        boolean studentLoginSuccess = EmployeeCollection.login(null, null, MainGUI.STUDENT);
+        assertTrue(studentLoginSuccess);
 	}
 }

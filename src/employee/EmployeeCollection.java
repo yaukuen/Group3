@@ -26,11 +26,11 @@ public class EmployeeCollection {
      * @return true if found, otherwise return false.
      * @throws SQLException if query is not correct.
      */
-    public static boolean login(String username, String password) throws SQLException {
+    public static boolean login(String username, String password, int theRole) throws SQLException {
         if (myEmployeeDB == null) {
             myEmployeeDB = new EmployeeDB();
         }
-        
+
 //        String message = null;
 //        if (!message.matches(theEmployee.getMyUserName())) {
 //            message = myEmployeeDB.login(theEmployee);
@@ -38,8 +38,8 @@ public class EmployeeCollection {
 //                return false;
 //            }
 //        }
-        
-        String message = myEmployeeDB.login(username, password);
+
+        String message = myEmployeeDB.login(username, password, theRole);
         return message != null;
     }
 }

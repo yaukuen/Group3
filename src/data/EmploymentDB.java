@@ -28,11 +28,7 @@ public class EmploymentDB {
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
         if (mConnection == null) {
-            try {
-                mConnection = DataConnection.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            mConnection = DataConnection.getConnection();
         }
 
         PreparedStatement preparedStatement = null;
@@ -72,6 +68,9 @@ public class EmploymentDB {
 
         mEmploymentList = new ArrayList<EmploymentData>();
         try {
+            if (mConnection == null) {
+                return null;
+            }
             stmt = mConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -184,11 +183,7 @@ public class EmploymentDB {
         // For debugging - System.out.println(sql);
         PreparedStatement preparedStatement = null;
         if (mConnection == null) {
-            try {
-                mConnection = DataConnection.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            mConnection = DataConnection.getConnection();
         }
         try {
             preparedStatement = mConnection.prepareStatement(sql);

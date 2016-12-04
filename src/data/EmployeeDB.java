@@ -25,17 +25,22 @@ public class EmployeeDB {
     /**
      * It login to the system by given Employee information.
      *
-     * @param theEmployee An Employee login in information
+     * @param user An Employee login username.
+     * @param pass Am Employee login password
+	 * @param theRole if 1, it's employee. If 2, it's student.
      * @return A string message that telling user success or not.
      */
-	public String login(String user, String pass) throws SQLException {
+	public String login(String user, String pass, int theRole) throws SQLException {
 		if (myConnection == null) {
 			myConnection = DataConnection.getConnection();
 		}
         Statement stmt = null;
 	    try {
-	        if (user != null && pass != null) {
+	        if (theRole == 1 && user != null && pass != null) {
 	            String sql = "Select * from Login where username ='" + user + "' and password='" + pass + "'";
+	            if (myConnection == null) {
+	                return null;
+                }
 	            stmt = myConnection.createStatement();
 	            ResultSet rs = stmt.executeQuery(sql);
 	            if (rs.next()) {
@@ -65,7 +70,17 @@ public class EmployeeDB {
 	            	new MainGUI();
 	            	return null;
 	            }
-	        }
+	        } else if (theRole == 2) {
+                String sql = "Select * from Login where username = 'student' and password='student'";
+                if (myConnection == null) {
+                    return null;
+                }
+                HomeGUI home = new HomeGUI();
+                home.studentPermission();
+                JOptionPane.showMessageDialog(null, "You are logged in as a Student",
+                        "Login success" , JOptionPane.INFORMATION_MESSAGE);
+                return "Sucess";
+            }
 	        // You can also validate user by result size if its comes zero user is invalid else user is valid
 
 	    } catch (SQLException e) {
