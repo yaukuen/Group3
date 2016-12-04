@@ -11,8 +11,6 @@ import java.sql.SQLException;
  */
 public class EmployeeCollection {
 
-//    private List<Employee> myEmployee;
-
     /**
      * Employee collection's database for connecting to the data base.
      */
@@ -30,14 +28,6 @@ public class EmployeeCollection {
         if (myEmployeeDB == null) {
             myEmployeeDB = new EmployeeDB();
         }
-
-//        String message = null;
-//        if (!message.matches(theEmployee.getMyUserName())) {
-//            message = myEmployeeDB.login(theEmployee);
-//            if (message == null) {
-//                return false;
-//            }
-//        }
 
         String message = myEmployeeDB.login(username, password, theRole);
         return message != null;
