@@ -34,9 +34,9 @@ public class Employee {
      * @param thePassword A String containing the employee's password.
      */
     public Employee(final String theUserName, final String thePassword) {
-    	if(theUserName == null || thePassword == null) {
-    		throw new IllegalArgumentException("Invalid Input");
-    	}
+        if (theUserName == null || thePassword == null) {
+            throw new IllegalArgumentException("Invalid Input");
+        }
         this.myUserName = theUserName;
         this.myPassword = thePassword;
     }
@@ -80,10 +80,10 @@ public class Employee {
     /**
      * Sets the employee's password.
      *
-     * @param myPassword A String containing the employee's password.
+     * @param thePassword A String containing the employee's password.
      */
-    public void setMyPassword(String myPassword) {
-        this.myPassword = myPassword;
+    public void setMyPassword(final String thePassword) {
+        this.myPassword = thePassword;
     }
 
     /**
@@ -98,10 +98,10 @@ public class Employee {
     /**
      * Sets the employee's role.
      *
-     * @param myRole An integer containing the employee's role.
+     * @param theRole An integer containing the employee's role.
      */
-    public void setMyRole(int myRole) {
-        this.myRole = myRole;
+    public void setMyRole(final int theRole) {
+        this.myRole = theRole;
     }
 
     /**
@@ -116,10 +116,10 @@ public class Employee {
     /**
      * Sets the employee's ID.
      *
-     * @param myId A String containing the employee's ID.
+     * @param theId A String containing the employee's ID.
      */
-    public void setMyId(String myId) {
-        this.myId = myId;
+    public void setMyId(final String theId) {
+        this.myId = theId;
     }
 
 //    /**

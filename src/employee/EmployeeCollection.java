@@ -5,8 +5,7 @@ import data.EmployeeDB;
 import java.sql.SQLException;
 
 /**
- * It's a collection of all the employees information
- * and login.
+ * It's a collection of all the employees login.
  * Created by Yau on 11/27/2016.
  */
 public class EmployeeCollection {
@@ -19,17 +18,20 @@ public class EmployeeCollection {
     /**
      * A login to find employee is in the system or not.
      *
-     * @param username An employee's username.
-     * @param password An employee's password.
+     * @param theUsername An employee's username.
+     * @param thePassword An employee's password.
+     * @param theRole     A role 1 is employee, 2 is student.
      * @return true if found, otherwise return false.
      * @throws SQLException if query is not correct.
      */
-    public static boolean login(String username, String password, int theRole) throws SQLException {
+    public static boolean login(final String theUsername,
+                                final String thePassword,
+                                final int theRole) throws SQLException {
         if (myEmployeeDB == null) {
             myEmployeeDB = new EmployeeDB();
         }
 
-        String message = myEmployeeDB.login(username, password, theRole);
+        String message = myEmployeeDB.login(theUsername, thePassword, theRole);
         return message != null;
     }
 }

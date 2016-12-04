@@ -13,27 +13,35 @@ import java.util.List;
  * @author Yau Tsang
  */
 public class EmploymentDB {
-    private static Connection mConnection;
-    private List<EmploymentData> mEmploymentList;
+
+    /**
+     * Connection to the database.
+     */
+    private static Connection myConnection;
+
+    /**
+     * List of the employment.
+     */
+    private List<EmploymentData> myEmploymentList;
 
     /**
      * Adds a new employment to the Employment table.
      *
-     * @param theEmployment
-     * @return Returns true or false
+     * @param theEmployment Contains employment's information.
+     * @return Returns true if adding success, false otherwise.
      */
-    public static boolean addEmployment(EmploymentData theEmployment) {
+    public static boolean addEmployment(final EmploymentData theEmployment) {
         String sql = "insert into Employment(`sid`,`company`,`position`,`description`,"
                 + "`skillUsed`,`startDay`,`endDay`, `type`, `salary`) values "
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
+        if (myConnection == null) {
+            myConnection = DataConnection.getConnection();
         }
 
         PreparedStatement preparedStatement = null;
         try {
-            preparedStatement = mConnection.prepareStatement(sql);
+            preparedStatement = myConnection.prepareStatement(sql);
             preparedStatement.setString(1, theEmployment.getSID());
             preparedStatement.setString(2, theEmployment.getCompany());
             preparedStatement.setString(3, theEmployment.getPosition());
@@ -41,7 +49,7 @@ public class EmploymentDB {
             preparedStatement.setString(5, theEmployment.getSkill());
             preparedStatement.setString(6, theEmployment.getStartDate());
             preparedStatement.setString(7, theEmployment.getEndDate());
-            preparedStatement.setString(8, theEmployment.getType());
+            preparedStatement.setString(8, theEmployment.getMyType());
             preparedStatement.setInt(9, theEmployment.getSalary());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -52,26 +60,62 @@ public class EmploymentDB {
     }
 
     /**
+     * Modifies the data on an Employment .
+     *
+     * @param theEmployment EmploymentData object.
+     * @param theCol        column name.
+     * @param theData       the change of input.
+     * @return Returns a message with success or failure.
+     */
+    public static boolean updateEmployment(final EmploymentData theEmployment,
+                                           final String theCol, final Object theData) {
+
+        int employmentid = Integer.parseInt(theEmployment.getMyEmploymentId());
+
+        String sql = "update Employment set `" + theCol
+                + "` = ?  where employmentid = ?";
+        // For debugging - System.out.println(sql);
+        PreparedStatement preparedStatement = null;
+        if (myConnection == null) {
+            myConnection = DataConnection.getConnection();
+        }
+        try {
+            preparedStatement = myConnection.prepareStatement(sql);
+            if (theData instanceof String)
+                preparedStatement.setString(1, (String) theData);
+            else if (theData instanceof Integer)
+                preparedStatement.setInt(1, (Integer) theData);
+            preparedStatement.setInt(2, employmentid);
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+//            e.printStackTrace();
+            return false;
+        }
+        return true;
+
+    }
+
+    /**
      * Retrieves all Employment from the Employment table.
      *
-     * @return list of employments
-     * @throws SQLException
+     * @return list of employments.
+     * @throws SQLException It throws exception if error occur.
      */
     public List<EmploymentData> getEmployments() throws SQLException {
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
+        if (myConnection == null) {
+            myConnection = DataConnection.getConnection();
         }
         Statement stmt = null;
         String query = "select Student.name , Employment.*\n" +
                 "from Student join Employment\n" +
                 "on Student.sid = Employment.sid;";
 
-        mEmploymentList = new ArrayList<EmploymentData>();
+        myEmploymentList = new ArrayList<EmploymentData>();
         try {
-            if (mConnection == null) {
+            if (myConnection == null) {
                 return null;
             }
-            stmt = mConnection.createStatement();
+            stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 String name = rs.getString("name");
@@ -86,10 +130,11 @@ public class EmploymentDB {
                 String eid = rs.getString("employmentid");
                 int salary = rs.getInt("salary");
                 EmploymentData employment = null;
-                employment = new EmploymentData(sid, company, pos, desc, skill, salary, type, sd, ed);
-                employment.setmStudentName(name);
-                employment.setmEmploymentId(eid);
-                mEmploymentList.add(employment);
+                employment = new EmploymentData(sid, company, pos, desc,
+                        skill, salary, type, sd, ed);
+                employment.setMyStudentName(name);
+                employment.setMyEmploymentId(eid);
+                myEmploymentList.add(employment);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -99,106 +144,71 @@ public class EmploymentDB {
                 stmt.close();
             }
         }
-        return mEmploymentList;
+        return myEmploymentList;
     }
 
     /**
      * Returns all employments that contain the search keyword in the name or description.
      *
      * @param theSearch keyword of searching.
-     * @return list of employment that match
-     * @throws SQLException
+     * @return list of employment that match.
+     * @throws SQLException It throws exception if error occur.
      */
     public List<EmploymentData> searchEmployments(String theSearch) throws SQLException {
         List<EmploymentData> filterList = new ArrayList<EmploymentData>();
-        if (mEmploymentList == null) {
+        if (myEmploymentList == null) {
             getEmployments();
         }
         theSearch = theSearch.toLowerCase();
         // searching name
-        for (EmploymentData emp : mEmploymentList) {
-            if (emp.getmStudentName().toLowerCase().contains(theSearch)) {
+        for (EmploymentData emp : myEmploymentList) {
+            if (emp.getMyStudentName().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // student ID
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getSID().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // company name
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getCompany().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // position
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getPosition().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // skill
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getSkill().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // start date
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getStartDate().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // end date
-        for (EmploymentData emp : mEmploymentList) {
+        for (EmploymentData emp : myEmploymentList) {
             if (emp.getEndDate().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         // type - job or internship
-        for (EmploymentData emp : mEmploymentList) {
-            if (emp.getType().toLowerCase().contains(theSearch)) {
+        for (EmploymentData emp : myEmploymentList) {
+            if (emp.getMyType().toLowerCase().contains(theSearch)) {
                 filterList.add(emp);
             }
         }
         return filterList;
-    }
-
-    /**
-     * Modifies the data on an Employment .
-     *
-     * @param theEmployment EmploymentData object.
-     * @param theCol        column name.
-     * @param theData       the change of input.
-     * @return Returns a message with success or failure.
-     */
-    public static boolean updateEmployment(EmploymentData theEmployment, String theCol, Object theData) {
-
-        int employmentid = Integer.parseInt(theEmployment.getmEmploymentId());
-
-        String sql = "update Employment set `" + theCol
-                + "` = ?  where employmentid = ?";
-        // For debugging - System.out.println(sql);
-        PreparedStatement preparedStatement = null;
-        if (mConnection == null) {
-            mConnection = DataConnection.getConnection();
-        }
-        try {
-            preparedStatement = mConnection.prepareStatement(sql);
-            if (theData instanceof String)
-                preparedStatement.setString(1, (String) theData);
-            else if (theData instanceof Integer)
-                preparedStatement.setInt(1, (Integer) theData);
-            preparedStatement.setInt(2, employmentid);
-            preparedStatement.executeUpdate();
-        } catch (SQLException e) {
-//            e.printStackTrace();
-            return false;
-        }
-        return true;
-
     }
 
 }

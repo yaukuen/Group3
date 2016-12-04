@@ -6,11 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * Created by kuenk on 11/29/2016.
+ * It's a collection of all request methods.
+ * Created by Yau on 11/29/2016.
  */
 public class RequestCollection {
-
-//    private List<Request> myRequest;
 
     /**
      * Request collection's database for connecting to the database.
@@ -19,6 +18,7 @@ public class RequestCollection {
 
     /**
      * Return all requests in the list, null otherwise.
+     *
      * @return a list of requests.
      */
     public static List<Request> showTheList() {
@@ -35,6 +35,7 @@ public class RequestCollection {
 
     /**
      * Adds a new request to the database.
+     *
      * @param theRequest request contains sid and request content.
      * @return true if succeeded, false otherwise.
      */
@@ -48,6 +49,7 @@ public class RequestCollection {
 
     /**
      * A request user want to remove.
+     *
      * @param theRequestId request contains request id.
      * @return true if succeeded, false otherwise.
      */
