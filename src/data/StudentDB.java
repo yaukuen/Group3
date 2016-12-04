@@ -40,6 +40,9 @@ public class StudentDB {
 
 		mStudentList = new ArrayList<Student>();
 		try {
+			if (mConnection == null) {
+			    return null;
+            }
 			stmt = mConnection.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
@@ -310,11 +313,7 @@ public class StudentDB {
 				+ "(?, ?, ?, ?, ?, ?, ?, ?); ";
 
 		if (mConnection == null) {
-			try {
-				mConnection = DataConnection.getConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			mConnection = DataConnection.getConnection();
 		}
 
 		PreparedStatement preparedStatement = null;
@@ -352,11 +351,7 @@ public class StudentDB {
 				+ "` = ?  where sid= ?";
 		// For debugging - System.out.println(sql);
 		if (mConnection == null) {
-			try {
-				mConnection = DataConnection.getConnection();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			mConnection = DataConnection.getConnection();
 		}
 		PreparedStatement preparedStatement = null;
 		try {

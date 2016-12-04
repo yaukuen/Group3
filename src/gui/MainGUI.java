@@ -10,10 +10,11 @@ import java.sql.SQLException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import data.EmployeeDB;
+import employee.EmployeeCollection;
 
 /**
  * This class creates a GUI for the login process 
@@ -22,14 +23,16 @@ import data.EmployeeDB;
  *
  */
 public class MainGUI implements ActionListener{
-	private static final int WIDTH = 300;
+	public static final int EMPLOYEE = 1;
+	public static final int STUDENT = 2;
+	private static final int WIDTH = 380;
 	private static final int HEIGHT = 125;
 	private JFrame myFrame;
 	private JPanel myLoginPnl, myLoginBtnPnl;
 	private JTextField myUserName;
 	private JTextField myPassword;
 	private JLabel myLabel, myLabelP;
-	private JButton myLoginBtn, myStudentLoginBtn;
+	private JButton myLoginBtn, myStudentLoginBtn, myBtnAbout;
 	
 	/**
 	 * The main method for running the GUI
@@ -85,11 +88,15 @@ public class MainGUI implements ActionListener{
 		myLoginBtn = new JButton("Log in");
 		myLoginBtn.addActionListener(this);
 		myLoginBtnPnl.add(myLoginBtn);
-		myFrame.add(myLoginPnl, BorderLayout.NORTH);
 		
 		myStudentLoginBtn = new JButton("Log in as a student");
 		myStudentLoginBtn.addActionListener(this);
+		myBtnAbout = new JButton("About This Program");
+		myBtnAbout.addActionListener(this);
 		myLoginBtnPnl.add(myStudentLoginBtn);
+		myLoginBtnPnl.add(myBtnAbout);
+
+		myFrame.add(myLoginPnl, BorderLayout.NORTH);
 		myFrame.add(myLoginBtnPnl, BorderLayout.SOUTH);
 	}
 
@@ -99,26 +106,38 @@ public class MainGUI implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == myStudentLoginBtn) {
-			HomeGUI home = null;
 			try {
-				home = new HomeGUI();
+                EmployeeCollection.login(null, null, STUDENT);
 			} catch (SQLException e1) {
-				e1.printStackTrace();
+				e1.printStackTrace(); //For debugging!
+				JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+						+ "\nPlease check your internet connection and restart the program!",
+				"Login failed" , JOptionPane.WARNING_MESSAGE);
 			}
-			home.studentPermission();
 			myFrame.dispose();
-		}
-		
-		if (e.getSource() == myLoginBtn) {
-			EmployeeDB employee = new EmployeeDB();
+		} else if (e.getSource() == myLoginBtn) {
+
 			String user = myUserName.getText();
 			String pass = myPassword.getText();
 			try {
-				employee.login(user, pass);
+				EmployeeCollection.login(user, pass, EMPLOYEE);
 			} catch (SQLException err) {
-				err.printStackTrace();
+				err.printStackTrace(); //For debugging!
+				JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+						+ "\nPlease check your internet connection and restart the program!",
+				"Login failed" , JOptionPane.WARNING_MESSAGE);
 			}
 			myFrame.dispose();
+		} else if (e.getSource() == myBtnAbout) {
+			String about = "This is the final project for TCSS 360 - Software Development"
+					+ " and\nQuality Assurance Techniques at University of Washington Tacoma.\n"
+					+ "\nThe README.txt contains the information for using this program including\nthe "
+					+ "username and password for logging in if you want to try our program.\nThank you!\n"
+					+ "\nGroup members:\nLoc Bui - locbui@uw.edu\nYau Kuen Tsang - yktsang@uw.edu\nNico Tandyo - nicot@uw.edu";
+
+			
+			JOptionPane.showMessageDialog(null, about, 
+    				"About This Program" , JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 }

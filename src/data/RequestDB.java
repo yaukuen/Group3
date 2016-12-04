@@ -36,6 +36,9 @@ public class RequestDB {
 
         myRequestList = new ArrayList<>();
         try {
+            if (myConnection == null) {
+                return null;
+            }
             stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -74,11 +77,7 @@ public class RequestDB {
                 + "(?, ?, ?, ?, ?, ?, ?, ?, ?); ";
 
         if (myConnection == null) {
-            try {
-                myConnection = DataConnection.getConnection();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            myConnection = DataConnection.getConnection();
         }
         PreparedStatement preparedStatement;
         try {
