@@ -8,7 +8,7 @@ Administrative staff:
 When you are logged in as an administrative staff, all of the tabs are available except the "Request to Edit Student's Data" tab. To search for a student,
 you can press the "Student Search" button and then enter the search keyword.
 You can also add a student using the "Add Student" button. You can also add or update student's employment information. Press the "Student Employment Search" to search
-an employment. You can enter any search key, from name, company, position, description, skill used, and the type of employment. 
+an employment. You can enter any search key, from name, company, position, skill used, and the type of employment. 
 You can also add a student employment information to the list. Press the "Add Student Employment" button. First you have to choose a student and then you have to enter all
 of the required fields.
 You can also generate outputs by choosing one criterion to view by.
@@ -27,7 +27,7 @@ When you are logged in as an advisor, only "Add or Update Student's Data", "Add 
 are available.
 To search for a student, you can press the "Student Search" button and then enter the search keyword.
 You can also add a student using the "Add Student" button. You can also add or update student's employment information. Press the "Student Employment Search" to search
-an employment. You can enter any search key, from name, company, position, description, skill used, and the type of employment. 
+an employment. You can enter any search key, from name, company, position, skill used, and the type of employment. 
 You can also add a student employment information to the list. Press the "Add Student Employment" button. First you have to choose a student and then you have to enter all
 of the required fields.
 You can also view and delete student request in the "View Student Request" tab.
@@ -51,5 +51,12 @@ You can only make a request to edit your employment data.
 You can fill in all of the new information you would like to have in your student employment information.
 You can also press the "Log Out" tab and then press the "Log Out" button to log out from the program.
 
+Our program will catch the exceptions when:
+	You add a student with an existing SID.
+	You input invalid start day and end day.
+	You input a salary not as an integer.
+	You input an invalid GPA (negative or larger than 4.0).
+	
 Lastly, when there is no internet connection, our program will display a message dialog that says "Unable to connect to the server! Please check your internet connection
-and restart the program!"
+and restart the program!" when users try to log in. In addition, if you are already logged in into the system and you lose your internet connection, then our program will
+pop up a message says that "unable to connect to the server" when you try to do any operations. 
