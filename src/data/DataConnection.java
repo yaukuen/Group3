@@ -1,11 +1,10 @@
 package data;
 
-
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import javax.swing.*;
 
 
 /**
@@ -16,13 +15,12 @@ import java.util.Properties;
  * @author Yau
  */
 
-
 public class DataConnection {
 
     /**
      * Connection to the database.
      */
-    private static Connection myConnection;
+	private static Connection myConnection;
 
     // Creates once instance of the connection to be reused in the different places in the
     // system.
@@ -56,7 +54,7 @@ public class DataConnection {
             } catch (SQLException e) {
 //				e.printStackTrace(); //For debugging.
                 JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
-                                + "\nPlease check your internet connection and restart the program!",
+                        + "\nPlease check your internet connection and restart the program!",
                         "Login failed", JOptionPane.WARNING_MESSAGE);
             }
         }
@@ -73,6 +71,4 @@ public class DataConnection {
             myConnection.close();
         }
     }
-
-
 }
