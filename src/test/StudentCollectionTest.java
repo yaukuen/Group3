@@ -199,7 +199,7 @@ public class StudentCollectionTest {
     public void testSearchbyMajor() {
         List<OutPut> majorOutput = null;
         try {
-            majorOutput = StudentDB.searchByMajor(myMajor);
+            majorOutput = StudentDB.searchByMajorOrDegree(myMajor);
         } catch (SQLException e) {
             e.printStackTrace();
         }

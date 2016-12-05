@@ -13,6 +13,8 @@ import java.util.List;
  * This class contains methods to access the student tables data.
  *
  * @author Nico Tandyo
+ * @author Yau
+ * @author Loc Bui
  */
 public class StudentDB {
 
@@ -126,7 +128,7 @@ public class StudentDB {
      * @return a list that grouped by the keyword.
      * @throws SQLException if error occur.
      */
-    public static List<OutPut> searchByMajor(final String theSearch) throws SQLException {
+    public static List<OutPut> searchByMajorOrDegree(final String theSearch) throws SQLException {
         if (myConnection == null) {
             myConnection = DataConnection.getConnection();
         }
@@ -163,11 +165,13 @@ public class StudentDB {
                 stmt.close();
             }
         }
+        //search by major
         for (OutPut out : myAnotherOutputList) {
             if (out.getMyStdMajor().equals(theSearch)) {
                 filterList.add(out);
             }
         }
+        //search by degree
         for (OutPut out : myAnotherOutputList) {
             if (out.getMyDegree().equals(theSearch)) {
                 filterList.add(out);

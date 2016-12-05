@@ -1,6 +1,5 @@
 package gui;
 
-import data.StudentDB;
 import student.OutPut;
 import student.StudentCollection;
 
@@ -118,10 +117,10 @@ public class OutputGUI extends JPanel implements ActionListener {
             myList = StudentCollection.searchBySalary();
             myData = new Object[myList.size()][myColumnNames.length];
         } else if (theNumber == 3) {
-            myList = StudentDB.searchByInternship();
+            myList = StudentCollection.searchByInternship();
             myData = new Object[myList.size()][myColumnNames.length];
         } else if (theNumber == 4) {
-            myList = StudentDB.searchByJob();
+            myList = StudentCollection.searchByJob();
             myData = new Object[myList.size()][myColumnNames.length];
         }
         if (myList != null) {
@@ -147,8 +146,8 @@ public class OutputGUI extends JPanel implements ActionListener {
      * @return a list of Output with desired major
      * @throws SQLException if error occur.
      */
-    public List<OutPut> getMajor(final String theSearch) throws SQLException {
-        myList = StudentDB.searchByMajor(theSearch);
+    public List<OutPut> getMajorOrDegree(final String theSearch) throws SQLException {
+        myList = StudentCollection.searchByMajorOrDegree(theSearch);
 
         if (myList != null) {
             myData = new Object[myList.size()][myColumnNames.length];
@@ -166,34 +165,6 @@ public class OutputGUI extends JPanel implements ActionListener {
         }
         return myList;
     }
-
-    /**
-     * Get a list of Output with desired degree.
-     *
-     * @param theSearch of searching keyword.
-     * @return the desired list of output.
-     * @throws SQLException if error occur.
-     */
-    public List<OutPut> getDegree(final String theSearch) throws SQLException {
-        myList = StudentDB.searchByMajor(theSearch);
-
-        if (myList != null) {
-            myData = new Object[myList.size()][myColumnNames.length];
-            for (int i = 0; i < myList.size(); i++) {
-                myData[i][0] = myList.get(i).getMyStdName();
-                myData[i][1] = myList.get(i).getMyStdID();
-                myData[i][2] = myList.get(i).getMyGPA();
-                myData[i][3] = myList.get(i).getMyStdMajor();
-                myData[i][4] = myList.get(i).getMyDegree();
-                myData[i][5] = myList.get(i).getMySalary();
-                myData[i][6] = myList.get(i).getMyCompany();
-                myData[i][7] = myList.get(i).getMyPosition();
-                myData[i][8] = myList.get(i).getMyType();
-            }
-        }
-        return myList;
-    }
-
 
     /**
      * This method creates the panel for generating outputs.
@@ -267,42 +238,42 @@ public class OutputGUI extends JPanel implements ActionListener {
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Major - CSS")) {
                 try {
-                    myList = getMajor("CSS");
+                    myList = getMajorOrDegree("CSS");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Major - CES")) {
                 try {
-                    myList = getMajor("CES");
+                    myList = getMajorOrDegree("CES");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Major - IT")) {
                 try {
-                    myList = getMajor("IT");
+                    myList = getMajorOrDegree("IT");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Degree - BA")) {
                 try {
-                    myList = getMajor("Bachelor of Arts");
+                    myList = getMajorOrDegree("Bachelor of Arts");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Degree - BS")) {
                 try {
-                    myList = getMajor("Bachelor of Science");
+                    myList = getMajorOrDegree("Bachelor of Science");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }
                 changeTable();
             } else if (myComboBox.getSelectedItem().equals("Degree - MS")) {
                 try {
-                    myList = getMajor("Master of Science");
+                    myList = getMajorOrDegree("Master of Science");
                 } catch (SQLException e1) {
                     e1.printStackTrace();
                 }

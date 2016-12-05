@@ -196,9 +196,9 @@ public class RequestMakingGUI extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent theEvent) {
         if (theEvent.getSource() == myBtnInstruction) {
-            JOptionPane.showMessageDialog(null, "Name: \nSID: \nCompany: "
-                            + "\nPosition: \nDescription: \nSkill used: \nSalary: "
-                            + "\nStart day: \nEnd day: \nType (Job or Internship): ",
+            JOptionPane.showMessageDialog(null, "We would love to know about your position"
+            		+ " description and the skills used.\nIf you have time, please tell us"
+            		+ " about those information in the comment section.\nThank you.",
                     "Request Instruction", JOptionPane.INFORMATION_MESSAGE);
         } else if (theEvent.getSource() == myAddBtn) {
             performAddRequest();
@@ -271,23 +271,23 @@ public class RequestMakingGUI extends JPanel implements ActionListener {
         } else if (start == end && startMonth > endMonth) {
             JOptionPane.showMessageDialog(null, "Invalid start day and end day",
                     "Add failed", JOptionPane.WARNING_MESSAGE);
-        }
+        } else {
+            Request request = new Request(sid, name, company, position, startDay, endDay, salary, type, content);
 
-        Request request = new Request(sid, name, company, position, startDay, endDay, salary, type, content);
+            String message = "Request add failed";
+            if (RequestCollection.addRequest(request)) {
+                message = "Request added successfully";
+            }
+            JOptionPane.showMessageDialog(null, message);
 
-        String message = "Request add failed";
-        if (RequestCollection.addRequest(request)) {
-            message = "Request added successfully";
-        }
-        JOptionPane.showMessageDialog(null, message);
+            if (myTxfArea.getText().length() != 0) {
+                myTxfArea.setText("");
+            }
 
-        if (myTxfArea.getText().length() != 0) {
-            myTxfArea.setText("");
-        }
-
-        for (int i = 0; i < myTxfField.length; i++) {
-            if (myTxfField[i].getText().length() != 0) {
-                myTxfField[i].setText("");
+            for (int i = 0; i < myTxfField.length; i++) {
+                if (myTxfField[i].getText().length() != 0) {
+                    myTxfField[i].setText("");
+                }
             }
         }
     }
