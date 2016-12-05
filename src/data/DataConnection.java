@@ -12,7 +12,7 @@ import javax.swing.*;
  * to customize for your own project.
  *
  * @author Loc Bui
- * @author Yau
+ * @author Yau Tsang
  */
 
 public class DataConnection {

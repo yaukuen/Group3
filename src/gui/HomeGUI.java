@@ -8,7 +8,7 @@ import java.sql.SQLException;
  * based on their permission of access.
  *
  * @author Loc Bui
- * @author Yau
+ * @author Yau Tsang
  */
 public class HomeGUI {
 
