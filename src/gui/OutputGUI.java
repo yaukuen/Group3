@@ -1,6 +1,6 @@
 package gui;
 
-import student.OutPut;
+import student.Output;
 import student.StudentCollection;
 
 import javax.swing.*;
@@ -62,7 +62,7 @@ public class OutputGUI extends JPanel implements ActionListener {
     /**
      * List of the output.
      */
-    private List<OutPut> myList;
+    private List<Output> myList;
 
     /**
      * Combo boc choices.
@@ -109,7 +109,7 @@ public class OutputGUI extends JPanel implements ActionListener {
      * @return a list of output
      * @throws SQLException if error occur.
      */
-    private List<OutPut> getData(final int theNumber) throws SQLException {
+    private List<Output> getData(final int theNumber) throws SQLException {
         if (theNumber == 1) {
             myList = StudentCollection.searchByGPA();
             myData = new Object[myList.size()][myColumnNames.length];
@@ -146,7 +146,7 @@ public class OutputGUI extends JPanel implements ActionListener {
      * @return a list of Output with desired major
      * @throws SQLException if error occur.
      */
-    public List<OutPut> getMajorOrDegree(final String theSearch) throws SQLException {
+    public List<Output> getMajorOrDegree(final String theSearch) throws SQLException {
         myList = StudentCollection.searchByMajorOrDegree(theSearch);
 
         if (myList != null) {

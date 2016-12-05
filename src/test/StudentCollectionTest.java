@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Before;
 import org.junit.Test;
-import student.OutPut;
+import student.Output;
 import student.Student;
 import student.StudentCollection;
 
@@ -132,7 +132,7 @@ public class StudentCollectionTest {
      */
     @Test
     public void testSearchbyGPA() {
-        List<OutPut> gpaOutput = StudentCollection.searchByGPA();
+        List<Output> gpaOutput = StudentCollection.searchByGPA();
         int result = gpaOutput.size();
         assertNotEquals(0, result);
     }
@@ -142,7 +142,7 @@ public class StudentCollectionTest {
      */
     @Test
     public void testSearchbySalary() {
-        List<OutPut> salaryOutput = StudentCollection.searchBySalary();
+        List<Output> salaryOutput = StudentCollection.searchBySalary();
         int result = salaryOutput.size();
         assertNotEquals(0, result);
     }
@@ -165,7 +165,7 @@ public class StudentCollectionTest {
      */
     @Test
     public void testSearchbyInternship() {
-        List<OutPut> internshipOutput = null;
+        List<Output> internshipOutput = null;
         internshipOutput = StudentCollection.searchByInternship();
         int result = internshipOutput.size();
         assertNotEquals(0, result);
@@ -176,7 +176,7 @@ public class StudentCollectionTest {
      */
     @Test
     public void testSearchbyJob() {
-        List<OutPut> jobOutput = null;
+        List<Output> jobOutput = null;
         jobOutput = StudentCollection.searchByJob();
         int result = jobOutput.size();
         assertNotEquals(0, result);
@@ -187,7 +187,7 @@ public class StudentCollectionTest {
      */
     @Test
     public void testSearchbyMajor() {
-        List<OutPut> majorOutput = null;
+        List<Output> majorOutput = null;
         majorOutput = StudentCollection.searchByMajorOrDegree(myMajor);
         int result = majorOutput.size();
         assertNotEquals(0, result);

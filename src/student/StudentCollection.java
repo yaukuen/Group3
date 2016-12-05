@@ -45,8 +45,8 @@ public class StudentCollection {
      *
      * @return a list of students with matching GPA
      */
-    public static List<OutPut> searchByGPA() {
-        List<OutPut> list = new ArrayList<>();
+    public static List<Output> searchByGPA() {
+        List<Output> list = new ArrayList<>();
         if (myStudentDB == null) {
             myStudentDB = new StudentDB();
         }
@@ -63,8 +63,8 @@ public class StudentCollection {
      *
      * @return a list of students with matching salary
      */
-    public static List<OutPut> searchBySalary() {
-        List<OutPut> list = new ArrayList<>();
+    public static List<Output> searchBySalary() {
+        List<Output> list = new ArrayList<>();
         if (myStudentDB == null) {
             myStudentDB = new StudentDB();
         }
@@ -81,8 +81,8 @@ public class StudentCollection {
 	 * @param theName of the major or degree.
 	 * @return a list of students with matching major.
 	 */
-	public static List<OutPut> searchByMajorOrDegree(final String theName) {
-		List<OutPut> list = new ArrayList<>();
+	public static List<Output> searchByMajorOrDegree(final String theName) {
+		List<Output> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}
@@ -98,8 +98,8 @@ public class StudentCollection {
 	 * Return a list of students with the matching intern.
      * @return a list of students with matching intern
 	 */
-	public static List<OutPut> searchByInternship() {
-		List<OutPut> list = new ArrayList<>();
+	public static List<Output> searchByInternship() {
+		List<Output> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}
@@ -114,8 +114,8 @@ public class StudentCollection {
 	 * Return a list of students with the matching job.
 	 * @return a list of students with matching intern
 	 */
-	public static List<OutPut> searchByJob() {
-		List<OutPut> list = new ArrayList<>();
+	public static List<Output> searchByJob() {
+		List<Output> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}
