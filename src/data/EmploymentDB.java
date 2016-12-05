@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /**
  * This class contains methods to access the Employment
  *
@@ -53,7 +55,10 @@ public class EmploymentDB {
             preparedStatement.setInt(9, theEmployment.getSalary());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -89,6 +94,9 @@ public class EmploymentDB {
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
 //            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
             return false;
         }
         return true;
@@ -137,8 +145,10 @@ public class EmploymentDB {
                 myEmploymentList.add(employment);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace(); //For debugging
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();

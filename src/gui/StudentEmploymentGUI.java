@@ -385,38 +385,45 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         String endDay = myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
 
         String name = (String) myStudentComboBox.getSelectedItem();
-        int index = name.indexOf(":");
-        String sid = name.substring(index + 2);
-
-        //check for invalid start day and end day.
-        int index2 = startDay.indexOf("-");
-        int index1 = endDay.indexOf("-");
-        int start = Integer.parseInt(startDay.substring(index2 + 1));
-        int end = Integer.parseInt(endDay.substring(index1 + 1));
-        int startMonth = Integer.parseInt(startDay.substring(0, index2));
-        int endMonth = Integer.parseInt(endDay.substring(0, index1));
-        if (start > end) {
-            JOptionPane.showMessageDialog(null, "Invalid start day and end day",
-                    "Add failed", JOptionPane.WARNING_MESSAGE);
-        } else if (start == end && startMonth > endMonth) {
-            JOptionPane.showMessageDialog(null, "Invalid start day and end day",
-                    "Add failed", JOptionPane.WARNING_MESSAGE);
+        
+        if (name == null) {
+        	JOptionPane.showMessageDialog(null, "Unable to retrieve student names from the server!"
+                    + "\nPlease add a student or check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } else {
-            EmploymentData empData;
+            int index = name.indexOf(":");
+            String sid = name.substring(index + 2);
 
-            empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
-                    salary, type, startDay, endDay);
+            //check for invalid start day and end day.
+            int index2 = startDay.indexOf("-");
+            int index1 = endDay.indexOf("-");
+            int start = Integer.parseInt(startDay.substring(index2 + 1));
+            int end = Integer.parseInt(endDay.substring(index1 + 1));
+            int startMonth = Integer.parseInt(startDay.substring(0, index2));
+            int endMonth = Integer.parseInt(endDay.substring(0, index1));
+            if (start > end) {
+                JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else if (start == end && startMonth > endMonth) {
+                JOptionPane.showMessageDialog(null, "Invalid start day and end day",
+                        "Add failed", JOptionPane.WARNING_MESSAGE);
+            } else {
+                EmploymentData empData;
 
-            String message = "Student add failed";
-            if (EmploymentDB.addEmployment(empData)) {
-                message = "Student added successfully";
-            }
-            JOptionPane.showMessageDialog(null, message);
+                empData = new EmploymentData(sid, company, position, posDescription, skillUsed,
+                        salary, type, startDay, endDay);
 
-            // Clear all text fields.
-            for (int i = 0; i < txfField.length; i++) {
-                if (txfField[i].getText().length() != 0) {
-                    txfField[i].setText("");
+                String message = "Student add failed";
+                if (EmploymentDB.addEmployment(empData)) {
+                    message = "Student added successfully";
+                }
+                JOptionPane.showMessageDialog(null, message);
+
+                // Clear all text fields.
+                for (int i = 0; i < txfField.length; i++) {
+                    if (txfField[i].getText().length() != 0) {
+                        txfField[i].setText("");
+                    }
                 }
             }
         }

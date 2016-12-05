@@ -6,6 +6,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 /**
  * This class contains methods to access Request table.
  * Created by Yau on 11/29/2016.
@@ -55,8 +57,10 @@ public class RequestDB {
                 myRequestList.add(requestTemp);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace(); //For debugging.
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Login failed", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -93,7 +97,10 @@ public class RequestDB {
             preparedStatement.setString(9, theRequest.getMyContent());
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace(); //For debugging.!
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
             return "Error adding request: " + e.getMessage();
         }
         return "Added Request Successfully";
@@ -113,7 +120,7 @@ public class RequestDB {
             preparedStatement.setString(1, theRequestId);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+//            e.printStackTrace();//For debugging.
             return "Error removing request: " + e.getMessage();
         }
         return "Removed Request Successfully";

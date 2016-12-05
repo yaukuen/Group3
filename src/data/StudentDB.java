@@ -69,7 +69,10 @@ public class StudentDB {
                 myAnotherOutputList.add(output);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+//        	e.printStackTrace(); //For debugging.
+        	JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -112,7 +115,10 @@ public class StudentDB {
                 myAnotherOutputList.add(output);
             }
         } catch (SQLException e) {
-            System.out.println(e);
+//        	e.printStackTrace(); //For debugging.!
+        	JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -158,8 +164,10 @@ public class StudentDB {
                 myAnotherOutputList.add(output);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace(); //For debugging.
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -214,8 +222,10 @@ public class StudentDB {
                 myStudentList.add(student);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace(); //For debugging.
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();
@@ -293,13 +303,13 @@ public class StudentDB {
                     "Employment.salary, Employment.company, Employment.position, Employment.type\n" +
                     "from Student Join Employment\n" +
                     "on Student.sid = Employment.sid\n" +
-                    "order by Student.gpa desc;";
+                    "order by Student.gpa desc, Student.name asc;";
         } else if (theNumber == 2) {
             query = "Select Student.name, Student.sid, Student.gpa, Student.major, Student.degree,\n" +
                     "Employment.salary, Employment.company, Employment.position, Employment.type\n" +
                     "from Student Join Employment\n" +
                     "on Student.sid = Employment.sid\n" +
-                    "order by Employment.salary desc;";
+                    "order by Employment.salary desc, Student.name asc;";
         }
         myOutPutList = new ArrayList<>();
         try {
@@ -320,8 +330,10 @@ public class StudentDB {
                 myOutPutList.add(output);
             }
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace(); //For debugging.
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } finally {
             if (stmt != null) {
                 stmt.close();

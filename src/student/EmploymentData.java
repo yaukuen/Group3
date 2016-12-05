@@ -1,5 +1,7 @@
 package student;
 
+import javax.swing.JOptionPane;
+
 /**
  * EmploymentData class represent the employment data with the company name, position, description,
  * skill used, start date, end date, and if it is an intern or a job.
@@ -80,6 +82,11 @@ public class EmploymentData {
     public EmploymentData(final String theSID, final String theCompany, final String thePosition,
                           final String theDescr, final String theSkill, final int theSalary,
                           final String theType, final String theStart, final String theEnd) {
+    	if (theSID == null) {
+    		JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Login failed", JOptionPane.WARNING_MESSAGE);
+    	}
         mySID = theSID;
         myCompany = theCompany;
         myPosition = thePosition;

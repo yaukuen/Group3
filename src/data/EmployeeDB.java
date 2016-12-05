@@ -84,8 +84,10 @@ public class EmployeeDB {
             // You can also validate user by result size if its comes zero user is invalid else user is valid
 
         } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println(e);
+//            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Unable to connect to the server!"
+                    + "\nPlease check your internet connection and restart the program!",
+                    "Failed Warning", JOptionPane.WARNING_MESSAGE);
         }
         return null;
     }
