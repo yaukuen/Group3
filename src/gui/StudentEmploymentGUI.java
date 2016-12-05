@@ -234,7 +234,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         comboPanel1.add(myStudentComboBox);
         myPnlAdd.add(comboPanel1);
 
-        String labelNames[] = {"Company: *", "Position: * ", "Description: ", "Skill Used: * ",
+        String labelNames[] = {"Company: *", "Position: * ", "Description: ", "Skill Used: ",
                 "Salary per year: * "};
         for (int i = 0; i < labelNames.length; i++) {
             JPanel panel = new JPanel();
@@ -365,9 +365,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 
         String skillUsed = txfField[3].getText();
         if (skillUsed.length() == 0) {
-            JOptionPane.showMessageDialog(null, "Enter Skill Used");
-            txfField[3].setFocusable(true);
-            return;
+        	skillUsed = "NOT PROVIDED";
         }
 
         String salaryStr = txfField[4].getText();
