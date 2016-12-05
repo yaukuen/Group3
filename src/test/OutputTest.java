@@ -2,7 +2,7 @@ package test;
 
 import org.junit.Before;
 import org.junit.Test;
-import student.OutPut;
+import student.Output;
 
 import static org.junit.Assert.assertEquals;
 
@@ -62,7 +62,7 @@ public class OutputTest {
     /**
      * The Output contain output information.
      */
-    private OutPut myOutput;
+    private Output myOutput;
 
     /**
      * Set up the request.
@@ -71,7 +71,7 @@ public class OutputTest {
      */
     @Before
     public void setUp() throws Exception {
-        myOutput = new OutPut(myStdName, myStdID, myGPA, myStdMajor, myDegree, mySalary, myCompany, myPosition, myType);
+        myOutput = new Output(myStdName, myStdID, myGPA, myStdMajor, myDegree, mySalary, myCompany, myPosition, myType);
     }
 
     /**

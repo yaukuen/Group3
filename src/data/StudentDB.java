@@ -1,6 +1,6 @@
 package data;
 
-import student.OutPut;
+import student.Output;
 import student.Student;
 
 import javax.swing.*;
@@ -25,7 +25,7 @@ public class StudentDB {
     /**
      * list of the second output.
      */
-    private static List<OutPut> myAnotherOutputList;
+    private static List<Output> myAnotherOutputList;
     /**
      * List of student.
      */
@@ -33,7 +33,7 @@ public class StudentDB {
     /**
      * List of output information.
      */
-    private List<OutPut> myOutPutList;
+    private List<Output> myOutPutList;
 
     /**
      * Returns a output list that grouped by internship.
@@ -41,7 +41,7 @@ public class StudentDB {
      * @return a list that grouped by internship.
      * @throws SQLException if error occur.
      */
-    public static List<OutPut> searchByInternship() throws SQLException {
+    public static List<Output> searchByInternship() throws SQLException {
         if (myConnection == null) {
             myConnection = DataConnection.getConnection();
         }
@@ -64,8 +64,8 @@ public class StudentDB {
                 String position = rs.getString("position");
                 String type = rs.getString("type");
                 int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
+                Output output = null;
+                output = new Output(name, sid, gpa, major, degree, salary, company, position, type);
                 myAnotherOutputList.add(output);
             }
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class StudentDB {
      * @return a list are type of job.
      * @throws SQLException if error occur.
      */
-    public static List<OutPut> searchByJob() throws SQLException {
+    public static List<Output> searchByJob() throws SQLException {
         if (myConnection == null) {
             myConnection = DataConnection.getConnection();
         }
@@ -110,8 +110,8 @@ public class StudentDB {
                 String position = rs.getString("position");
                 String type = rs.getString("type");
                 int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, position, type);
+                Output output = null;
+                output = new Output(name, sid, gpa, major, degree, salary, company, position, type);
                 myAnotherOutputList.add(output);
             }
         } catch (SQLException e) {
@@ -134,7 +134,7 @@ public class StudentDB {
      * @return a list that grouped by the keyword.
      * @throws SQLException if error occur.
      */
-    public static List<OutPut> searchByMajorOrDegree(final String theSearch) throws SQLException {
+    public static List<Output> searchByMajorOrDegree(final String theSearch) throws SQLException {
         if (myConnection == null) {
             myConnection = DataConnection.getConnection();
         }
@@ -144,7 +144,7 @@ public class StudentDB {
                 + "from Student Join Employment on Student.sid = Employment.sid order by Student.name asc;";
 
         myAnotherOutputList = new ArrayList<>();
-        List<OutPut> filterList = new ArrayList<>();
+        List<Output> filterList = new ArrayList<>();
         try {
             stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -158,8 +158,8 @@ public class StudentDB {
                 String pos = rs.getString("position");
                 String type = rs.getString("type");
                 int salary = rs.getInt("salary");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, degree, salary, company, pos, type);
+                Output output = null;
+                output = new Output(name, sid, gpa, major, degree, salary, company, pos, type);
 
                 myAnotherOutputList.add(output);
             }
@@ -174,13 +174,13 @@ public class StudentDB {
             }
         }
         //search by major
-        for (OutPut out : myAnotherOutputList) {
+        for (Output out : myAnotherOutputList) {
             if (out.getMyStdMajor().equals(theSearch)) {
                 filterList.add(out);
             }
         }
         //search by degree
-        for (OutPut out : myAnotherOutputList) {
+        for (Output out : myAnotherOutputList) {
             if (out.getMyDegree().equals(theSearch)) {
                 filterList.add(out);
             }
@@ -292,7 +292,7 @@ public class StudentDB {
      * @return a output list.
      * @throws SQLException if error occur.
      */
-    private List<OutPut> getOutputs(final int theNumber) throws SQLException {
+    private List<Output> getOutputs(final int theNumber) throws SQLException {
         if (myConnection == null) {
             myConnection = DataConnection.getConnection();
         }
@@ -325,8 +325,8 @@ public class StudentDB {
                 String company = rs.getString("company");
                 String pos = rs.getString("position");
                 String type = rs.getString("type");
-                OutPut output = null;
-                output = new OutPut(name, sid, gpa, major, deg, salary, company, pos, type);
+                Output output = null;
+                output = new Output(name, sid, gpa, major, deg, salary, company, pos, type);
                 myOutPutList.add(output);
             }
         } catch (SQLException e) {
@@ -349,7 +349,7 @@ public class StudentDB {
      * @return list of student that match.
      * @throws SQLException if error occur.
      */
-    public List<OutPut> getOutput(final int theNumber) throws SQLException {
+    public List<Output> getOutput(final int theNumber) throws SQLException {
         getOutputs(theNumber);
         return myOutPutList;
     }

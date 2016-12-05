@@ -5,7 +5,7 @@ package student;
  * salary, company, position, and the type of employment.
  * Created by Yau on 12/1/2016.
  */
-public class OutPut {
+public class Output {
 
     /**
      * Student's name.
@@ -65,7 +65,7 @@ public class OutPut {
      * @param thePosition working position.
      * @param theType     employment type.
      */
-    public OutPut(final String theStdName, final String theStdID, final double theGPA,
+    public Output(final String theStdName, final String theStdID, final double theGPA,
                   final String theStdMajor, final String theDegree, final int theSalary,
                   final String theCompany, final String thePosition, final String theType) {
         this.myStdName = theStdName;
