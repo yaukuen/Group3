@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
  * Test class for the Employee class
  *
  * @author Nico Tandyo
- * @author Yau
+ * @author Yau Tsang
  */
 public class EmployeeTest {
 
@@ -54,7 +54,6 @@ public class EmployeeTest {
     /**
      * Test the constructor.
      *
-     * @throws Exception if error occur.
      */
     @Test(expected = IllegalArgumentException.class)
     public void testConstructor() {

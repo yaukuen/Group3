@@ -13,6 +13,7 @@ import java.sql.SQLException;
  * and goes to the HomeGUI after the user has logged in.
  *
  * @author Loc Bui
+ * @author Yau Tsang
  */
 public class MainGUI implements ActionListener {
     /**

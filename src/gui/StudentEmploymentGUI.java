@@ -116,7 +116,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
     /**
      * This constructor calls the method to create all of the components
      *
-     * @throws SQLException if it cause an error from the query calling SQL.
      */
     public StudentEmploymentGUI() {
         setLayout(new BorderLayout());
@@ -133,7 +132,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
      *
      * @param theSearchKey the searching keyword.
      * @return a list of employment data.
-     * @throws SQLException if it cause an error from the query calling SQL.
      */
     private List<EmploymentData> getData(final String theSearchKey) {
         if (theSearchKey != null) {
@@ -229,7 +227,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
             myStudentArrays[i] = studentList.get(i).getName() + " - SID: " + studentList.get(i).getID();
         }
 
-        myStudentComboBox = new JComboBox<String>(myStudentArrays);
+        myStudentComboBox = new JComboBox<>(myStudentArrays);
         comboPanel1.add(new JLabel("Choose a student: "));
         comboPanel1.add(myStudentComboBox);
         myPnlAdd.add(comboPanel1);
@@ -249,7 +247,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         JPanel comboPanel4 = new JPanel();
         comboPanel4.setLayout(new GridLayout(1, 2));
         String[] types = {"Job", "Internship"};
-        myTypeComboBox = new JComboBox<String>(types);
+        myTypeComboBox = new JComboBox<>(types);
         myTypeComboBox.setSelectedIndex(0);
         comboPanel4.add(new JLabel("Type (Job or Intership): * "));
         comboPanel4.add(myTypeComboBox);
@@ -260,14 +258,14 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 
         String[] months = {"01", "02", "03", "04", "05", "06",
                 "07", "08", "09", "10", "11", "12"};
-        myMonthStartComboBox = new JComboBox<String>(months);
+        myMonthStartComboBox = new JComboBox<>(months);
         myMonthStartComboBox.setSelectedIndex(0);
 
         String[] years = {"2001", "2002", "2003", "2004", "2005",
                 "2006", "2007", "2008", "2009", "2010", "2011", "2012",
                 "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"};
 
-        myYearStartComboBox = new JComboBox<String>(years);
+        myYearStartComboBox = new JComboBox<>(years);
         myYearStartComboBox.setSelectedIndex(0);
         comboPanel2.add(new JLabel("Start Day (Month - Year): * "));
         comboPanel2.add(myMonthStartComboBox);
@@ -276,9 +274,9 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 
         JPanel comboPanel3 = new JPanel();
         comboPanel3.setLayout(new GridLayout(1, 2));
-        myMonthEndComboBox = new JComboBox<String>(months);
+        myMonthEndComboBox = new JComboBox<>(months);
         myMonthEndComboBox.setSelectedIndex(0);
-        myYearEndComboBox = new JComboBox<String>(years);
+        myYearEndComboBox = new JComboBox<>(years);
         myYearEndComboBox.setSelectedIndex(0);
         comboPanel3.add(new JLabel("End Day (Month - Year): * "));
         comboPanel3.add(myMonthEndComboBox);

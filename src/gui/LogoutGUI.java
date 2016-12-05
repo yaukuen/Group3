@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
  * and a button to show things about this program
  *
  * @author Loc Bui
+ * @author Yau Tsang
  */
 public class LogoutGUI extends JPanel implements ActionListener {
 

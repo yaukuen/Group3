@@ -110,7 +110,7 @@ public class EmploymentDB {
                 "from Student join Employment\n" +
                 "on Student.sid = Employment.sid;";
 
-        myEmploymentList = new ArrayList<EmploymentData>();
+        myEmploymentList = new ArrayList<>();
         try {
             if (myConnection == null) {
                 return null;
@@ -155,7 +155,7 @@ public class EmploymentDB {
      * @throws SQLException It throws exception if error occur.
      */
     public List<EmploymentData> searchEmployments(String theSearch) throws SQLException {
-        List<EmploymentData> filterList = new ArrayList<EmploymentData>();
+        List<EmploymentData> filterList = new ArrayList<>();
         if (myEmploymentList == null) {
             getEmployments();
         }
