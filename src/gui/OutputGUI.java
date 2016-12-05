@@ -15,7 +15,7 @@ import java.util.List;
  * based on the criterion that the user has chosen to view by.
  *
  * @author Loc Bui
- * @author Yau
+ * @author Yau Tsang
  */
 public class OutputGUI extends JPanel implements ActionListener {
 
@@ -174,7 +174,7 @@ public class OutputGUI extends JPanel implements ActionListener {
         myComboBoxPnl = new JPanel();
         JLabel label = new JLabel("Select a criterion to view by: ");
         myComboBoxPnl.add(label);
-        myComboBox = new JComboBox<String>();
+        myComboBox = new JComboBox<>();
         for (int i = 0; i < myComboBoxValues.length; i++) {
             myComboBox.addItem(myComboBoxValues[i]);
         }

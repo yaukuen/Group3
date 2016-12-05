@@ -11,7 +11,7 @@ import java.util.List;
  * A class for the collection of students.
  *
  * @author Nico Tandyo
- * @author Yau
+ * @author Yau Tsang
  * @author Loc Bui
  */
 public class StudentCollection {
@@ -78,11 +78,11 @@ public class StudentCollection {
 
 	/**
 	 * Return a list of students with the matching major or degree.
-	 * @param theName
-	 * @return a list of students with matching major
+	 * @param theName of the major or degree.
+	 * @return a list of students with matching major.
 	 */
-	public static List<OutPut> searchByMajorOrDegree(String theName) {
-		List<OutPut> list = new ArrayList<OutPut>();
+	public static List<OutPut> searchByMajorOrDegree(final String theName) {
+		List<OutPut> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}
@@ -96,16 +96,15 @@ public class StudentCollection {
 
 	/**
 	 * Return a list of students with the matching intern.
-	 * @param theInternship name as a string
-	 * @return a list of students with matching intern
+     * @return a list of students with matching intern
 	 */
 	public static List<OutPut> searchByInternship() {
-		List<OutPut> list = new ArrayList<OutPut>();
+		List<OutPut> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}
 		try {
-				return StudentDB.searchByInternship();
+            return StudentDB.searchByInternship();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -113,11 +112,10 @@ public class StudentCollection {
 	}
 	/**
 	 * Return a list of students with the matching job.
-	 * @param theJob name as a string
 	 * @return a list of students with matching intern
 	 */
 	public static List<OutPut> searchByJob() {
-		List<OutPut> list = new ArrayList<OutPut>();
+		List<OutPut> list = new ArrayList<>();
 		if (myStudentDB == null) {
 			myStudentDB = new StudentDB();
 		}

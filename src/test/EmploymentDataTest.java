@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  * Test class for the EmploymentData.
  *
  * @author Nico Tandyo
- * @author Yau
+ * @author Yau Tsang
  */
 public class EmploymentDataTest {
 
@@ -67,7 +67,7 @@ public class EmploymentDataTest {
     /**
      * Employment ID.
      */
-    private String myEmID = "17";
+    private String myEmID = "6";
 
     /**
      * Employment data.

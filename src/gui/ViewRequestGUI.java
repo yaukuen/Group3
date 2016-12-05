@@ -16,7 +16,7 @@ import java.util.List;
  * and delete the request after updating the student's employment information of that request.
  *
  * @author Loc Bui
- * @author Yau
+ * @author Yau Tsang
  */
 public class ViewRequestGUI extends JPanel implements ActionListener {
 

@@ -1,13 +1,11 @@
 package test;
 
-import data.StudentDB;
 import org.junit.Before;
 import org.junit.Test;
 import student.OutPut;
 import student.Student;
 import student.StudentCollection;
 
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
@@ -18,7 +16,7 @@ import static org.junit.Assert.assertTrue;
  * Test class for the StudentCollection class.
  *
  * @author Nico Tandyo
- * @author Yau
+ * @author Yau Tsang
  */
 public class StudentCollectionTest {
 
@@ -168,11 +166,7 @@ public class StudentCollectionTest {
     @Test
     public void testSearchbyInternship() {
         List<OutPut> internshipOutput = null;
-        try {
-            internshipOutput = StudentDB.searchByInternship();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        internshipOutput = StudentCollection.searchByInternship();
         int result = internshipOutput.size();
         assertNotEquals(0, result);
     }
@@ -183,11 +177,7 @@ public class StudentCollectionTest {
     @Test
     public void testSearchbyJob() {
         List<OutPut> jobOutput = null;
-        try {
-            jobOutput = StudentDB.searchByJob();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        jobOutput = StudentCollection.searchByJob();
         int result = jobOutput.size();
         assertNotEquals(0, result);
     }
@@ -198,11 +188,7 @@ public class StudentCollectionTest {
     @Test
     public void testSearchbyMajor() {
         List<OutPut> majorOutput = null;
-        try {
-            majorOutput = StudentDB.searchByMajorOrDegree(myMajor);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        majorOutput = StudentCollection.searchByMajorOrDegree(myMajor);
         int result = majorOutput.size();
         assertNotEquals(0, result);
     }

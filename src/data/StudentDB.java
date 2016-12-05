@@ -13,7 +13,7 @@ import java.util.List;
  * This class contains methods to access the student tables data.
  *
  * @author Nico Tandyo
- * @author Yau
+ * @author Yau Tsang
  * @author Loc Bui
  */
 public class StudentDB {
@@ -50,7 +50,7 @@ public class StudentDB {
                 + "Student.degree, Employment.salary, Employment.company, Employment.position,"
                 + " Employment.type from Student Join Employment on Student.sid = Employment.sid"
                 + " where Employment.type = 'Internship' order by Student.name asc;";
-        myAnotherOutputList = new ArrayList<OutPut>();
+        myAnotherOutputList = new ArrayList<>();
         try {
             stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -137,8 +137,8 @@ public class StudentDB {
                 + " Employment.salary, Employment.company, Employment.position, Employment.type "
                 + "from Student Join Employment on Student.sid = Employment.sid order by Student.name asc;";
 
-        myAnotherOutputList = new ArrayList<OutPut>();
-        List<OutPut> filterList = new ArrayList<OutPut>();
+        myAnotherOutputList = new ArrayList<>();
+        List<OutPut> filterList = new ArrayList<>();
         try {
             stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
@@ -193,7 +193,7 @@ public class StudentDB {
         Statement stmt = null;
         String query = "select * " + "from Student ";
 
-        myStudentList = new ArrayList<Student>();
+        myStudentList = new ArrayList<>();
         try {
             if (myConnection == null) {
                 return null;
@@ -301,7 +301,7 @@ public class StudentDB {
                     "on Student.sid = Employment.sid\n" +
                     "order by Employment.salary desc;";
         }
-        myOutPutList = new ArrayList<OutPut>();
+        myOutPutList = new ArrayList<>();
         try {
             stmt = myConnection.createStatement();
             ResultSet rs = stmt.executeQuery(query);
