@@ -200,6 +200,9 @@ public class OutputGUI extends JPanel implements ActionListener {
         this.repaint();
     }
     
+    /**
+     * Print this message when our system is unable to find the student’s information that match the criteria.
+     */
     public void printMessage() {
     	JOptionPane.showMessageDialog(null, "Unable to retrieve student's information from the input!"
                 + "\nPlease select a different criterion to view by.",
