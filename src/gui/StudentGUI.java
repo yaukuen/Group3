@@ -130,57 +130,50 @@ public class StudentGUI extends JPanel implements ActionListener,
      * @return list of student
      */
     private void getData(final String theSearchKey) {
-    	if (theSearchKey != null && theSearchKey.length() < 2) {
-            JOptionPane.showMessageDialog(null, "Search key is too short! Must be at least 2 characters!",
-                    "Search failed", JOptionPane.WARNING_MESSAGE);
-            return;
-    	} else { 
-            myList.clear();
-            Iterator iter;
-            if (theSearchKey != null) {
-                iter = myStudentCollection.getIterator(theSearchKey);
-            } else {
-                iter = myStudentCollection.getIterator(null);
-            }
-
-            int size = myStudentCollection.getSize();
-
-            if (iter != null) {
-                myData = new Object[size][myColumnNames.length];
-//                for (int i = 0; i < myList.size(); i++) {
-//                    myData[i][0] = myList.get(i).getName();
-//                    myData[i][1] = myList.get(i).getID();
-//                    myData[i][2] = myList.get(i).getMajor();
-//                    myData[i][3] = myList.get(i).getTerm();
-//                    myData[i][4] = myList.get(i).getDegree();
-//                    myData[i][5] = myList.get(i).getYear();
-//                    myData[i][6] = myList.get(i).getGPA();
-//                    myData[i][7] = myList.get(i).getEmail();
-//                }
-                int i = 0;
-                for(; iter.hasNext();){
-                    Student student = (Student) iter.next();
-                    myList.add(student);
-                    myData[i][0] = student.getName();
-                    myData[i][1] = student.getID();
-                    myData[i][2] = student.getMajor();
-                    myData[i][3] = student.getTerm();
-                    myData[i][4] = student.getDegree();
-                    myData[i][5] = student.getYear();
-                    myData[i][6] = student.getGPA();
-                    myData[i][7] = student.getEmail();
-                    i++;
-                }
-            }
-//            System.out.println(!myIter.hasNext());
-//            return myIter;
-    	}
 //        if (theSearchKey != null) {
 //            myList = StudentCollection.search(theSearchKey);
 //        } else {
 //            myList = StudentCollection.showAll();
 //        }
+        myList.clear();
+        Iterator iter;
+        if (theSearchKey != null) {
+            iter = myStudentCollection.getIterator(theSearchKey);
+        } else {
+            iter = myStudentCollection.getIterator(null);
+        }
 
+        int size = myStudentCollection.getSize();
+
+        if (iter != null) {
+            myData = new Object[size][myColumnNames.length];
+//            for (int i = 0; i < myList.size(); i++) {
+//                myData[i][0] = myList.get(i).getName();
+//                myData[i][1] = myList.get(i).getID();
+//                myData[i][2] = myList.get(i).getMajor();
+//                myData[i][3] = myList.get(i).getTerm();
+//                myData[i][4] = myList.get(i).getDegree();
+//                myData[i][5] = myList.get(i).getYear();
+//                myData[i][6] = myList.get(i).getGPA();
+//                myData[i][7] = myList.get(i).getEmail();
+//            }
+            int i = 0;
+            for(; iter.hasNext();){
+                Student student = (Student) iter.next();
+                myList.add(student);
+                myData[i][0] = student.getName();
+                myData[i][1] = student.getID();
+                myData[i][2] = student.getMajor();
+                myData[i][3] = student.getTerm();
+                myData[i][4] = student.getDegree();
+                myData[i][5] = student.getYear();
+                myData[i][6] = student.getGPA();
+                myData[i][7] = student.getEmail();
+                i++;
+            }
+        }
+//        System.out.println(!myIter.hasNext());
+//        return myIter;
     }
 
     /**

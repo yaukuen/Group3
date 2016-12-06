@@ -134,41 +134,35 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
      * @return a list of employment data.
      */
     private List<EmploymentData> getData(final String theSearchKey) {
-    	if (theSearchKey != null && theSearchKey.length() < 2) {
-            JOptionPane.showMessageDialog(null, "Search key is too short! Must be at least 2 characters!",
-                    "Search failed", JOptionPane.WARNING_MESSAGE);
-            return null;
-    	} else {
-            if (theSearchKey != null) {
-                try {
-                    myList = myEmploymentDB.searchEmployments(theSearchKey);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                try {
-                    myList = myEmploymentDB.getEmployments();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+        if (theSearchKey != null) {
+            try {
+                myList = myEmploymentDB.searchEmployments(theSearchKey);
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            if (myList != null) {
-                myData = new Object[myList.size()][myEmploymentColumnNames.length];
-                for (int i = 0; i < myList.size(); i++) {
-                    myData[i][0] = myList.get(i).getMyStudentName();
-                    myData[i][1] = myList.get(i).getSID();
-                    myData[i][2] = myList.get(i).getCompany();
-                    myData[i][3] = myList.get(i).getPosition();
-                    myData[i][4] = myList.get(i).getDescription();
-                    myData[i][5] = myList.get(i).getSkill();
-                    myData[i][6] = myList.get(i).getSalary();
-                    myData[i][7] = myList.get(i).getStartDate();
-                    myData[i][8] = myList.get(i).getEndDate();
-                    myData[i][9] = myList.get(i).getMyType();
-                }
+        } else {
+            try {
+                myList = myEmploymentDB.getEmployments();
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-            return myList;
-    	}
+        }
+        if (myList != null) {
+            myData = new Object[myList.size()][myEmploymentColumnNames.length];
+            for (int i = 0; i < myList.size(); i++) {
+                myData[i][0] = myList.get(i).getMyStudentName();
+                myData[i][1] = myList.get(i).getSID();
+                myData[i][2] = myList.get(i).getCompany();
+                myData[i][3] = myList.get(i).getPosition();
+                myData[i][4] = myList.get(i).getDescription();
+                myData[i][5] = myList.get(i).getSkill();
+                myData[i][6] = myList.get(i).getSalary();
+                myData[i][7] = myList.get(i).getStartDate();
+                myData[i][8] = myList.get(i).getEndDate();
+                myData[i][9] = myList.get(i).getMyType();
+            }
+        }
+        return myList;
     }
 
 
