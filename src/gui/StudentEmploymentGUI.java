@@ -171,7 +171,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
      */
     private void createComponents() {
         // A button panel at the top for list, search, add
-
         myPnlContent = new JPanel();
         myPnlButtons = new JPanel();
         myBtnList = new JButton("Student Employment List");
