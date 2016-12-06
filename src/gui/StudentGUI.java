@@ -118,7 +118,8 @@ public class StudentGUI extends JPanel implements ActionListener,
         setLayout(new BorderLayout());
         myStudentCollection = new StudentCollection();
         myList = new ArrayList<>();
-        /*myIter = */getData(null);
+        /*myIter = */
+        getData(null);
         createComponents();
         setVisible(true);
     }
@@ -158,7 +159,7 @@ public class StudentGUI extends JPanel implements ActionListener,
 //                myData[i][7] = myList.get(i).getEmail();
 //            }
             int i = 0;
-            for(; iter.hasNext();){
+            for (; iter.hasNext(); ) {
                 Student student = (Student) iter.next();
                 myList.add(student);
                 myData[i][0] = student.getName();
@@ -308,7 +309,8 @@ public class StudentGUI extends JPanel implements ActionListener,
             performAddStudent();
         } else if (theEvent.getSource() == myBtnList) {
 //            myList = null;
-            /*myIter = */getData(null);
+            /*myIter = */
+            getData(null);
             myPnlContent.removeAll();
             myTable = new JTable(myData, myColumnNames);
             myTable.getModel().addTableModelListener(this);
@@ -327,7 +329,8 @@ public class StudentGUI extends JPanel implements ActionListener,
             String title = myTxfTitle.getText();
             if (title.length() > 0) {
 //                myList = null;
-                /*myIter = */getData(title);
+                /*myIter = */
+                getData(title);
                 myPnlContent.removeAll();
                 myTable = new JTable(myData, myColumnNames);
                 myTable.getModel().addTableModelListener(this);
