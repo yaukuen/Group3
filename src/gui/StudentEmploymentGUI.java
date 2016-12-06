@@ -115,7 +115,6 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 
     /**
      * This constructor calls the method to create all of the components
-     *
      */
     public StudentEmploymentGUI() {
         setLayout(new BorderLayout());
@@ -363,7 +362,7 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
 
         String skillUsed = txfField[3].getText();
         if (skillUsed.length() == 0) {
-        	skillUsed = "NOT PROVIDED";
+            skillUsed = "NOT PROVIDED";
         }
 
         String salaryStr = txfField[4].getText();
@@ -385,10 +384,10 @@ public class StudentEmploymentGUI extends JPanel implements ActionListener,
         String endDay = myMonthEndComboBox.getSelectedItem() + "-" + myYearEndComboBox.getSelectedItem();
 
         String name = (String) myStudentComboBox.getSelectedItem();
-        
+
         if (name == null) {
-        	JOptionPane.showMessageDialog(null, "Unable to retrieve student names from the server!"
-                    + "\nPlease add a student or check your internet connection and restart the program!",
+            JOptionPane.showMessageDialog(null, "Unable to retrieve student names from the server!"
+                            + "\nPlease add a student or check your internet connection and restart the program!",
                     "Failed Warning", JOptionPane.WARNING_MESSAGE);
         } else {
             int index = name.indexOf(":");
